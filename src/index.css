@@ -1009,6 +1009,14 @@ body::after {
     @apply w-full overflow-hidden relative;
   }
 
+  /* Complete isolation for tech skills section */
+  .tech-skills-isolated {
+    isolation: isolate !important;
+    contain: layout style paint !important;
+    position: relative !important;
+    z-index: 1 !important;
+  }
+
   /* Global mobile touch fixes for tech skills section */
   #tech-skills,
   #tech-skills *,
@@ -1023,6 +1031,37 @@ body::after {
     -webkit-appearance: none !important;
     -moz-appearance: none !important;
     appearance: none !important;
+    /* Disable all green animations and effects */
+    animation: none !important;
+    box-shadow: none !important;
+  }
+
+  /* Specifically disable problematic green animations in tech skills section */
+  #tech-skills .btn-ping,
+  #tech-skills .btn-ping_dot,
+  #tech-skills *[class*='ping'],
+  #tech-skills *[class*='pulse'],
+  #tech-skills *[class*='green'],
+  #tech-skills *[class*='cosmic'],
+  #tech-skills *[class*='planet'],
+  #tech-skills *[class*='meteor'],
+  #tech-skills *[class*='comet'] {
+    animation: none !important;
+    box-shadow: none !important;
+    background-color: transparent !important;
+    opacity: 1 !important;
+    display: none !important; /* Completely hide these elements */
+  }
+
+  /* Disable all pseudo-elements that might create circles */
+  #tech-skills *::before,
+  #tech-skills *::after {
+    content: none !important;
+    display: none !important;
+    animation: none !important;
+    box-shadow: none !important;
+    background: none !important;
+    border-radius: 0 !important;
   }
 
   #tech-skills *:focus,
@@ -1145,6 +1184,21 @@ body::after {
       border-color: inherit !important;
       background-color: inherit !important;
     }
+
+    /* Disable all problematic animations on mobile */
+    #tech-skills * {
+      animation: none !important;
+      box-shadow: none !important;
+    }
+
+    /* Keep only the slider animations */
+    #tech-skills .tech-slider-track {
+      animation: slide-right-to-left 12s linear infinite !important;
+    }
+
+    #tech-skills .tech-slider-reverse {
+      animation: slide-left-to-right 12s linear infinite !important;
+    }
   }
 
   /* Keyframes for reverse sliding animation */
@@ -1157,9 +1211,10 @@ body::after {
     }
   }
 
-  /* Enhanced hover effects */
+  /* Enhanced hover effects - Remove problematic shadows */
   .tech-slide-content:hover {
-    @apply transform scale-105 shadow-2xl shadow-blue-500/20;
+    @apply transform scale-105;
+    /* Removed shadow-2xl shadow-blue-500/20 that might appear as green circles */
   }
 
   .tech-slide-content:hover .tech-slide-logo {

@@ -199,7 +199,14 @@ const TechSkills = () => {
   const secondRowTechs = allTechnologies.slice(Math.ceil(allTechnologies.length / 2));
 
   return (
-    <section className="c-space my-20" id="tech-skills">
+    <section
+      className="c-space my-20 tech-skills-isolated"
+      id="tech-skills"
+      style={{
+        isolation: 'isolate',
+        contain: 'layout style paint',
+        overflow: 'hidden',
+      }}>
       <div className="w-full text-center">
         <h2 className="head-text">🛠️ Tech Stack & Tools I Know</h2>
         <p className="text-gray_gradient text-lg mt-3 max-w-2xl mx-auto">
