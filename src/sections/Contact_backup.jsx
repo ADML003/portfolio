@@ -1,5 +1,21 @@
 import emailjs from '@emailjs/browser';
-import { useRef, useState } from 'react';
+import { useRef, useState   return (
+    <section className="c-space my-20" id="contact">
+      {alert.show && <Alert {...alert} />}
+
+      <div className="relative min-h-[70vh] sm:min-h-screen flex items-center justify-center flex-col">
+        <img 
+          src="/assets/terminal.png" 
+          alt="terminal-bg" 
+          className="absolute inset-0 w-full h-full object-cover object-center opacity-20 sm:opacity-40" 
+        />
+
+        <div className="contact-container relative z-10">
+          <h3 className="head-text">Let's talk</h3>
+          <p className="text-lg text-white-600 mt-3">
+            Whether you're looking to build a new website, improve your existing platform, or bring a unique project to
+            life, I'm here to help.
+          </p>';
 
 import useAlert from '../hooks/useAlert.js';
 import Alert from '../components/Alert.jsx';
@@ -68,9 +84,11 @@ const Contact = () => {
     <section className="c-space my-20" id="contact">
       {alert.show && <Alert {...alert} />}
 
-      <div className="relative min-h-[70vh] md:min-h-screen flex items-center justify-center flex-col py-10 md:py-0">
-        <div className="contact-container border border-black-300 bg-black-200/50 backdrop-blur-sm rounded-2xl p-6 md:p-8 shadow-2xl shadow-black-500/20 hover:border-white/20 transition-all duration-300">
-          <h3 className="head-text">Let&apos;s talk</h3>
+      <div className="relative min-h-screen flex items-center justify-center flex-col">
+        <img src="/assets/terminal.png" alt="terminal-bg" className="absolute inset-0 min-h-screen" />
+
+        <div className="contact-container">
+          <h3 className="head-text">Let's talk</h3>
           <p className="text-lg text-white-600 mt-3">
             Whether you’re looking to build a new website, improve your existing platform, or bring a unique project to
             life, I’m here to help.

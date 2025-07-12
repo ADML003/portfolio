@@ -1,8 +1,10 @@
 import { useState } from 'react';
 import Globe from 'react-globe.gl';
 import Button from '../components/Button.jsx';
+
 const About = () => {
   const [hasCopied, setHasCopied] = useState(false);
+
   const handleCopy = () => {
     navigator.clipboard.writeText('reach.adml@gmail.com');
     setHasCopied(true);
@@ -63,7 +65,7 @@ const About = () => {
               </div>
             </div>
             <div>
-              <p className="grid-headtext">Hi, I'm Aditya Malhotra</p>
+              <p className="grid-headtext">Hi, I&apos;m Aditya Malhotra</p>
               <p className="grid-subtext">
                 A passionate Full Stack Developer with expertise in modern web technologies, creating dynamic and
                 responsive applications that solve real-world problems.
@@ -141,7 +143,7 @@ const About = () => {
           {' '}
           <div className="grid-container">
             {' '}
-            <div className="rounded-3xl w-full sm:h-[326px] h-fit flex justify-center items-center">
+            <div className="rounded-3xl w-full sm:h-[326px] h-fit flex justify-center items-center globe-container">
               {' '}
               <Globe
                 height={326}
@@ -152,12 +154,83 @@ const About = () => {
                 showGraticules
                 globeImageUrl="//unpkg.com/three-globe/example/img/earth-night.jpg"
                 bumpImageUrl="//unpkg.com/three-globe/example/img/earth-topology.png"
-                labelsData={[{ lat: 28.6139, lng: 77.209, text: 'India', color: 'white', size: 15 }]}
+                // Auto-rotation
+                enablePointerInteraction={true}
+                animateIn={true}
+                waitForGlobeReady={true}
+                // Blinking points for India location
+                pointsData={[
+                  {
+                    lat: 28.6139,
+                    lng: 77.209,
+                    size: 1.0,
+                    color: '#22c55e',
+                    name: 'New Delhi, India',
+                  },
+                ]}
+                pointAltitude={0.015}
+                pointColor="color"
+                pointRadius="size"
+                // HTML elements for clean blinking effect
+                htmlElementsData={[
+                  {
+                    lat: 28.6139,
+                    lng: 77.209,
+                    html: `
+                      <div style="position: relative; display: flex; align-items: center; justify-content: center;">
+                        <span style="
+                          position: absolute;
+                          display: inline-flex;
+                          height: 12px;
+                          width: 12px;
+                          border-radius: 50%;
+                          background-color: rgb(74 222 128);
+                          opacity: 0.75;
+                          animation: ping 1s cubic-bezier(0, 0, 0.2, 1) infinite;
+                        "></span>
+                        <span style="
+                          position: relative;
+                          display: inline-flex;
+                          height: 12px;
+                          width: 12px;
+                          border-radius: 50%;
+                          background-color: rgb(34 197 94);
+                          box-shadow: 0 0 8px rgb(34 197 94);
+                        "></span>
+                      </div>
+                    `,
+                    altitude: 0.02,
+                  },
+                ]}
+                // Labels for text
+                labelsData={[
+                  {
+                    lat: 28.6139,
+                    lng: 77.209,
+                    text: 'India 🇮🇳',
+                    color: '#22c55e',
+                    size: 1.0,
+                  },
+                ]}
+                labelText="text"
+                labelColor="color"
+                labelSize="size"
+                labelDotRadius={0.3}
+                labelAltitude={0.025}
+                // Auto-rotation settings (faster)
+                ref={(globe) => {
+                  if (globe) {
+                    globe.controls().autoRotate = true;
+                    globe.controls().autoRotateSpeed = 1.2; // Increased from 0.5 to 1.2
+                    globe.controls().enableZoom = false;
+                    globe.pointOfView({ lat: 20, lng: 80, altitude: 2.5 }, 2000);
+                  }
+                }}
               />{' '}
             </div>{' '}
             <div>
               {' '}
-              <p className="grid-headtext">I'm very flexible with time zone communications & locations</p>{' '}
+              <p className="grid-headtext">I&apos;m very flexible with time zone communications & locations</p>{' '}
               <p className="grid-subtext">I&apos;m based in India and open to remote work worldwide.</p>{' '}
               <Button name="Contact Me" isBeam containerClass="w-full mt-10" />{' '}
             </div>{' '}

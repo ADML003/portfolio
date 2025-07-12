@@ -781,6 +781,41 @@ body::after {
 
 .animate-float {
   animation: float 3s ease-in-out infinite;
+} /* Globe blinking animation */
+@keyframes ping {
+  75%,
+  100% {
+    transform: scale(2);
+    opacity: 0;
+  }
+}
+
+@keyframes blink-green {
+  0%,
+  50% {
+    opacity: 1;
+  }
+  51%,
+  100% {
+    opacity: 0.3;
+  }
+}
+
+.globe-container .scene-container canvas {
+  animation: none;
+}
+
+/* Custom blinking dot animation */
+@keyframes pulse-green {
+  0% {
+    box-shadow: 0 0 0 0 rgba(0, 255, 0, 0.7);
+  }
+  70% {
+    box-shadow: 0 0 0 10px rgba(0, 255, 0, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(0, 255, 0, 0);
+  }
 }
 
 @layer utilities {
@@ -985,7 +1020,7 @@ body::after {
   }
 
   .tech-slide-item {
-    @apply flex-shrink-0 group cursor-pointer;
+    @apply flex-shrink-0 cursor-pointer;
     min-width: 80px;
   }
 
@@ -1122,6 +1157,60 @@ body::after {
     100% {
       transform: translateX(0);
     }
+  }
+
+  /* Enhanced Touch Support for Tech Skills */
+  .tech-slider-track.paused {
+    animation-play-state: paused !important;
+  }
+
+  /* Touch feedback for mobile devices */
+  @media (max-width: 768px) {
+    .tech-slider-row {
+      touch-action: pan-x;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    .tech-slide-item {
+      transition: transform 0.2s ease;
+    }
+
+    .tech-slide-item:active {
+      transform: scale(0.95);
+    }
+
+    /* Enhanced mobile touch hint */
+    .mobile-touch-hint {
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+      animation: touch-hint-glow 3s ease-in-out infinite;
+      border-radius: 8px;
+      padding: 8px 16px;
+      margin: 0 auto 16px;
+      width: fit-content;
+    }
+  }
+
+  @keyframes touch-hint-glow {
+    0%,
+    100% {
+      opacity: 0.6;
+      transform: scale(1);
+    }
+    50% {
+      opacity: 1;
+      transform: scale(1.05);
+    }
+  }
+
+  /* Smooth transition when resuming from pause */
+  .tech-slider-track {
+    transition: animation-play-state 0.3s ease;
+  }
+
+  /* Visual feedback for touch interaction */
+  .tech-slider-container-touch-active {
+    background: rgba(255, 255, 255, 0.02);
+    transition: background 0.2s ease;
   }
 }
 
