@@ -1,71 +1,7 @@
-import { useState, useRef, useEffect } from 'react';
+import { useState } from 'react';
 
 const TechSkills = () => {
   const [hoveredTech, setHoveredTech] = useState(null);
-  const [isPaused, setIsPaused] = useState(false);
-  const [touchStart, setTouchStart] = useState(null);
-  const [touchEnd, setTouchEnd] = useState(null);
-  const row1Ref = useRef(null);
-  const row2Ref = useRef(null);
-
-  // Minimum swipe distance for gesture recognition
-  const minSwipeDistance = 50;
-
-  // Touch event handlers for swipe gestures
-  const handleTouchStart = (e) => {
-    setTouchEnd(null);
-    setTouchStart(e.targetTouches[0].clientX);
-  };
-
-  const handleTouchMove = (e) => {
-    setTouchEnd(e.targetTouches[0].clientX);
-  };
-
-  const handleTouchEnd = () => {
-    if (!touchStart || !touchEnd) return;
-
-    const distance = touchStart - touchEnd;
-    const isLeftSwipe = distance > minSwipeDistance;
-    const isRightSwipe = distance < -minSwipeDistance;
-
-    if (isLeftSwipe || isRightSwipe) {
-      // Haptic feedback on supported devices
-      if (navigator.vibrate) {
-        navigator.vibrate(50);
-      }
-
-      // Pause automatic animation for 5 seconds when user swipes
-      setIsPaused(true);
-      setTimeout(() => setIsPaused(false), 5000);
-
-      // Manually control the animation position
-      if (row1Ref.current && row2Ref.current) {
-        const currentTransform = getComputedStyle(row1Ref.current).transform;
-        // Add manual offset based on swipe direction
-        const offset = isLeftSwipe ? -100 : 100;
-
-        // Apply temporary transform
-        row1Ref.current.style.transform = `${currentTransform} translateX(${offset}px)`;
-        row2Ref.current.style.transform = `${currentTransform} translateX(${-offset}px)`;
-
-        // Reset after animation resumes
-        setTimeout(() => {
-          if (row1Ref.current && row2Ref.current) {
-            row1Ref.current.style.transform = '';
-            row2Ref.current.style.transform = '';
-          }
-        }, 5000);
-      }
-    }
-  };
-
-  // Auto-resume animation after pause
-  useEffect(() => {
-    if (isPaused) {
-      const timer = setTimeout(() => setIsPaused(false), 5000);
-      return () => clearTimeout(timer);
-    }
-  }, [isPaused]);
 
   // All technologies for sliding animation - organized for better presentation
   const allTechnologies = [
@@ -272,37 +208,12 @@ const TechSkills = () => {
       </div>
 
       <div className="mt-16">
-        <div
-          className="w-full max-w-7xl mx-auto"
-          onTouchStart={handleTouchStart}
-          onTouchMove={handleTouchMove}
-          onTouchEnd={handleTouchEnd}>
-          {/* Debug: Simple test first */}
-          <div className="mb-8 text-center">
-            <p className="text-white">Tech Skills Component Loaded - Total Technologies: {allTechnologies.length}</p>
-            <p className="text-white">
-              First Row: {firstRowTechs.length} | Second Row: {secondRowTechs.length}
-            </p>
-          </div>
-
-          {/* Two-row sliding animation with touch support */}
+        <div className="w-full max-w-7xl mx-auto">
+          {/* Two-row sliding animation with faster speed */}
           <div className="overflow-hidden border border-white/20 rounded-xl p-6">
-            {/* Mobile Touch Hint */}
-            <div className="block sm:hidden text-center mb-4">
-              <p className="text-sm text-white-600/60 mobile-touch-hint">← Swipe to explore technologies →</p>
-              {isPaused && (
-                <p className="text-xs text-yellow-400 mt-2 animate-pulse">
-                  ⏸️ Animation paused - resuming in a moment...
-                </p>
-              )}
-            </div>
-
             {/* First Row - Sliding Right to Left */}
             <div className="tech-slider-row mb-8">
-              <div
-                ref={row1Ref}
-                className={`tech-slider-track ${isPaused ? 'paused' : ''}`}
-                style={{ animationPlayState: isPaused ? 'paused' : 'running' }}>
+              <div className="tech-slider-track tech-slider-fast">
                 {/* First set */}
                 {firstRowTechs.map((tech, index) => (
                   <div
@@ -395,10 +306,7 @@ const TechSkills = () => {
 
             {/* Second Row - Sliding Left to Right */}
             <div className="tech-slider-row">
-              <div
-                ref={row2Ref}
-                className={`tech-slider-track tech-slider-reverse ${isPaused ? 'paused' : ''}`}
-                style={{ animationPlayState: isPaused ? 'paused' : 'running' }}>
+              <div className="tech-slider-track tech-slider-reverse tech-slider-fast">
                 {/* First set */}
                 {secondRowTechs.map((tech, index) => (
                   <div
