@@ -1010,23 +1010,41 @@ body::after {
   }
 
   /* Global mobile touch fixes for tech skills section */
-  #tech-skills * {
+  #tech-skills,
+  #tech-skills *,
+  #tech-skills *:before,
+  #tech-skills *:after {
     -webkit-tap-highlight-color: transparent !important;
     -webkit-touch-callout: none !important;
     -webkit-user-select: none !important;
     -moz-user-select: none !important;
     -ms-user-select: none !important;
     user-select: none !important;
+    -webkit-appearance: none !important;
+    -moz-appearance: none !important;
+    appearance: none !important;
   }
 
-  #tech-skills *:focus {
+  #tech-skills *:focus,
+  #tech-skills *:active,
+  #tech-skills *:hover {
     outline: none !important;
     box-shadow: none !important;
+    -webkit-tap-highlight-color: transparent !important;
+  }
+
+  /* Prevent any iOS specific touch effects */
+  @supports (-webkit-touch-callout: none) {
+    #tech-skills * {
+      -webkit-tap-highlight-color: rgba(0, 0, 0, 0) !important;
+      -webkit-touch-callout: none !important;
+      -webkit-user-select: none !important;
+    }
   }
 
   .tech-slider-track {
     @apply flex gap-8 items-center;
-    animation: slide-right-to-left 60s linear infinite;
+    animation: slide-right-to-left 15s linear infinite; /* Default fast speed */
     width: calc(200% + 32px); /* Double width for seamless loop */
     -webkit-user-select: none;
     -moz-user-select: none;
@@ -1034,18 +1052,19 @@ body::after {
     user-select: none; /* Disable text selection */
     touch-action: none; /* Disable touch interactions */
     -webkit-touch-callout: none; /* Disable iOS callout */
+    -webkit-tap-highlight-color: transparent !important;
   }
 
   .tech-slider-fast {
-    animation-duration: 15s; /* Much faster animation - reduced from 25s to 15s */
+    animation-duration: 12s !important; /* Even faster for better mobile experience */
   }
 
   .tech-slider-reverse {
-    animation: slide-left-to-right 60s linear infinite;
+    animation: slide-left-to-right 15s linear infinite; /* Default fast speed */
   }
 
   .tech-slider-reverse.tech-slider-fast {
-    animation-duration: 15s; /* Much faster reverse animation - same as forward */
+    animation-duration: 12s !important; /* Even faster reverse animation */
   }
 
   .tech-slide-item {
@@ -1056,23 +1075,44 @@ body::after {
     -ms-user-select: none;
     user-select: none; /* Disable text selection */
     -webkit-touch-callout: none; /* Disable iOS callout */
-    -webkit-tap-highlight-color: transparent; /* Remove tap highlight */
+    -webkit-tap-highlight-color: transparent !important; /* Remove tap highlight */
+    touch-action: manipulation; /* Optimize touch performance */
+    pointer-events: none; /* Disable all pointer events on mobile */
+  }
+
+  /* Re-enable pointer events only on desktop */
+  @media (hover: hover) and (pointer: fine) {
+    .tech-slide-item {
+      pointer-events: auto;
+    }
   }
 
   .tech-slide-content {
     @apply relative flex flex-col items-center justify-center p-4 rounded-xl bg-black-300/50 border border-black-200 backdrop-blur-sm hover:border-white/30 transition-all duration-300 hover:bg-black-200/80;
-    outline: none; /* Remove focus outline */
-    -webkit-tap-highlight-color: transparent; /* Remove tap highlight */
-    -webkit-touch-callout: none; /* Disable iOS callout */
+    outline: none !important; /* Remove focus outline */
+    -webkit-tap-highlight-color: transparent !important; /* Remove tap highlight */
+    -webkit-touch-callout: none !important; /* Disable iOS callout */
     -webkit-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
+    touch-action: none !important; /* Completely disable touch actions */
+    pointer-events: none; /* Disable all interactions on mobile */
   }
 
-  .tech-slide-content:focus {
-    outline: none; /* Ensure no focus outline */
-    box-shadow: none; /* Remove any focus shadow */
+  .tech-slide-content:focus,
+  .tech-slide-content:active {
+    outline: none !important; /* Ensure no focus outline */
+    box-shadow: none !important; /* Remove any focus shadow */
+    -webkit-tap-highlight-color: transparent !important;
+  }
+
+  /* Re-enable interactions only on desktop */
+  @media (hover: hover) and (pointer: fine) {
+    .tech-slide-content {
+      pointer-events: auto;
+      touch-action: auto;
+    }
   }
 
   .tech-slide-logo {
@@ -1091,6 +1131,20 @@ body::after {
   /* Pause animation on hover */
   .tech-slider-row:hover .tech-slider-track {
     animation-play-state: paused;
+  }
+
+  /* Disable hover effects on mobile devices */
+  @media (hover: none) {
+    .tech-slider-row:hover .tech-slider-track {
+      animation-play-state: running !important;
+    }
+
+    .tech-slide-content:hover {
+      transform: none !important;
+      box-shadow: none !important;
+      border-color: inherit !important;
+      background-color: inherit !important;
+    }
   }
 
   /* Keyframes for reverse sliding animation */

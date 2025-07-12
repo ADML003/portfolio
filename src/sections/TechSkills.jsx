@@ -219,8 +219,8 @@ const TechSkills = () => {
                   <div
                     key={`row1-first-${index}`}
                     className="tech-slide-item"
-                    onMouseEnter={() => setHoveredTech(tech.name)}
-                    onMouseLeave={() => setHoveredTech(null)}>
+                    onMouseEnter={() => window.matchMedia('(hover: hover)').matches && setHoveredTech(tech.name)}
+                    onMouseLeave={() => window.matchMedia('(hover: hover)').matches && setHoveredTech(null)}>
                     <div className="tech-slide-content">
                       <img
                         src={tech.logo}
@@ -263,8 +263,8 @@ const TechSkills = () => {
                   <div
                     key={`row1-second-${index}`}
                     className="tech-slide-item"
-                    onMouseEnter={() => setHoveredTech(tech.name)}
-                    onMouseLeave={() => setHoveredTech(null)}>
+                    onMouseEnter={() => window.matchMedia('(hover: hover)').matches && setHoveredTech(tech.name)}
+                    onMouseLeave={() => window.matchMedia('(hover: hover)').matches && setHoveredTech(null)}>
                     <div className="tech-slide-content">
                       <img
                         src={tech.logo}
@@ -312,8 +312,8 @@ const TechSkills = () => {
                   <div
                     key={`row2-first-${index}`}
                     className="tech-slide-item"
-                    onMouseEnter={() => setHoveredTech(tech.name)}
-                    onMouseLeave={() => setHoveredTech(null)}>
+                    onMouseEnter={() => window.matchMedia('(hover: hover)').matches && setHoveredTech(tech.name)}
+                    onMouseLeave={() => window.matchMedia('(hover: hover)').matches && setHoveredTech(null)}>
                     <div className="tech-slide-content">
                       <img
                         src={tech.logo}
@@ -356,8 +356,8 @@ const TechSkills = () => {
                   <div
                     key={`row2-second-${index}`}
                     className="tech-slide-item"
-                    onMouseEnter={() => setHoveredTech(tech.name)}
-                    onMouseLeave={() => setHoveredTech(null)}>
+                    onMouseEnter={() => window.matchMedia('(hover: hover)').matches && setHoveredTech(tech.name)}
+                    onMouseLeave={() => window.matchMedia('(hover: hover)').matches && setHoveredTech(null)}>
                     <div className="tech-slide-content">
                       <img
                         src={tech.logo}
