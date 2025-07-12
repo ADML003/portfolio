@@ -746,10 +746,10 @@ body::after {
 
 @keyframes slide-left-to-right {
   0% {
-    transform: translateX(0);
+    transform: translateX(-100%);
   }
   100% {
-    transform: translateX(100%);
+    transform: translateX(0);
   }
 }
 
@@ -1009,14 +1009,6 @@ body::after {
     @apply w-full overflow-hidden relative;
   }
 
-  /* Complete isolation for tech skills section */
-  .tech-skills-isolated {
-    isolation: isolate !important;
-    contain: layout style paint !important;
-    position: relative !important;
-    z-index: 1 !important;
-  }
-
   /* Global mobile touch fixes for tech skills section */
   #tech-skills,
   #tech-skills *,
@@ -1028,12 +1020,6 @@ body::after {
     -moz-user-select: none !important;
     -ms-user-select: none !important;
     user-select: none !important;
-    -webkit-appearance: none !important;
-    -moz-appearance: none !important;
-    appearance: none !important;
-    /* Disable all green animations and effects */
-    animation: none !important;
-    box-shadow: none !important;
   }
 
   /* Specifically disable problematic green animations in tech skills section */
@@ -1185,12 +1171,6 @@ body::after {
       background-color: inherit !important;
     }
 
-    /* Disable all problematic animations on mobile */
-    #tech-skills * {
-      animation: none !important;
-      box-shadow: none !important;
-    }
-
     /* Keep only the slider animations */
     #tech-skills .tech-slider-track {
       animation: slide-right-to-left 12s linear infinite !important;
@@ -1204,7 +1184,7 @@ body::after {
   /* Keyframes for reverse sliding animation */
   @keyframes slide-left-to-right {
     0% {
-      transform: translateX(-50%);
+      transform: translateX(-100%);
     }
     100% {
       transform: translateX(0);

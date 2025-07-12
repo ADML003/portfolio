@@ -200,12 +200,12 @@ const TechSkills = () => {
 
   return (
     <section
-      className="c-space my-20 tech-skills-isolated"
+      className="c-space my-20"
       id="tech-skills"
       style={{
-        isolation: 'isolate',
-        contain: 'layout style paint',
-        overflow: 'hidden',
+        position: 'relative',
+        zIndex: 10,
+        backgroundColor: 'rgb(14, 15, 16)',
       }}>
       <div className="w-full text-center">
         <h2 className="head-text">🛠️ Tech Stack & Tools I Know</h2>
