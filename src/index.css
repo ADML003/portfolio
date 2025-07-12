@@ -1,0 +1,1171 @@
+@import url('https://fonts.cdnfonts.com/css/general-sans');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: radial-gradient(ellipse at center, #0a0a23 0%, #000000 70%, #000000 100%);
+  font-family: 'General Sans', sans-serif;
+  overflow-x: hidden;
+  position: relative;
+}
+
+/* Cosmic Background */
+body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: 
+    /* Dense star field - Top row */
+    radial-gradient(1px 1px at 2% 5%, #fff, transparent),
+    radial-gradient(1px 1px at 8% 8%, rgba(255, 255, 255, 0.8), transparent),
+    radial-gradient(2px 2px at 14% 12%, #eee, transparent),
+    radial-gradient(1px 1px at 20% 6%, rgba(255, 255, 255, 0.9), transparent),
+    radial-gradient(1px 1px at 26% 15%, #fff, transparent),
+    radial-gradient(2px 2px at 32% 9%, rgba(255, 255, 255, 0.7), transparent),
+    radial-gradient(1px 1px at 38% 18%, #eee, transparent),
+    radial-gradient(1px 1px at 44% 7%, rgba(255, 255, 255, 0.8), transparent),
+    radial-gradient(2px 2px at 50% 14%, #fff, transparent),
+    radial-gradient(1px 1px at 56% 10%, rgba(255, 255, 255, 0.6), transparent),
+    radial-gradient(1px 1px at 62% 16%, #eee, transparent),
+    radial-gradient(2px 2px at 68% 5%, rgba(255, 255, 255, 0.9), transparent),
+    radial-gradient(1px 1px at 74% 13%, #fff, transparent),
+    radial-gradient(1px 1px at 80% 8%, rgba(255, 255, 255, 0.7), transparent),
+    radial-gradient(2px 2px at 86% 17%, #eee, transparent),
+    radial-gradient(1px 1px at 92% 11%, rgba(255, 255, 255, 0.8), transparent),
+    radial-gradient(1px 1px at 98% 6%, #fff, transparent),
+    /* Dense star field - Second row */ radial-gradient(1px 1px at 4% 24%, rgba(255, 255, 255, 0.8), transparent),
+    radial-gradient(2px 2px at 10% 28%, #fff, transparent),
+    radial-gradient(1px 1px at 16% 22%, rgba(255, 255, 255, 0.6), transparent),
+    radial-gradient(1px 1px at 22% 31%, #eee, transparent),
+    radial-gradient(2px 2px at 28% 25%, rgba(255, 255, 255, 0.9), transparent),
+    radial-gradient(1px 1px at 34% 33%, #fff, transparent),
+    radial-gradient(1px 1px at 40% 27%, rgba(255, 255, 255, 0.7), transparent),
+    radial-gradient(2px 2px at 46% 35%, #eee, transparent),
+    radial-gradient(1px 1px at 52% 29%, rgba(255, 255, 255, 0.8), transparent),
+    radial-gradient(1px 1px at 58% 37%, #fff, transparent),
+    radial-gradient(2px 2px at 64% 23%, rgba(255, 255, 255, 0.6), transparent),
+    radial-gradient(1px 1px at 70% 32%, #eee, transparent),
+    radial-gradient(1px 1px at 76% 26%, rgba(255, 255, 255, 0.9), transparent),
+    radial-gradient(2px 2px at 82% 38%, #fff, transparent),
+    radial-gradient(1px 1px at 88% 30%, rgba(255, 255, 255, 0.7), transparent),
+    radial-gradient(1px 1px at 94% 34%, #eee, transparent),
+    /* Dense star field - Third row */ radial-gradient(2px 2px at 6% 44%, rgba(255, 255, 255, 0.8), transparent),
+    radial-gradient(1px 1px at 12% 48%, #fff, transparent),
+    radial-gradient(1px 1px at 18% 42%, rgba(255, 255, 255, 0.7), transparent),
+    radial-gradient(2px 2px at 24% 51%, #eee, transparent),
+    radial-gradient(1px 1px at 30% 45%, rgba(255, 255, 255, 0.9), transparent),
+    radial-gradient(1px 1px at 36% 53%, #fff, transparent),
+    radial-gradient(2px 2px at 42% 47%, rgba(255, 255, 255, 0.6), transparent),
+    radial-gradient(1px 1px at 48% 55%, #eee, transparent),
+    radial-gradient(1px 1px at 54% 49%, rgba(255, 255, 255, 0.8), transparent),
+    radial-gradient(2px 2px at 60% 57%, #fff, transparent),
+    radial-gradient(1px 1px at 66% 43%, rgba(255, 255, 255, 0.7), transparent),
+    radial-gradient(1px 1px at 72% 52%, #eee, transparent),
+    radial-gradient(2px 2px at 78% 46%, rgba(255, 255, 255, 0.9), transparent),
+    radial-gradient(1px 1px at 84% 58%, #fff, transparent),
+    radial-gradient(1px 1px at 90% 50%, rgba(255, 255, 255, 0.6), transparent),
+    radial-gradient(2px 2px at 96% 54%, #eee, transparent),
+    /* Dense star field - Fourth row */ radial-gradient(1px 1px at 3% 64%, rgba(255, 255, 255, 0.9), transparent),
+    radial-gradient(2px 2px at 9% 68%, #fff, transparent),
+    radial-gradient(1px 1px at 15% 62%, rgba(255, 255, 255, 0.7), transparent),
+    radial-gradient(1px 1px at 21% 71%, #eee, transparent),
+    radial-gradient(2px 2px at 27% 65%, rgba(255, 255, 255, 0.8), transparent),
+    radial-gradient(1px 1px at 33% 73%, #fff, transparent),
+    radial-gradient(1px 1px at 39% 67%, rgba(255, 255, 255, 0.6), transparent),
+    radial-gradient(2px 2px at 45% 75%, #eee, transparent),
+    radial-gradient(1px 1px at 51% 69%, rgba(255, 255, 255, 0.9), transparent),
+    radial-gradient(1px 1px at 57% 77%, #fff, transparent),
+    radial-gradient(2px 2px at 63% 63%, rgba(255, 255, 255, 0.7), transparent),
+    radial-gradient(1px 1px at 69% 72%, #eee, transparent),
+    radial-gradient(1px 1px at 75% 66%, rgba(255, 255, 255, 0.8), transparent),
+    radial-gradient(2px 2px at 81% 78%, #fff, transparent),
+    radial-gradient(1px 1px at 87% 70%, rgba(255, 255, 255, 0.6), transparent),
+    radial-gradient(1px 1px at 93% 74%, #eee, transparent),
+    /* Dense star field - Bottom row */ radial-gradient(2px 2px at 5% 84%, rgba(255, 255, 255, 0.8), transparent),
+    radial-gradient(1px 1px at 11% 88%, #fff, transparent),
+    radial-gradient(1px 1px at 17% 82%, rgba(255, 255, 255, 0.9), transparent),
+    radial-gradient(2px 2px at 23% 91%, #eee, transparent),
+    radial-gradient(1px 1px at 29% 85%, rgba(255, 255, 255, 0.7), transparent),
+    radial-gradient(1px 1px at 35% 93%, #fff, transparent),
+    radial-gradient(2px 2px at 41% 87%, rgba(255, 255, 255, 0.6), transparent),
+    radial-gradient(1px 1px at 47% 95%, #eee, transparent),
+    radial-gradient(1px 1px at 53% 89%, rgba(255, 255, 255, 0.8), transparent),
+    radial-gradient(2px 2px at 59% 97%, #fff, transparent),
+    radial-gradient(1px 1px at 65% 83%, rgba(255, 255, 255, 0.7), transparent),
+    radial-gradient(1px 1px at 71% 92%, #eee, transparent),
+    radial-gradient(2px 2px at 77% 86%, rgba(255, 255, 255, 0.9), transparent),
+    radial-gradient(1px 1px at 83% 98%, #fff, transparent),
+    radial-gradient(1px 1px at 89% 90%, rgba(255, 255, 255, 0.6), transparent),
+    radial-gradient(2px 2px at 95% 94%, #eee, transparent);
+  background-size: 100vw 100vh;
+  animation: cosmic-drift 120s linear infinite;
+  z-index: -2;
+  pointer-events: none;
+}
+
+/* Cosmic Animations */
+/* Enhanced Cosmic Twinkling Stars */
+body::after {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: 
+    /* Additional dense star field layer */
+    radial-gradient(1px 1px at 7% 19%, rgba(255, 255, 255, 0.6), transparent),
+    radial-gradient(1px 1px at 13% 13%, rgba(255, 255, 255, 0.8), transparent),
+    radial-gradient(1px 1px at 19% 7%, rgba(255, 255, 255, 0.5), transparent),
+    radial-gradient(1px 1px at 25% 21%, rgba(255, 255, 255, 0.7), transparent),
+    radial-gradient(1px 1px at 31% 17%, rgba(255, 255, 255, 0.9), transparent),
+    radial-gradient(1px 1px at 37% 11%, rgba(255, 255, 255, 0.4), transparent),
+    radial-gradient(1px 1px at 43% 23%, rgba(255, 255, 255, 0.8), transparent),
+    radial-gradient(1px 1px at 49% 15%, rgba(255, 255, 255, 0.6), transparent),
+    radial-gradient(1px 1px at 55% 9%, rgba(255, 255, 255, 0.7), transparent),
+    radial-gradient(1px 1px at 61% 25%, rgba(255, 255, 255, 0.5), transparent),
+    radial-gradient(1px 1px at 67% 19%, rgba(255, 255, 255, 0.9), transparent),
+    radial-gradient(1px 1px at 73% 13%, rgba(255, 255, 255, 0.6), transparent),
+    radial-gradient(1px 1px at 79% 27%, rgba(255, 255, 255, 0.8), transparent),
+    radial-gradient(1px 1px at 85% 21%, rgba(255, 255, 255, 0.4), transparent),
+    radial-gradient(1px 1px at 91% 15%, rgba(255, 255, 255, 0.7), transparent),
+    radial-gradient(1px 1px at 97% 29%, rgba(255, 255, 255, 0.6), transparent),
+    /* Mid-section dense stars */ radial-gradient(1px 1px at 5% 39%, rgba(255, 255, 255, 0.7), transparent),
+    radial-gradient(1px 1px at 11% 33%, rgba(255, 255, 255, 0.5), transparent),
+    radial-gradient(1px 1px at 17% 41%, rgba(255, 255, 255, 0.8), transparent),
+    radial-gradient(1px 1px at 23% 37%, rgba(255, 255, 255, 0.6), transparent),
+    radial-gradient(1px 1px at 29% 31%, rgba(255, 255, 255, 0.9), transparent),
+    radial-gradient(1px 1px at 35% 43%, rgba(255, 255, 255, 0.4), transparent),
+    radial-gradient(1px 1px at 41% 35%, rgba(255, 255, 255, 0.7), transparent),
+    radial-gradient(1px 1px at 47% 29%, rgba(255, 255, 255, 0.8), transparent),
+    radial-gradient(1px 1px at 53% 45%, rgba(255, 255, 255, 0.5), transparent),
+    radial-gradient(1px 1px at 59% 39%, rgba(255, 255, 255, 0.6), transparent),
+    radial-gradient(1px 1px at 65% 33%, rgba(255, 255, 255, 0.9), transparent),
+    radial-gradient(1px 1px at 71% 47%, rgba(255, 255, 255, 0.7), transparent),
+    radial-gradient(1px 1px at 77% 41%, rgba(255, 255, 255, 0.4), transparent),
+    radial-gradient(1px 1px at 83% 35%, rgba(255, 255, 255, 0.8), transparent),
+    radial-gradient(1px 1px at 89% 49%, rgba(255, 255, 255, 0.6), transparent),
+    radial-gradient(1px 1px at 95% 43%, rgba(255, 255, 255, 0.5), transparent),
+    /* Lower section dense stars */ radial-gradient(1px 1px at 8% 59%, rgba(255, 255, 255, 0.8), transparent),
+    radial-gradient(1px 1px at 14% 53%, rgba(255, 255, 255, 0.6), transparent),
+    radial-gradient(1px 1px at 20% 61%, rgba(255, 255, 255, 0.7), transparent),
+    radial-gradient(1px 1px at 26% 57%, rgba(255, 255, 255, 0.5), transparent),
+    radial-gradient(1px 1px at 32% 51%, rgba(255, 255, 255, 0.9), transparent),
+    radial-gradient(1px 1px at 38% 63%, rgba(255, 255, 255, 0.4), transparent),
+    radial-gradient(1px 1px at 44% 55%, rgba(255, 255, 255, 0.8), transparent),
+    radial-gradient(1px 1px at 50% 49%, rgba(255, 255, 255, 0.6), transparent),
+    radial-gradient(1px 1px at 56% 65%, rgba(255, 255, 255, 0.7), transparent),
+    radial-gradient(1px 1px at 62% 59%, rgba(255, 255, 255, 0.5), transparent),
+    radial-gradient(1px 1px at 68% 53%, rgba(255, 255, 255, 0.9), transparent),
+    radial-gradient(1px 1px at 74% 67%, rgba(255, 255, 255, 0.6), transparent),
+    radial-gradient(1px 1px at 80% 61%, rgba(255, 255, 255, 0.8), transparent),
+    radial-gradient(1px 1px at 86% 55%, rgba(255, 255, 255, 0.4), transparent),
+    radial-gradient(1px 1px at 92% 69%, rgba(255, 255, 255, 0.7), transparent),
+    radial-gradient(1px 1px at 98% 63%, rgba(255, 255, 255, 0.6), transparent),
+    /* Bottom section dense stars */ radial-gradient(1px 1px at 6% 79%, rgba(255, 255, 255, 0.7), transparent),
+    radial-gradient(1px 1px at 12% 73%, rgba(255, 255, 255, 0.9), transparent),
+    radial-gradient(1px 1px at 18% 81%, rgba(255, 255, 255, 0.5), transparent),
+    radial-gradient(1px 1px at 24% 77%, rgba(255, 255, 255, 0.8), transparent),
+    radial-gradient(1px 1px at 30% 71%, rgba(255, 255, 255, 0.6), transparent),
+    radial-gradient(1px 1px at 36% 83%, rgba(255, 255, 255, 0.4), transparent),
+    radial-gradient(1px 1px at 42% 75%, rgba(255, 255, 255, 0.9), transparent),
+    radial-gradient(1px 1px at 48% 69%, rgba(255, 255, 255, 0.7), transparent),
+    radial-gradient(1px 1px at 54% 85%, rgba(255, 255, 255, 0.5), transparent),
+    radial-gradient(1px 1px at 60% 79%, rgba(255, 255, 255, 0.8), transparent),
+    radial-gradient(1px 1px at 66% 73%, rgba(255, 255, 255, 0.6), transparent),
+    radial-gradient(1px 1px at 72% 87%, rgba(255, 255, 255, 0.4), transparent),
+    radial-gradient(1px 1px at 78% 81%, rgba(255, 255, 255, 0.9), transparent),
+    radial-gradient(1px 1px at 84% 75%, rgba(255, 255, 255, 0.7), transparent),
+    radial-gradient(1px 1px at 90% 89%, rgba(255, 255, 255, 0.5), transparent),
+    radial-gradient(1px 1px at 96% 83%, rgba(255, 255, 255, 0.8), transparent);
+  background-size: 100vw 100vh;
+  animation: twinkle 6s ease-in-out infinite;
+  z-index: -1;
+  pointer-events: none;
+}
+
+/* Cosmic Animations */
+@keyframes cosmic-drift {
+  0% {
+    transform: translateX(0) translateY(0);
+  }
+  100% {
+    transform: translateX(-50px) translateY(-30px);
+  }
+}
+
+@keyframes planet-orbit {
+  0% {
+    transform: rotate(0deg) translateX(300px) rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg) translateX(300px) rotate(-360deg);
+  }
+}
+
+@keyframes comet-trail {
+  0% {
+    transform: translateX(-100vw) translateY(-50px) rotate(45deg);
+    opacity: 0;
+  }
+  5% {
+    opacity: 1;
+  }
+  95% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(100vw) translateY(50px) rotate(45deg);
+    opacity: 0;
+  }
+}
+
+@keyframes nebula-float {
+  0%,
+  100% {
+    transform: translateY(0px) scale(1);
+    opacity: 0.3;
+  }
+  50% {
+    transform: translateY(-20px) scale(1.1);
+    opacity: 0.5;
+  }
+}
+
+@keyframes scroll-parallax {
+  0% {
+    transform: translateY(0px);
+  }
+  100% {
+    transform: translateY(-50px);
+  }
+}
+
+@keyframes twinkle {
+  0%,
+  100% {
+    opacity: 0.3;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.2);
+  }
+}
+
+@keyframes galaxy-rotation {
+  0% {
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+  100% {
+    transform: translate(-50%, -50%) rotate(360deg);
+  }
+}
+
+/* Enhanced Planet Rings */
+.cosmic-planet::before {
+  content: '';
+  position: absolute;
+  top: -10px;
+  left: -10px;
+  right: -10px;
+  bottom: -10px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 50%;
+  animation: planet-ring-rotation 10s linear infinite;
+}
+
+.cosmic-planet::after {
+  content: '';
+  position: absolute;
+  top: -20px;
+  left: -20px;
+  right: -20px;
+  bottom: -20px;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 50%;
+  animation: planet-ring-rotation 15s linear infinite reverse;
+}
+
+@keyframes planet-ring-rotation {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* Cosmic Glow Effects */
+.cosmic-glow {
+  position: fixed;
+  pointer-events: none;
+  z-index: -1;
+}
+
+.cosmic-glow-1 {
+  width: 400px;
+  height: 400px;
+  background: radial-gradient(circle, rgba(138, 43, 226, 0.05), transparent 70%);
+  top: 10%;
+  left: 10%;
+  border-radius: 50%;
+  animation: cosmic-pulse 8s ease-in-out infinite;
+}
+
+.cosmic-glow-2 {
+  width: 500px;
+  height: 500px;
+  background: radial-gradient(circle, rgba(75, 0, 130, 0.04), transparent 70%);
+  bottom: 10%;
+  right: 10%;
+  border-radius: 50%;
+  animation: cosmic-pulse 12s ease-in-out infinite;
+  animation-delay: 4s;
+}
+
+@keyframes cosmic-pulse {
+  0%,
+  100% {
+    transform: scale(1);
+    opacity: 0.3;
+  }
+  50% {
+    transform: scale(1.2);
+    opacity: 0.6;
+  }
+}
+
+/* UFO Animations */
+@keyframes ufo-float {
+  0%,
+  100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  25% {
+    transform: translateY(-15px) rotate(2deg);
+  }
+  50% {
+    transform: translateY(-10px) rotate(0deg);
+  }
+  75% {
+    transform: translateY(-20px) rotate(-2deg);
+  }
+}
+
+@keyframes ufo-light {
+  0%,
+  100% {
+    opacity: 0.3;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.3);
+  }
+}
+
+/* Planet Animations */
+@keyframes planet-glow {
+  0%,
+  100% {
+    box-shadow:
+      0 0 30px rgba(244, 164, 96, 0.4),
+      inset -10px -10px 20px rgba(0, 0, 0, 0.3);
+  }
+  50% {
+    box-shadow:
+      0 0 50px rgba(244, 164, 96, 0.7),
+      inset -5px -5px 15px rgba(0, 0, 0, 0.2);
+  }
+}
+
+@keyframes planet-pulse {
+  0%,
+  100% {
+    box-shadow:
+      0 0 25px rgba(255, 140, 66, 0.5),
+      inset -8px -8px 15px rgba(0, 0, 0, 0.4);
+  }
+  50% {
+    box-shadow:
+      0 0 40px rgba(255, 140, 66, 0.8),
+      inset -4px -4px 10px rgba(0, 0, 0, 0.3);
+  }
+}
+
+@keyframes ring-rotate {
+  0% {
+    transform: translate(-50%, -50%) rotateX(75deg) rotate(0deg);
+  }
+  100% {
+    transform: translate(-50%, -50%) rotateX(75deg) rotate(360deg);
+  }
+}
+
+/* Collision Effects Animations */
+@keyframes collision-burst {
+  0% {
+    transform: translate(-50%, -50%) scale(0);
+    opacity: 1;
+  }
+  50% {
+    transform: translate(-50%, -50%) scale(1.5);
+    opacity: 0.8;
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(3);
+    opacity: 0;
+  }
+}
+
+@keyframes shockwave-expand {
+  0% {
+    width: 20px;
+    height: 20px;
+    opacity: 1;
+  }
+  100% {
+    width: 200px;
+    height: 200px;
+    opacity: 0;
+  }
+}
+
+@keyframes particle-burst-0 {
+  0% {
+    transform: translate(-50%, -50%) rotate(0deg) translateX(20px) scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(-50%, -50%) rotate(0deg) translateX(80px) scale(0);
+    opacity: 0;
+  }
+}
+
+@keyframes particle-burst-1 {
+  0% {
+    transform: translate(-50%, -50%) rotate(45deg) translateX(20px) scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(-50%, -50%) rotate(45deg) translateX(80px) scale(0);
+    opacity: 0;
+  }
+}
+
+@keyframes particle-burst-2 {
+  0% {
+    transform: translate(-50%, -50%) rotate(90deg) translateX(20px) scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(-50%, -50%) rotate(90deg) translateX(80px) scale(0);
+    opacity: 0;
+  }
+}
+
+@keyframes particle-burst-3 {
+  0% {
+    transform: translate(-50%, -50%) rotate(135deg) translateX(20px) scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(-50%, -50%) rotate(135deg) translateX(80px) scale(0);
+    opacity: 0;
+  }
+}
+
+@keyframes particle-burst-4 {
+  0% {
+    transform: translate(-50%, -50%) rotate(180deg) translateX(20px) scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(-50%, -50%) rotate(180deg) translateX(80px) scale(0);
+    opacity: 0;
+  }
+}
+
+@keyframes particle-burst-5 {
+  0% {
+    transform: translate(-50%, -50%) rotate(225deg) translateX(20px) scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(-50%, -50%) rotate(225deg) translateX(80px) scale(0);
+    opacity: 0;
+  }
+}
+
+@keyframes particle-burst-6 {
+  0% {
+    transform: translate(-50%, -50%) rotate(270deg) translateX(20px) scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(-50%, -50%) rotate(270deg) translateX(80px) scale(0);
+    opacity: 0;
+  }
+}
+
+@keyframes particle-burst-7 {
+  0% {
+    transform: translate(-50%, -50%) rotate(315deg) translateX(20px) scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(-50%, -50%) rotate(315deg) translateX(80px) scale(0);
+    opacity: 0;
+  }
+}
+
+@keyframes electric-arc-1 {
+  0% {
+    opacity: 0.3;
+    width: 40px;
+  }
+  100% {
+    opacity: 1;
+    width: 80px;
+  }
+}
+
+@keyframes electric-arc-2 {
+  0% {
+    opacity: 0.2;
+    width: 30px;
+  }
+  100% {
+    opacity: 0.8;
+    width: 70px;
+  }
+}
+
+@keyframes gravitational-wave {
+  0% {
+    width: 50px;
+    height: 50px;
+    opacity: 0.8;
+  }
+  100% {
+    width: 500px;
+    height: 500px;
+    opacity: 0;
+  }
+}
+
+/* Meteor Shower Effect */
+.meteor {
+  position: fixed;
+  width: 2px;
+  height: 2px;
+  background: #fff;
+  border-radius: 50%;
+  z-index: -1;
+  pointer-events: none;
+}
+
+.meteor::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -50px;
+  width: 50px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.6), transparent);
+}
+
+@keyframes meteor-fall {
+  0% {
+    transform: translateX(-100vw) translateY(-100vh) rotate(45deg);
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(100vw) translateY(100vh) rotate(45deg);
+    opacity: 0;
+  }
+}
+
+/* Planet Elements */
+.cosmic-planet {
+  position: fixed;
+  border-radius: 50%;
+  z-index: -1;
+  pointer-events: none;
+}
+
+.planet-1 {
+  width: 80px;
+  height: 80px;
+  background: radial-gradient(circle at 30% 30%, #ff6b35, #f7931e, #ff6b35);
+  top: 20%;
+  left: 10%;
+  animation: planet-orbit 60s linear infinite;
+  box-shadow: 0 0 30px rgba(255, 107, 53, 0.3);
+}
+
+.planet-2 {
+  width: 60px;
+  height: 60px;
+  background: radial-gradient(circle at 30% 30%, #4ecdc4, #44a08d, #4ecdc4);
+  top: 70%;
+  right: 15%;
+  animation: planet-orbit 80s linear infinite reverse;
+  box-shadow: 0 0 25px rgba(78, 205, 196, 0.3);
+}
+
+.planet-3 {
+  width: 40px;
+  height: 40px;
+  background: radial-gradient(circle at 30% 30%, #667eea, #764ba2, #667eea);
+  top: 40%;
+  right: 20%;
+  animation: planet-orbit 100s linear infinite;
+  box-shadow: 0 0 20px rgba(102, 126, 234, 0.3);
+}
+
+/* Comet */
+.cosmic-comet {
+  position: fixed;
+  width: 4px;
+  height: 4px;
+  background: #fff;
+  border-radius: 50%;
+  z-index: -1;
+  pointer-events: none;
+}
+
+.cosmic-comet::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100px;
+  width: 100px;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.8), transparent);
+  border-radius: 50%;
+}
+
+.comet-1 {
+  top: 20%;
+  animation: comet-trail 15s linear infinite;
+  animation-delay: 2s;
+}
+
+.comet-2 {
+  top: 60%;
+  animation: comet-trail 20s linear infinite;
+  animation-delay: 8s;
+}
+
+/* Nebula Effects */
+.cosmic-nebula {
+  position: fixed;
+  border-radius: 50%;
+  z-index: -1;
+  pointer-events: none;
+  filter: blur(40px);
+}
+
+.nebula-1 {
+  width: 200px;
+  height: 200px;
+  background: radial-gradient(circle, rgba(138, 43, 226, 0.1), transparent);
+  top: 10%;
+  left: 50%;
+  animation: nebula-float 8s ease-in-out infinite;
+}
+
+.nebula-2 {
+  width: 300px;
+  height: 300px;
+  background: radial-gradient(circle, rgba(75, 0, 130, 0.1), transparent);
+  bottom: 20%;
+  right: 30%;
+  animation: nebula-float 12s ease-in-out infinite;
+  animation-delay: 4s;
+}
+
+/* Custom animations */
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes slide-right-to-left {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}
+
+@keyframes slide-left-to-right {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+@keyframes marquee {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes marquee-reverse {
+  0% {
+    transform: translateX(-50%);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+.animate-fadeIn {
+  animation: fadeIn 0.2s ease-out;
+}
+
+.animate-fadeOut {
+  animation: fadeOut 0.2s ease-out;
+}
+
+.animate-float {
+  animation: float 3s ease-in-out infinite;
+}
+
+@layer utilities {
+  .c-space {
+    @apply sm:px-10 px-5;
+  }
+
+  .head-text {
+    @apply sm:text-4xl text-3xl font-semibold text-gray_gradient;
+  }
+
+  .nav-ul {
+    @apply flex flex-col items-center gap-4 sm:flex-row md:gap-6 relative z-20;
+  }
+
+  .nav-li {
+    @apply text-neutral-400 hover:text-white font-generalsans max-sm:hover:bg-black-500 max-sm:w-full max-sm:rounded-md py-2 max-sm:px-5;
+  }
+
+  .nav-li_a {
+    @apply text-lg md:text-base hover:text-white transition-colors;
+  }
+
+  .nav-sidebar {
+    @apply absolute left-0 right-0 bg-black-200 backdrop-blur-sm transition-all duration-300 ease-in-out overflow-hidden z-20 mx-auto sm:hidden block;
+  }
+
+  .text-gray_gradient {
+    @apply bg-gradient-to-r from-[#BEC1CF] from-60% via-[#D5D8EA] via-60% to-[#D5D8EA] to-100% bg-clip-text text-transparent;
+  }
+
+  /* button component */
+  .btn {
+    @apply flex gap-4 items-center justify-center cursor-pointer p-3 rounded-md bg-black-300  transition-all active:scale-95 text-white mx-auto;
+  }
+
+  .btn-ping {
+    @apply animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75;
+  }
+
+  .btn-ping_dot {
+    @apply relative inline-flex rounded-full h-3 w-3 bg-green-500;
+  }
+
+  /* hero section */
+  .hero_tag {
+    @apply text-center xl:text-6xl md:text-5xl sm:text-4xl text-3xl font-generalsans font-black !leading-normal;
+  }
+
+  /* about section */
+  .grid-container {
+    @apply w-full h-full border border-black-300 bg-black-200 rounded-lg sm:p-7 p-4 flex flex-col gap-5;
+  }
+
+  .grid-headtext {
+    @apply text-xl font-semibold mb-2 text-white font-generalsans;
+  }
+
+  .grid-subtext {
+    @apply text-[#afb0b6] text-base font-generalsans;
+  }
+
+  .copy-container {
+    @apply cursor-pointer flex justify-center items-center gap-2;
+  }
+
+  /* projects section  */
+  .arrow-btn {
+    @apply w-10 h-10 p-3 cursor-pointer active:scale-95 transition-all rounded-full arrow-gradient;
+  }
+
+  .tech-logo {
+    @apply w-10 h-10 rounded-md p-2 bg-neutral-100 bg-opacity-10 backdrop-filter backdrop-blur-lg flex justify-center items-center;
+  }
+
+  /* clients section */
+  .client-container {
+    @apply grid md:grid-cols-2 grid-cols-1 gap-5 mt-12;
+  }
+
+  .client-review {
+    @apply rounded-lg md:p-10 p-5 col-span-1 bg-black-300 bg-opacity-50;
+  }
+
+  .client-content {
+    @apply flex lg:flex-row flex-col justify-between lg:items-center items-start gap-5 mt-7;
+  }
+
+  /*  work experience section */
+  .work-container {
+    @apply grid lg:grid-cols-3 grid-cols-1 gap-5 mt-12;
+  }
+
+  .work-canvas {
+    @apply col-span-1 rounded-lg bg-black-200 border border-black-300;
+  }
+
+  .work-content {
+    @apply col-span-2 rounded-lg bg-black-200 border border-black-300;
+  }
+
+  .work-content_container {
+    @apply grid grid-cols-[auto_1fr] items-start gap-5  transition-all ease-in-out duration-500 cursor-pointer hover:bg-black-300 rounded-lg sm:px-5 px-2.5;
+  }
+
+  .work-content_logo {
+    @apply rounded-3xl w-16 h-16 p-2 bg-black-600;
+  }
+
+  .work-content_bar {
+    @apply flex-1 w-0.5 mt-4 h-full bg-black-300 group-hover:bg-black-500 group-last:hidden;
+  }
+
+  /* contact section */
+  .contact-container {
+    @apply max-w-xl relative z-10 sm:px-10 px-5 mt-12;
+  }
+
+  .field-label {
+    @apply text-lg text-white-600;
+  }
+
+  .field-input {
+    @apply w-full bg-black-300 px-5 py-2 min-h-14 rounded-lg placeholder:text-white-500 text-lg text-white-800 shadow-black-200 shadow-2xl focus:outline-none;
+  }
+
+  .field-btn {
+    @apply bg-black-500 px-5 py-2 min-h-12 rounded-lg shadow-black-200 shadow-2xl flex justify-center items-center text-lg text-white gap-3;
+  }
+
+  .field-btn_arrow {
+    @apply w-2.5 h-2.5 object-contain invert brightness-0;
+  }
+
+  /*  footer */
+  .social-icon {
+    @apply w-12 h-12 rounded-full flex justify-center items-center bg-black-300 border border-black-200;
+  }
+
+  /* Tech Skills Elegant Layout */
+  .tech-category-container {
+    @apply bg-black-300 rounded-xl p-6 border border-black-200 hover:border-white/20 transition-all duration-500;
+  }
+
+  .tech-grid {
+    @apply grid grid-cols-2 gap-4;
+  }
+
+  .tech-item {
+    @apply flex flex-col items-center justify-center p-4 rounded-lg bg-black-200 border border-black-100 hover:border-white/30 transition-all duration-300 cursor-pointer hover:bg-black-100 group;
+  }
+
+  .tech-item-inner {
+    @apply flex items-center justify-center w-10 h-10 mb-2;
+  }
+
+  .tech-logo {
+    @apply w-full h-full object-contain transition-all duration-300;
+  }
+
+  .tech-name {
+    @apply text-white text-xs font-medium text-center group-hover:text-white transition-colors;
+  }
+
+  .tech-item:hover {
+    @apply transform scale-105 shadow-lg;
+  }
+
+  .tech-item:hover .tech-logo {
+    @apply filter-none;
+  }
+
+  /* Tech Skills Sliding Animation */
+  .tech-slider-container {
+    @apply w-full overflow-hidden relative bg-black-300 rounded-xl p-6 mt-8 border border-black-200;
+  }
+
+  /* Legacy tech slider - keeping for compatibility */
+  .tech-slider {
+    @apply flex gap-6 items-center;
+    animation: slide-right-to-left 45s linear infinite;
+    width: calc(200% + 24px); /* Double width for seamless loop */
+  }
+
+  .tech-slide-inner {
+    @apply flex items-center justify-center w-10 h-10;
+  }
+
+  /* Two-Row Tech Skills Sliding Animation */
+  .tech-slider-row {
+    @apply w-full overflow-hidden relative;
+  }
+
+  .tech-slider-track {
+    @apply flex gap-8 items-center;
+    animation: slide-right-to-left 60s linear infinite;
+    width: calc(200% + 32px); /* Double width for seamless loop */
+  }
+
+  .tech-slider-reverse {
+    animation: slide-left-to-right 60s linear infinite;
+  }
+
+  .tech-slide-item {
+    @apply flex-shrink-0 group cursor-pointer;
+    min-width: 80px;
+  }
+
+  .tech-slide-content {
+    @apply relative flex flex-col items-center justify-center p-4 rounded-xl bg-black-300/50 border border-black-200 backdrop-blur-sm hover:border-white/30 transition-all duration-300 hover:bg-black-200/80;
+  }
+
+  .tech-slide-logo {
+    @apply w-12 h-12 object-contain transition-all duration-300;
+  }
+
+  .tech-tooltip {
+    @apply absolute -top-10 left-1/2 transform -translate-x-1/2 px-3 py-1 bg-black-100 text-white text-sm rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 whitespace-nowrap border border-white/20;
+  }
+
+  .tech-tooltip::after {
+    content: '';
+    @apply absolute top-full left-1/2 transform -translate-x-1/2 border-4 border-transparent border-t-black-100;
+  }
+
+  /* Pause animation on hover */
+  .tech-slider-row:hover .tech-slider-track {
+    animation-play-state: paused;
+  }
+
+  /* Keyframes for reverse sliding animation */
+  @keyframes slide-left-to-right {
+    0% {
+      transform: translateX(-50%);
+    }
+    100% {
+      transform: translateX(0);
+    }
+  }
+
+  /* Enhanced hover effects */
+  .tech-slide-content:hover {
+    @apply transform scale-105 shadow-2xl shadow-blue-500/20;
+  }
+
+  .tech-slide-content:hover .tech-slide-logo {
+    @apply transform rotate-3;
+  }
+
+  /* Old tech styles - keep for compatibility */
+  .tech-stack-horizontal {
+    @apply w-full overflow-hidden;
+  }
+
+  .tech-stack-slider {
+    @apply flex gap-6 items-center justify-start flex-wrap;
+  }
+
+  .tech-item {
+    @apply flex flex-col items-center justify-center p-4 rounded-lg bg-black-300 border border-black-200 hover:border-white/20 transition-all duration-300 cursor-pointer min-w-[100px];
+  }
+
+  .tech-item-inner {
+    @apply flex items-center justify-center w-10 h-10 mb-2;
+  }
+
+  .tech-item-logo {
+    @apply w-full h-full object-contain transition-all duration-300;
+  }
+
+  .tech-item-name {
+    @apply text-white text-xs font-medium text-center group-hover:text-white transition-colors;
+  }
+
+  .tech-item:hover {
+    @apply transform scale-105 bg-black-200;
+  }
+
+  .tech-item:hover .tech-item-logo {
+    @apply filter-none;
+  }
+
+  /* Remove old tech card styles */
+  .tech-stack-section {
+    @apply w-full;
+  }
+
+  .tech-card {
+    @apply flex flex-col items-center justify-center p-4 rounded-xl bg-black-300 border border-black-200 hover:border-white/20 transition-all duration-300 cursor-pointer min-h-[120px];
+  }
+
+  .tech-card-inner {
+    @apply flex flex-col items-center justify-center gap-3;
+  }
+
+  .tech-logo-container {
+    @apply w-12 h-12 flex items-center justify-center;
+  }
+
+  .tech-logo {
+    @apply w-full h-full object-contain transition-all duration-300;
+  }
+
+  .tech-name {
+    @apply text-white text-sm font-medium text-center group-hover:text-white transition-colors;
+  }
+
+  .tech-card:hover {
+    @apply transform scale-105 bg-black-200;
+  }
+
+  .tech-card:hover .tech-logo {
+    @apply filter-none;
+  }
+
+  /* Simple marquee animation for tech skills */
+  .animate-marquee {
+    animation: marquee 20s linear infinite;
+  }
+
+  @keyframes marquee {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(-50%);
+    }
+  }
+
+  /* Reverse marquee animation for second row */
+  .animate-marquee-reverse {
+    animation: marquee-reverse 25s linear infinite;
+  }
+
+  @keyframes marquee-reverse {
+    0% {
+      transform: translateX(-50%);
+    }
+    100% {
+      transform: translateX(0);
+    }
+  }
+}
+
+.waving-hand {
+  animation-name: wave-animation;
+  animation-duration: 2.5s;
+  animation-iteration-count: infinite;
+  transform-origin: 70% 70%;
+  display: inline-block;
+}
+
+.arrow-gradient {
+  background-image: linear-gradient(
+    to right,
+    rgba(255, 255, 255, 0.1) 10%,
+    rgba(255, 255, 255, 0.000025) 50%,
+    rgba(255, 255, 255, 0.000025) 50%,
+    rgba(255, 255, 255, 0.025) 100%
+  );
+}
+
+@keyframes wave-animation {
+  0% {
+    transform: rotate(0deg);
+  }
+  15% {
+    transform: rotate(14deg);
+  }
+  30% {
+    transform: rotate(-8deg);
+  }
+  40% {
+    transform: rotate(14deg);
+  }
+  50% {
+    transform: rotate(-4deg);
+  }
+  60% {
+    transform: rotate(10deg);
+  }
+  70% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(0deg);
+  }
+}
