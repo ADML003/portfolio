@@ -222,25 +222,26 @@ const TechSkills = () => {
               <div className="tech-skills-particles"></div>
 
               {/* Two-row sliding animation with enhanced styling */}
-              <div className="overflow-hidden tech-slider-enhanced rounded-xl">
+              <div className="rounded-xl">
                 {/* First Row - Sliding Right to Left */}
-                <div className="tech-slider-row mb-8">
+                <div className="tech-slider-row mb-8 overflow-hidden">
                   <div className="tech-slider-track tech-slider-fast">
                     {/* First set */}
                     {firstRowTechs.map((tech, index) => (
                       <div
                         key={`row1-first-${index}`}
-                        className="tech-slide-item tech-slide-item-enhanced group"
+                        className="tech-slide-item group"
                         onMouseEnter={() => window.matchMedia('(hover: hover)').matches && setHoveredTech(tech.name)}
                         onMouseLeave={() => window.matchMedia('(hover: hover)').matches && setHoveredTech(null)}>
                         <a
                           href={tech.homepage}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="tech-slide-content tech-link"
+                          className="tech-link"
                           style={{
-                            backgroundColor: hoveredTech === tech.name ? `${tech.color}20` : 'rgba(20, 21, 22, 0.8)',
-                            borderColor: hoveredTech === tech.name ? tech.color : 'rgba(255, 255, 255, 0.1)',
+                            backgroundColor: hoveredTech === tech.name ? `${tech.color}20` : 'rgba(255, 255, 255, 0.1)',
+                            borderColor: hoveredTech === tech.name ? tech.color : 'rgba(255, 255, 255, 0.2)',
+                            border: '1px solid',
                             transform: hoveredTech === tech.name ? 'translateY(-2px)' : 'translateY(0)',
                             boxShadow:
                               hoveredTech === tech.name
@@ -252,6 +253,9 @@ const TechSkills = () => {
                             justifyContent: 'center',
                             textDecoration: 'none',
                             cursor: 'pointer',
+                            padding: '16px',
+                            borderRadius: '12px',
+                            backdropFilter: 'blur(10px)',
                           }}>
                           <img
                             src={tech.logo}
@@ -261,6 +265,9 @@ const TechSkills = () => {
                               filter:
                                 hoveredTech === tech.name ? 'none' : 'grayscale(0%) brightness(1.1) saturate(1.2)',
                               transition: 'all 0.3s ease',
+                              width: '48px',
+                              height: '48px',
+                              objectFit: 'contain',
                             }}
                             onError={(e) => {
                               console.log(`Failed to load image for ${tech.name}:`, tech.logo);
@@ -300,10 +307,11 @@ const TechSkills = () => {
                           href={tech.homepage}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="tech-slide-content tech-link"
+                          className="tech-link"
                           style={{
-                            backgroundColor: hoveredTech === tech.name ? `${tech.color}20` : 'rgba(20, 21, 22, 0.8)',
-                            borderColor: hoveredTech === tech.name ? tech.color : 'rgba(255, 255, 255, 0.1)',
+                            backgroundColor: hoveredTech === tech.name ? `${tech.color}20` : 'rgba(255, 255, 255, 0.1)',
+                            borderColor: hoveredTech === tech.name ? tech.color : 'rgba(255, 255, 255, 0.2)',
+                            border: '1px solid',
                             transform: hoveredTech === tech.name ? 'translateY(-2px)' : 'translateY(0)',
                             boxShadow:
                               hoveredTech === tech.name
@@ -315,6 +323,9 @@ const TechSkills = () => {
                             justifyContent: 'center',
                             textDecoration: 'none',
                             cursor: 'pointer',
+                            padding: '16px',
+                            borderRadius: '12px',
+                            backdropFilter: 'blur(10px)',
                           }}>
                           <img
                             src={tech.logo}
@@ -324,6 +335,9 @@ const TechSkills = () => {
                               filter:
                                 hoveredTech === tech.name ? 'none' : 'grayscale(0%) brightness(1.1) saturate(1.2)',
                               transition: 'all 0.3s ease',
+                              width: '48px',
+                              height: '48px',
+                              objectFit: 'contain',
                             }}
                             onError={(e) => {
                               console.log(`Failed to load image for ${tech.name}:`, tech.logo);
@@ -355,7 +369,7 @@ const TechSkills = () => {
                 </div>
 
                 {/* Second Row - Sliding Left to Right */}
-                <div className="tech-slider-row">
+                <div className="tech-slider-row overflow-hidden">
                   <div className="tech-slider-track tech-slider-reverse tech-slider-fast">
                     {/* First set */}
                     {secondRowTechs.map((tech, index) => (
@@ -368,10 +382,11 @@ const TechSkills = () => {
                           href={tech.homepage}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="tech-slide-content tech-link"
+                          className="tech-link"
                           style={{
-                            backgroundColor: hoveredTech === tech.name ? `${tech.color}20` : 'rgba(20, 21, 22, 0.8)',
-                            borderColor: hoveredTech === tech.name ? tech.color : 'rgba(255, 255, 255, 0.1)',
+                            backgroundColor: hoveredTech === tech.name ? `${tech.color}20` : 'rgba(255, 255, 255, 0.1)',
+                            borderColor: hoveredTech === tech.name ? tech.color : 'rgba(255, 255, 255, 0.2)',
+                            border: '1px solid',
                             transform: hoveredTech === tech.name ? 'translateY(-2px)' : 'translateY(0)',
                             boxShadow:
                               hoveredTech === tech.name
@@ -383,6 +398,9 @@ const TechSkills = () => {
                             justifyContent: 'center',
                             textDecoration: 'none',
                             cursor: 'pointer',
+                            padding: '16px',
+                            borderRadius: '12px',
+                            backdropFilter: 'blur(10px)',
                           }}>
                           <img
                             src={tech.logo}
@@ -392,6 +410,9 @@ const TechSkills = () => {
                               filter:
                                 hoveredTech === tech.name ? 'none' : 'grayscale(0%) brightness(1.1) saturate(1.2)',
                               transition: 'all 0.3s ease',
+                              width: '48px',
+                              height: '48px',
+                              objectFit: 'contain',
                             }}
                             onError={(e) => {
                               console.log(`Failed to load image for ${tech.name}:`, tech.logo);
@@ -431,10 +452,11 @@ const TechSkills = () => {
                           href={tech.homepage}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="tech-slide-content tech-link"
+                          className="tech-link"
                           style={{
-                            backgroundColor: hoveredTech === tech.name ? `${tech.color}20` : 'rgba(20, 21, 22, 0.8)',
-                            borderColor: hoveredTech === tech.name ? tech.color : 'rgba(255, 255, 255, 0.1)',
+                            backgroundColor: hoveredTech === tech.name ? `${tech.color}20` : 'rgba(255, 255, 255, 0.1)',
+                            borderColor: hoveredTech === tech.name ? tech.color : 'rgba(255, 255, 255, 0.2)',
+                            border: '1px solid',
                             transform: hoveredTech === tech.name ? 'translateY(-2px)' : 'translateY(0)',
                             boxShadow:
                               hoveredTech === tech.name
@@ -446,6 +468,9 @@ const TechSkills = () => {
                             justifyContent: 'center',
                             textDecoration: 'none',
                             cursor: 'pointer',
+                            padding: '16px',
+                            borderRadius: '12px',
+                            backdropFilter: 'blur(10px)',
                           }}>
                           <img
                             src={tech.logo}
@@ -455,6 +480,9 @@ const TechSkills = () => {
                               filter:
                                 hoveredTech === tech.name ? 'none' : 'grayscale(0%) brightness(1.1) saturate(1.2)',
                               transition: 'all 0.3s ease',
+                              width: '48px',
+                              height: '48px',
+                              objectFit: 'contain',
                             }}
                             onError={(e) => {
                               console.log(`Failed to load image for ${tech.name}:`, tech.logo);

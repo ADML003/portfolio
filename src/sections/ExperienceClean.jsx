@@ -1,10 +1,59 @@
-import { useRef } from 'react';
+import { useRef, useEffect, useState } from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
 import { OrbitControls, Float } from '@react-three/drei';
+
+// Hook to detect screen size
+const useResponsiveCamera = () => {
+  const [cameraSettings, setCameraSettings] = useState({
+    position: [0, 0, 5],
+    fov: 50
+  });
+
+  useEffect(() => {
+    const updateCameraSettings = () => {
+      const isMobile = window.innerWidth < 768;
+      const isTablet = window.innerWidth >= 768 && window.innerWidth < 1024;
+      
+      if (isMobile) {
+        setCameraSettings({
+          position: [0, 0, 7], // Move camera back for mobile
+          fov: 65 // Wider field of view for mobile
+        });
+      } else if (isTablet) {
+        setCameraSettings({
+          position: [0, 0, 6], // Slightly back for tablet
+          fov: 55 // Moderate field of view for tablet
+        });
+      } else {
+        setCameraSettings({
+          position: [0, 0, 5], // Original desktop position
+          fov: 50 // Original desktop field of view
+        });
+      }
+    };
+
+    updateCameraSettings();
+    window.addEventListener('resize', updateCameraSettings);
+    return () => window.removeEventListener('resize', updateCameraSettings);
+  }, []);
+
+  return cameraSettings;
+};
 
 // 3D Developer Scene Component
 const DeveloperScene = () => {
   const groupRef = useRef();
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
 
   useFrame((state) => {
     if (groupRef.current) {
@@ -12,10 +61,13 @@ const DeveloperScene = () => {
     }
   });
 
+  // Scale factor for mobile devices
+  const mobileScale = isMobile ? 0.8 : 1;
+
   // Enhanced laptop/computer setup with animated elements
   const Laptop = () => (
     <Float speed={1} rotationIntensity={0.1} floatIntensity={0.05}>
-      <group position={[0, -0.3, 0]}>
+      <group position={[0, -0.3, 0]} scale={mobileScale}>
         {/* Laptop base with gradient effect */}
         <mesh position={[0, 0, 0]} rotation={[-Math.PI / 2, 0, 0]}>
           <boxGeometry args={[2.5, 1.8, 0.1]} />
@@ -162,7 +214,7 @@ const DeveloperScene = () => {
   );
 
   return (
-    <group ref={groupRef}>
+    <group ref={groupRef} scale={mobileScale}>
       {/* Enhanced lighting with color cycling */}
       <ambientLight intensity={0.5} />
       <pointLight position={[5, 5, 5]} intensity={1.2} color="#60a5fa" />
@@ -221,6 +273,8 @@ const DeveloperScene = () => {
 };
 
 const WorkExperience = () => {
+  const cameraSettings = useResponsiveCamera();
+  
   const experiences = [
     {
       id: 1,
@@ -278,10 +332,10 @@ const WorkExperience = () => {
           </p>
         </div>
 
-        <div className="grid lg:grid-cols-2 gap-12 items-center">
-          <div className="relative">
-            <div className="h-[500px] rounded-2xl overflow-hidden border border-white/10 bg-gradient-to-br from-black-300/50 to-black-500/30 backdrop-blur-lg">
-              <Canvas camera={{ position: [0, 0, 5], fov: 50 }}>
+        <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
+          <div className="relative order-2 lg:order-1">
+            <div className="h-[350px] sm:h-[400px] md:h-[450px] lg:h-[500px] rounded-2xl overflow-hidden border border-white/10 bg-gradient-to-br from-black-300/50 to-black-500/30 backdrop-blur-lg">
+              <Canvas camera={{ position: cameraSettings.position, fov: cameraSettings.fov }}>
                 <DeveloperScene />
                 <OrbitControls
                   enableZoom={false}
@@ -293,15 +347,9 @@ const WorkExperience = () => {
                 />
               </Canvas>
             </div>
-
-            <div className="absolute -bottom-6 left-1/2 transform -translate-x-1/2">
-              <div className="px-6 py-3 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full text-white font-semibold shadow-lg">
-                ✨ Developer Workspace
-              </div>
-            </div>
           </div>
 
-          <div className="space-y-8">
+          <div className="space-y-6 lg:space-y-8 order-1 lg:order-2">
             {experiences.map((exp) => (
               <div key={exp.id} className="group relative">
                 <div className="absolute left-0 top-0 bottom-0 w-px bg-gradient-to-b from-blue-500 via-purple-500 to-transparent"></div>
