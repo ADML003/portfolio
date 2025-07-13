@@ -6,28 +6,28 @@ import { OrbitControls, Float } from '@react-three/drei';
 const useResponsiveCamera = () => {
   const [cameraSettings, setCameraSettings] = useState({
     position: [0, 0, 5],
-    fov: 50
+    fov: 50,
   });
 
   useEffect(() => {
     const updateCameraSettings = () => {
       const isMobile = window.innerWidth < 768;
       const isTablet = window.innerWidth >= 768 && window.innerWidth < 1024;
-      
+
       if (isMobile) {
         setCameraSettings({
           position: [0, 0, 7], // Move camera back for mobile
-          fov: 65 // Wider field of view for mobile
+          fov: 65, // Wider field of view for mobile
         });
       } else if (isTablet) {
         setCameraSettings({
           position: [0, 0, 6], // Slightly back for tablet
-          fov: 55 // Moderate field of view for tablet
+          fov: 55, // Moderate field of view for tablet
         });
       } else {
         setCameraSettings({
           position: [0, 0, 5], // Original desktop position
-          fov: 50 // Original desktop field of view
+          fov: 50, // Original desktop field of view
         });
       }
     };
@@ -49,7 +49,7 @@ const DeveloperScene = () => {
     const checkMobile = () => {
       setIsMobile(window.innerWidth < 768);
     };
-    
+
     checkMobile();
     window.addEventListener('resize', checkMobile);
     return () => window.removeEventListener('resize', checkMobile);
@@ -274,7 +274,7 @@ const DeveloperScene = () => {
 
 const WorkExperience = () => {
   const cameraSettings = useResponsiveCamera();
-  
+
   const experiences = [
     {
       id: 1,
