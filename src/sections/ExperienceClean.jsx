@@ -62,7 +62,7 @@ const DeveloperScene = () => {
   });
 
   // Scale factor for mobile devices
-  const mobileScale = isMobile ? 0.8 : 1;
+  const mobileScale = isMobile ? 0.9 : 1;
 
   // Enhanced laptop/computer setup with animated elements
   const Laptop = () => (
