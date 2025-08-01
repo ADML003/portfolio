@@ -20,16 +20,12 @@ const About = () => {
         <div className="col-span-1 xl:row-span-3">
           <div className="grid-container">
             <div className="w-full sm:h-[276px] h-fit flex flex-col justify-center items-center bg-gradient-to-br from-indigo-900/30 via-purple-900/30 to-pink-900/30 rounded-3xl border border-indigo-500/20 relative overflow-hidden">
-              {/* Animated Background Pattern */}
+              {/* Static Background Pattern */}
               <div className="absolute inset-0 opacity-20">
-                <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-r from-blue-400/10 via-purple-400/10 to-pink-400/10 animate-pulse"></div>
-                <div
-                  className="absolute top-4 left-4 w-16 h-16 border border-blue-300/30 rounded-full animate-spin"
-                  style={{ animationDuration: '8s' }}></div>
-                <div className="absolute bottom-8 right-6 w-12 h-12 border border-purple-300/30 rounded-full animate-bounce"></div>
-                <div
-                  className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-24 h-24 border border-pink-300/20 rounded-full animate-ping"
-                  style={{ animationDuration: '3s' }}></div>
+                <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-r from-blue-400/10 via-purple-400/10 to-pink-400/10"></div>
+                <div className="absolute top-4 left-4 w-16 h-16 border border-blue-300/30 rounded-full"></div>
+                <div className="absolute bottom-8 right-6 w-12 h-12 border border-purple-300/30 rounded-full"></div>
+                <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-24 h-24 border border-pink-300/20 rounded-full"></div>
               </div>
 
               {/* Main Content */}
@@ -48,21 +44,17 @@ const About = () => {
                   </div>
                 </div>
 
-                {/* Elegant Status */}
+                {/* Static Status */}
                 <div className="flex items-center justify-center space-x-2">
-                  <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
+                  <div className="w-2 h-2 bg-green-400 rounded-full"></div>
                   <span className="text-white/80 text-sm">Open to opportunities</span>
                 </div>
               </div>
 
-              {/* Minimal Floating Elements */}
-              <div className="absolute top-8 right-8 w-1 h-1 bg-white/20 rounded-full animate-ping"></div>
-              <div className="absolute bottom-8 left-8 w-1.5 h-1.5 bg-white/30 rounded-full animate-pulse"></div>
-              <div
-                className="absolute top-1/3 right-8 text-pink-300/40 text-xs font-mono animate-float"
-                style={{ animationDelay: '2s' }}>
-                ( )
-              </div>
+              {/* Static Floating Elements */}
+              <div className="absolute top-8 right-8 w-1 h-1 bg-white/20 rounded-full"></div>
+              <div className="absolute bottom-8 left-8 w-1.5 h-1.5 bg-white/30 rounded-full"></div>
+              <div className="absolute top-1/3 right-8 text-pink-300/40 text-xs font-mono">( )</div>
             </div>
             <div>
               <p className="grid-headtext">Hi, I&apos;m Aditya Malhotra</p>
@@ -76,59 +68,34 @@ const About = () => {
         <div className="col-span-1 xl:row-span-3">
           <div className="grid-container">
             <div className="w-full sm:h-[276px] h-fit flex flex-col justify-center items-center bg-gradient-to-br from-blue-900/20 via-purple-900/20 to-pink-900/20 rounded-3xl border border-blue-500/20 relative overflow-hidden group">
-              {/* Animated Background Waves */}
-              <div className="absolute inset-0 bg-gradient-to-r from-blue-500/10 via-purple-500/10 to-pink-500/10 animate-pulse"></div>
-              <div className="absolute inset-0 opacity-30">
-                <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-transparent via-blue-400/5 to-transparent transform rotate-45 translate-x-full group-hover:translate-x-[-100%] transition-transform duration-3000 ease-linear"></div>
-              </div>
+              {/* Static Background */}
+              <div className="absolute inset-0 bg-gradient-to-r from-blue-500/10 via-purple-500/10 to-pink-500/10"></div>
 
-              {/* Tech Icons Grid with Enhanced Animations */}
+              {/* Tech Icons Grid - Static Version */}
               <div className="relative z-10 grid grid-cols-4 gap-3 p-4">
                 {[
-                  { name: 'React', icon: '⚛️', color: 'text-cyan-400', rotation: 'animate-spin' },
-                  { name: 'JS', icon: '🟨', color: 'text-yellow-400', rotation: '' },
-                  { name: 'Node', icon: '🟢', color: 'text-green-400', rotation: 'animate-pulse' },
-                  { name: 'TS', icon: '🔷', color: 'text-blue-400', rotation: '' },
-                  { name: 'Next', icon: '▲', color: 'text-white', rotation: 'animate-bounce' },
-                  { name: 'Python', icon: '🐍', color: 'text-yellow-500', rotation: '' },
-                  { name: 'AWS', icon: '☁️', color: 'text-orange-400', rotation: 'animate-float' },
-                  { name: 'Git', icon: '📦', color: 'text-red-400', rotation: '' },
-                ].map((tech, index) => (
+                  { name: 'React', icon: '⚛️', color: 'text-cyan-400' },
+                  { name: 'JS', icon: '🟨', color: 'text-yellow-400' },
+                  { name: 'Node', icon: '🟢', color: 'text-green-400' },
+                  { name: 'TS', icon: '🔷', color: 'text-blue-400' },
+                  { name: 'Next', icon: '▲', color: 'text-white' },
+                  { name: 'Python', icon: '🐍', color: 'text-yellow-500' },
+                  { name: 'AWS', icon: '☁️', color: 'text-orange-400' },
+                  { name: 'Git', icon: '📦', color: 'text-red-400' },
+                ].map((tech) => (
                   <div
                     key={tech.name}
-                    className={`flex flex-col items-center justify-center w-12 h-12 rounded-lg bg-black-200/50 border border-white/10 hover:border-white/30 hover:bg-black-100/70 hover:scale-110 transition-all duration-300 cursor-pointer ${tech.color}`}
-                    style={{
-                      animationDelay: `${index * 0.2}s`,
-                      animation: `fadeInUp 0.6s ease-out ${index * 0.1}s both`,
-                    }}>
-                    <span
-                      className={`text-lg ${tech.rotation}`}
-                      style={{ animationDuration: tech.rotation === 'animate-spin' ? '3s' : 'default' }}>
-                      {tech.icon}
-                    </span>
+                    className={`flex flex-col items-center justify-center w-12 h-12 rounded-lg bg-black-200/50 border border-white/10 hover:border-white/30 hover:bg-black-100/70 hover:scale-110 transition-all duration-300 cursor-pointer ${tech.color}`}>
+                    <span className="text-lg">{tech.icon}</span>
                   </div>
                 ))}
               </div>
 
-              {/* Enhanced Floating Elements */}
-              <div
-                className="absolute top-4 left-4 w-2 h-2 bg-blue-400 rounded-full animate-bounce opacity-60"
-                style={{ animationDelay: '0s' }}></div>
-              <div
-                className="absolute top-8 right-6 w-1 h-1 bg-purple-400 rounded-full animate-ping opacity-50"
-                style={{ animationDelay: '1s' }}></div>
-              <div
-                className="absolute bottom-6 left-8 w-1.5 h-1.5 bg-pink-400 rounded-full animate-pulse opacity-70"
-                style={{ animationDelay: '2s' }}></div>
-              <div
-                className="absolute bottom-4 right-4 w-1 h-1 bg-cyan-300 rounded-full animate-ping opacity-40"
-                style={{ animationDelay: '0.5s' }}></div>
-
-              {/* Orbiting Elements */}
-              <div className="absolute inset-0 animate-spin opacity-20" style={{ animationDuration: '20s' }}>
-                <div className="absolute top-6 left-1/2 w-1 h-1 bg-white rounded-full"></div>
-                <div className="absolute bottom-6 left-1/2 w-1 h-1 bg-white rounded-full"></div>
-              </div>
+              {/* Subtle Static Elements */}
+              <div className="absolute top-4 left-4 w-2 h-2 bg-blue-400/60 rounded-full opacity-60"></div>
+              <div className="absolute top-8 right-6 w-1 h-1 bg-purple-400/50 rounded-full opacity-50"></div>
+              <div className="absolute bottom-6 left-8 w-1.5 h-1.5 bg-pink-400/70 rounded-full opacity-70"></div>
+              <div className="absolute bottom-4 right-4 w-1 h-1 bg-cyan-300/40 rounded-full opacity-40"></div>
             </div>
             <div>
               <p className="grid-headtext">Tech Stack</p>
@@ -232,7 +199,21 @@ const About = () => {
               {' '}
               <p className="grid-headtext">I&apos;m very flexible with time zone communications & locations</p>{' '}
               <p className="grid-subtext">I&apos;m based in India and open to remote work worldwide.</p>{' '}
-              <Button name="Contact Me" isBeam containerClass="w-full mt-10" />{' '}
+              <a
+                href="#contact"
+                className="block w-full mt-10"
+                onClick={(e) => {
+                  e.preventDefault();
+                  const target = document.querySelector('#contact');
+                  if (target) {
+                    target.scrollIntoView({
+                      behavior: 'smooth',
+                      block: 'start',
+                    });
+                  }
+                }}>
+                <Button name="Contact Me" isBeam containerClass="w-full" />
+              </a>{' '}
             </div>{' '}
           </div>{' '}
         </div>{' '}

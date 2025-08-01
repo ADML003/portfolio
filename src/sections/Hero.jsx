@@ -65,7 +65,19 @@ const Hero = () => {
       </div>
 
       <div className="absolute bottom-7 left-0 right-0 w-full z-10 c-space">
-        <a href="#about" className="w-fit">
+        <a
+          href="#contact"
+          className="w-fit"
+          onClick={(e) => {
+            e.preventDefault();
+            const target = document.querySelector('#contact');
+            if (target) {
+              target.scrollIntoView({
+                behavior: 'smooth',
+                block: 'start',
+              });
+            }
+          }}>
           <Button name="Let's work together" isBeam containerClass="sm:w-fit w-full sm:min-w-96" />
         </a>
       </div>
