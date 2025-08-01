@@ -42,11 +42,12 @@ const Hero = () => {
             {/* To control the camera */}
             <PerspectiveCamera makeDefault position={[0, 0, 30]} />
 
-            <HeroCamera isMobile={isMobile}>
-              <Target position={sizes.targetPosition} />
-              <ReactLogo position={sizes.reactLogoPosition} />
-              <Cube position={sizes.cubePosition} />
-            </HeroCamera>
+            {/* Fixed position objects - not affected by camera rotation */}
+            <Target position={sizes.targetPosition} />
+            <ReactLogo position={sizes.reactLogoPosition} />
+            <Cube position={sizes.cubePosition} />
+
+            <HeroCamera isMobile={isMobile}>{/* Only the developer stays in the camera group */}</HeroCamera>
 
             {/* Static developer character in the center */}
             <StaticDeveloper position={[0, -3, 0]} scale={3.2} />

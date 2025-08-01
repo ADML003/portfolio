@@ -4,15 +4,32 @@
     Author: xenadus (https://sketchfab.com/xenadus)
     License: CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
     Source: https://sketchfab.com/3d-models/react-logo-76174ceeba96487f9863f974636f641e
+    Modified to prevent position drift during scroll
 */
 
 import { useGLTF } from '@react-three/drei';
+import { useRef } from 'react';
+import { useFrame } from '@react-three/fiber';
 
 const ReactLogo = (props) => {
   const { nodes, materials } = useGLTF('models/react.glb');
+  const logoRef = useRef();
+
+  // Store initial position to prevent drift
+  const initialPosition = useRef(props.position || [5, 8, 0]);
+
+  useFrame((state) => {
+    if (logoRef.current) {
+      // Lock position to prevent drift during scroll
+      logoRef.current.position.set(initialPosition.current[0], initialPosition.current[1], initialPosition.current[2]);
+
+      // Gentle rotation around Z-axis
+      logoRef.current.rotation.z = state.clock.elapsedTime * 0.5;
+    }
+  });
 
   return (
-    <group position={[5, 8, 0]} scale={0.3} {...props} dispose={null}>
+    <group ref={logoRef} position={[5, 8, 0]} scale={0.3} {...props} dispose={null}>
       <mesh
         geometry={nodes['React-Logo_Material002_0'].geometry}
         material={materials['Material.002']}
