@@ -1,6 +1,6 @@
 import { useRef, useEffect, useState } from 'react';
-import { Canvas, useFrame } from '@react-three/fiber';
-import { OrbitControls, Float } from '@react-three/drei';
+import { Canvas } from '@react-three/fiber';
+import { OrbitControls } from '@react-three/drei';
 
 // Hook to detect screen size
 const useResponsiveCamera = () => {
@@ -55,19 +55,14 @@ const DeveloperScene = () => {
     return () => window.removeEventListener('resize', checkMobile);
   }, []);
 
-  useFrame((state) => {
-    if (groupRef.current) {
-      groupRef.current.rotation.y = Math.sin(state.clock.elapsedTime * 0.2) * 0.05;
-    }
-  });
+  // No animations - static scene
 
   // Scale factor for mobile devices
   const mobileScale = isMobile ? 0.9 : 1;
 
-  // Enhanced laptop/computer setup with animated elements
+  // Static laptop/computer setup without animations
   const Laptop = () => (
-    <Float speed={1} rotationIntensity={0.1} floatIntensity={0.05}>
-      <group position={[0, -0.3, 0]} scale={mobileScale}>
+    <group position={[0, -0.3, 0]} scale={mobileScale}>
         {/* Laptop base with gradient effect */}
         <mesh position={[0, 0, 0]} rotation={[-Math.PI / 2, 0, 0]}>
           <boxGeometry args={[2.5, 1.8, 0.1]} />
@@ -141,9 +136,9 @@ const DeveloperScene = () => {
     </Float>
   );
 
-  // Enhanced tech orbs with pulsing effect
-  const TechOrb = ({ position, color, scale, speed = 1, pulseIntensity = 0.3 }) => (
-    <Float speed={speed} rotationIntensity={0.3} floatIntensity={0.2}>
+  // Enhanced tech orb with pulsing effect
+  const TechOrb = ({ position, color, scale = [1, 1, 1], speed = 1, pulseIntensity = 0.5 }) => (
+    <Float speed={speed} rotationIntensity={0.4} floatIntensity={0.6}>
       <mesh position={position} scale={scale}>
         <sphereGeometry args={[0.12, 20, 20]} />
         <meshStandardMaterial
@@ -159,9 +154,9 @@ const DeveloperScene = () => {
     </Float>
   );
 
-  // Tech Icon Component - renders floating tech logos
+  // Enhanced tech icon with floating animation
   const TechIcon = ({ position, color, scale = [0.4, 0.4, 0.4], speed = 1 }) => (
-    <Float speed={speed} rotationIntensity={0.4} floatIntensity={0.3}>
+    <Float speed={speed} rotationIntensity={0.3} floatIntensity={0.4}>
       <mesh position={position} scale={scale}>
         <planeGeometry args={[1, 1]} />
         <meshStandardMaterial color={color} emissive={color} emissiveIntensity={0.3} transparent opacity={0.9} />
@@ -215,56 +210,39 @@ const DeveloperScene = () => {
 
   return (
     <group ref={groupRef} scale={mobileScale}>
-      {/* Enhanced lighting with color cycling */}
-      <ambientLight intensity={0.5} />
-      <pointLight position={[5, 5, 5]} intensity={1.2} color="#60a5fa" />
-      <pointLight position={[-5, 3, -5]} intensity={1} color="#8b5cf6" />
-      <pointLight position={[0, 8, 0]} intensity={0.8} color="#34d399" />
-      <pointLight position={[3, -2, 3]} intensity={0.6} color="#f59e0b" />
-      {/* Subtle rim lighting */}
-      <directionalLight position={[2, 5, 2]} intensity={0.7} color="#ffffff" />
+      {/* Optimized lighting setup */}
+      <ambientLight intensity={0.6} />
+      <pointLight position={[5, 5, 5]} intensity={1} color="#60a5fa" />
+      <pointLight position={[-5, 3, -5]} intensity={0.8} color="#8b5cf6" />
+      {/* Essential rim lighting */}
+      <directionalLight position={[2, 5, 2]} intensity={0.5} color="#ffffff" />
       {/* Main laptop setup */}
       <Laptop />
-      {/* Enhanced tech orbs with varied sizes and animations */}
-      <TechOrb position={[-2.5, 1, 1]} color="#61dafb" scale={[1, 1, 1]} speed={1.2} pulseIntensity={0.5} />
-      <TechOrb position={[2.5, 0.5, 0.5]} color="#f97316" scale={[0.7, 0.7, 0.7]} speed={0.8} pulseIntensity={0.4} />
-      <TechOrb position={[-1.8, -0.5, 2]} color="#10b981" scale={[0.8, 0.8, 0.8]} speed={1.5} pulseIntensity={0.6} />
-      <TechOrb position={[2, 1.5, -1]} color="#8b5cf6" scale={[0.6, 0.6, 0.6]} speed={1.1} pulseIntensity={0.3} />
-      <TechOrb position={[0, 2.5, 1.5]} color="#ef4444" scale={[0.5, 0.5, 0.5]} speed={0.9} pulseIntensity={0.4} />
-      {/* Floating tech icons instead of holographic rings */}
-      <TechIcon position={[-3, 2, 1]} color="#f7df1e" speed={0.8} /> {/* JavaScript */}
-      <TechIcon position={[3, 1.5, -1]} color="#61dafb" speed={1.2} /> {/* React */}
-      <TechIcon position={[-2, -1, 2]} color="#000000" speed={0.9} /> {/* Next.js */}
-      <TechIcon position={[2.5, 0, 2]} color="#00add8" speed={1.1} /> {/* Go */}
-      <TechIcon position={[-1.5, 3, 0]} color="#3178c6" speed={0.7} /> {/* TypeScript */}
-      <TechIcon position={[1, -2, 1.5]} color="#339933" speed={1.3} /> {/* Node.js */}
-      <TechIcon position={[-3.5, 0.5, -0.5]} color="#3776ab" speed={0.6} /> {/* Python */}
-      <TechIcon position={[3.5, -0.5, 0.5]} color="#06b6d4" scale={[0.3, 0.3, 0.3]} speed={1.4} /> {/* Tailwind */}
-      <TechIcon position={[0, 3.5, -1]} color="#47a248" scale={[0.35, 0.35, 0.35]} speed={0.8} /> {/* MongoDB */}
-      <TechIcon position={[-2.5, -2, -1]} color="#ff6c37" scale={[0.3, 0.3, 0.3]} speed={1.2} /> {/* Postman */}
-      {/* Enhanced geometric shapes */}
+      {/* Essential tech orbs - reduced for performance */}
+      <TechOrb position={[-2.5, 1, 1]} color="#61dafb" scale={[0.7, 0.7, 0.7]} speed={0.8} pulseIntensity={0.4} />
+      <TechOrb position={[2.5, 0.5, 0.5]} color="#f97316" scale={[0.6, 0.6, 0.6]} speed={0.6} pulseIntensity={0.3} />
+      <TechOrb position={[-1.8, -0.5, 2]} color="#10b981" scale={[0.5, 0.5, 0.5]} speed={0.7} pulseIntensity={0.3} />
+      {/* Essential tech icons only */}
+      <TechIcon position={[-3, 2, 1]} color="#f7df1e" speed={0.6} /> {/* JavaScript */}
+      <TechIcon position={[3, 1.5, -1]} color="#61dafb" speed={0.8} /> {/* React */}
+      <TechIcon position={[-2, -1, 2]} color="#000000" speed={0.7} /> {/* Next.js */}
+      <TechIcon position={[2.5, 0, 2]} color="#3178c6" speed={0.6} /> {/* TypeScript */}
+      {/* Simplified geometric shapes */}
       <GeometricShape position={[-3, 0, -1]} rotation={[0.5, 0.5, 0]} color="#60a5fa" shape="octahedron" />
       <GeometricShape position={[3, 1, 1]} rotation={[1, 0.3, 0.7]} color="#34d399" shape="dodecahedron" />
-      <GeometricShape position={[1, -1, -2]} rotation={[0.2, 1.2, 0.3]} color="#f59e0b" shape="icosahedron" />
-      {/* Enhanced data streams with different colors */}
+      {/* Reduced data streams */}
       <DataStream position={[-1.5, 1, 0]} rotation={[0, 0, Math.PI / 6]} color="#60a5fa" />
       <DataStream position={[1.5, 0.5, 0.5]} rotation={[0, 0, -Math.PI / 4]} color="#34d399" />
-      <DataStream position={[0, 1.8, -0.5]} rotation={[Math.PI / 3, 0, 0]} color="#8b5cf6" />
-      <DataStream position={[-0.8, -0.5, 1]} rotation={[0, Math.PI / 4, Math.PI / 3]} color="#f59e0b" />
-      {/* Background particle system with varied colors and sizes */}
+      {/* Minimal background particles - reduced from 25 to 8 */}
       <group>
-        {Array.from({ length: 25 }).map((_, i) => (
+        {Array.from({ length: 8 }).map((_, i) => (
           <TechOrb
             key={i}
-            position={[(Math.random() - 0.5) * 10, (Math.random() - 0.5) * 8, (Math.random() - 0.5) * 8 - 4]}
-            color={
-              ['#60a5fa', '#34d399', '#f59e0b', '#8b5cf6', '#ef4444', '#06b6d4', '#84cc16'][
-                Math.floor(Math.random() * 7)
-              ]
-            }
-            scale={[0.15 + Math.random() * 0.15, 0.15 + Math.random() * 0.15, 0.15 + Math.random() * 0.15]}
-            speed={0.2 + Math.random() * 0.6}
-            pulseIntensity={0.2 + Math.random() * 0.3}
+            position={[(Math.random() - 0.5) * 8, (Math.random() - 0.5) * 6, (Math.random() - 0.5) * 6 - 2]}
+            color={['#60a5fa', '#34d399', '#f59e0b', '#8b5cf6'][Math.floor(Math.random() * 4)]}
+            scale={[0.12, 0.12, 0.12]}
+            speed={0.3 + Math.random() * 0.3}
+            pulseIntensity={0.2}
           />
         ))}
       </group>

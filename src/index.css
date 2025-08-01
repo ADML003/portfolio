@@ -4,8 +4,43 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Performance optimizations */
+.cosmic-background {
+  will-change: transform;
+  backface-visibility: hidden;
+  perspective: 1000px;
+}
+
+.cosmic-planet {
+  will-change: transform, opacity;
+  transform-style: preserve-3d;
+  backface-visibility: hidden;
+}
+
+.cosmic-ufo {
+  will-change: transform, opacity;
+  backface-visibility: hidden;
+}
+
+.cosmic-comet {
+  will-change: transform, opacity;
+  backface-visibility: hidden;
+}
+
 * {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
   scroll-behavior: smooth;
+  overflow-x: hidden;
+  height: 100%;
+  /* Enhanced scroll performance */
+  scroll-padding-top: 0;
+  -webkit-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
 }
 
 body {
@@ -13,6 +48,58 @@ body {
   font-family: 'General Sans', sans-serif;
   overflow-x: hidden;
   position: relative;
+  height: 100%;
+  /* Ultra-smooth scrolling optimizations */
+  background-attachment: fixed;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  -webkit-transform: translateZ(0);
+  transform: translateZ(0);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  /* Prevent scroll bounce on iOS */
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior: none;
+  /* GPU acceleration for smoother scrolling */
+  will-change: scroll-position;
+}
+
+/* Enhanced Smooth Scrolling */
+.smooth-scroll {
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior: none;
+}
+
+/* Optimize all sections for smooth scrolling */
+section {
+  will-change: auto;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  contain: layout style paint;
+  /* Prevent layout thrashing */
+  position: relative;
+  isolation: isolate;
+}
+
+/* Optimize cards and interactive elements */
+.group {
+  will-change: auto;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+}
+
+/* Optimize gradient backgrounds */
+[class*='bg-gradient'] {
+  will-change: auto;
+  transform: translateZ(0);
+}
+
+/* Ultra-smooth scrolling for entire page */
+#root {
+  overflow-x: hidden;
+  height: 100vh;
+  width: 100vw;
 }
 
 /* Cosmic Background */
@@ -821,6 +908,10 @@ body::after {
 @layer utilities {
   .c-space {
     @apply sm:px-10 px-5;
+    /* Smooth scrolling optimizations */
+    will-change: auto;
+    transform: translateZ(0);
+    backface-visibility: hidden;
   }
 
   .head-text {

@@ -1,6 +1,6 @@
 import { PerspectiveCamera } from '@react-three/drei';
 import { Canvas } from '@react-three/fiber';
-import { Suspense, useState, useEffect } from 'react';
+import { Suspense } from 'react';
 import { useMediaQuery } from 'react-responsive';
 import { calculateSizes } from '../constants/index.js';
 
@@ -10,7 +10,7 @@ import Cube from '../components/Cube.jsx';
 import HeroCamera from '../components/HeroCamera.jsx';
 import Button from '../components/Button.jsx';
 import CanvasLoader from '../components/Loading.jsx';
-import InteractiveDeveloper from '../components/InteractiveDeveloper.jsx';
+import StaticDeveloper from '../components/StaticDeveloper.jsx';
 
 const Hero = () => {
   // Use media queries to determine screen size
@@ -18,22 +18,7 @@ const Hero = () => {
   const isMobile = useMediaQuery({ maxWidth: 768 });
   const isTablet = useMediaQuery({ minWidth: 768, maxWidth: 1024 });
 
-  // Animation cycling for the developer
-  const [currentAnimation, setCurrentAnimation] = useState('idle');
-
-  useEffect(() => {
-    const animations = ['idle', 'victory', 'clapping', 'salute'];
-    const interval = setInterval(() => {
-      setCurrentAnimation((prev) => {
-        const currentIndex = animations.indexOf(prev);
-        const nextIndex = (currentIndex + 1) % animations.length;
-        const newAnimation = animations[nextIndex];
-        return newAnimation;
-      });
-    }, 5000); // Change animation every 5 seconds
-
-    return () => clearInterval(interval);
-  }, []);
+  // No animations - static developer
 
   const sizes = calculateSizes(isSmall, isMobile, isTablet);
 
@@ -47,7 +32,12 @@ const Hero = () => {
       </div>
 
       <div className="w-full h-full absolute inset-0">
-        <Canvas className="w-full h-full">
+        <Canvas
+          className="w-full h-full"
+          dpr={[1, 2]} // Restored original DPR
+          performance={{ min: 0.5 }} // Restored original performance threshold
+          frameloop="demand" // Restored original frameloop
+        >
           <Suspense fallback={<CanvasLoader />}>
             {/* To control the camera */}
             <PerspectiveCamera makeDefault position={[0, 0, 30]} />
@@ -58,18 +48,18 @@ const Hero = () => {
               <Cube position={sizes.cubePosition} />
             </HeroCamera>
 
-            {/* Developer character in the center */}
-            <InteractiveDeveloper position={[0, -3, 0]} scale={3.2} animationName={currentAnimation} />
+            {/* Static developer character in the center */}
+            <StaticDeveloper position={[0, -3, 0]} scale={3.2} />
 
-            <ambientLight intensity={1.5} />
-            <directionalLight position={[10, 10, 10]} intensity={1.2} />
-            <spotLight position={[10, 10, 10]} angle={0.15} penumbra={1} intensity={1.5} />
+            {/* Optimized lighting with reduced intensity */}
+            <ambientLight intensity={1.2} />
+            <directionalLight position={[10, 10, 10]} intensity={1} />
+            <spotLight position={[10, 10, 10]} angle={0.15} penumbra={1} intensity={1.2} />
 
-            {/* Additional lighting specifically for the developer character */}
-            <directionalLight position={[-5, 5, 5]} intensity={1} />
-            <pointLight position={[0, 2, 3]} intensity={1.2} color="#ffffff" />
-            <pointLight position={[3, 0, 2]} intensity={0.8} color="#add8e6" />
-            <pointLight position={[-3, 1, 2]} intensity={0.6} color="#ffffff" />
+            {/* Reduced additional lighting for better performance */}
+            <directionalLight position={[-5, 5, 5]} intensity={0.8} />
+            <pointLight position={[0, 2, 3]} intensity={1} color="#ffffff" />
+            <pointLight position={[3, 0, 2]} intensity={0.6} color="#add8e6" />
           </Suspense>
         </Canvas>
       </div>

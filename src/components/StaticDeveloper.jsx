@@ -11,43 +11,6 @@ const InteractiveDeveloper = ({ ...props }) => {
   const { nodes, materials } = useGraph(clone);
 
   // No animations - completely static developer
-      setTimeout(() => {
-        if (actions[animationName]) {
-          const action = actions[animationName];
-          action.reset();
-          action.setLoop(2201, Infinity); // Loop infinitely
-          action.play();
-          setCurrentAnimation(animationName);
-        }
-      }, 100); // Normal timeout
-    }
-  }, [animationName, actions, currentAnimation, mixer]);
-
-  // Initialize with the provided animation
-  useEffect(() => {
-    if (actions[animationName]) {
-      actions[animationName].play();
-      setCurrentAnimation(animationName);
-    }
-  }, [actions, animationName]);
-
-  // Update mixer and floating motion
-  useFrame((state) => {
-    // Update animation mixer
-    if (mixer) {
-      mixer.update(state.clock.getDelta());
-    }
-
-    if (group.current) {
-      const time = state.clock.elapsedTime;
-      const baseY = props.position?.[1] || -3;
-
-      // Subtle floating effect
-      const floatIntensity = 0.015;
-      const floatY = Math.sin(time * 0.4) * floatIntensity;
-      group.current.position.y = baseY + floatY;
-    }
-  });
 
   return (
     <group ref={group} {...props} dispose={null}>
