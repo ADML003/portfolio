@@ -2,8 +2,8 @@ import Navbar from './sections/Navbar.jsx';
 import Hero from './sections/Hero.jsx';
 import About from './sections/About.jsx';
 import TechSkills from './sections/TechSkills.jsx';
-import StaticProjects from './sections/StaticProjects.jsx';
-import StaticExperience from './sections/StaticExperienceOriginal.jsx';
+import StaticProjectsGrid from './sections/StaticProjectsGrid.jsx';
+import StaticExperience from './sections/StaticExperienceOriginal_NEW.jsx';
 import Contact from './sections/Contact.jsx';
 import Footer from './sections/Footer.jsx';
 import { useEffect } from 'react';
@@ -31,7 +31,7 @@ const App = () => {
       <Hero />
       <About />
       <TechSkills />
-      <StaticProjects />
+      <StaticProjectsGrid />
       <StaticExperience />
       <Contact />
       <Footer />

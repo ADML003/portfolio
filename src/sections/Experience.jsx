@@ -405,9 +405,9 @@ const WorkExperience = () => {
       companyDetail: 'Manufacturing Company - beasgreen.com',
       position: 'Web Development Intern',
       location: 'Remote',
-      period: 'Jun 2025 – Present',
-      duration: 'Currently doing',
-      type: 'Current Internship',
+      period: 'Jun 2025 – Jul 2025',
+      duration: '2 months',
+      type: 'Internship',
       achievements: [
         'Built and deployed beasgreen.com - a comprehensive manufacturing company website showcasing bricks, concrete furniture, and blocks production.',
         'Developed Pix Pro, an advanced image transformation tool to enhance product photography for marketing materials and hoardings.',
@@ -545,18 +545,18 @@ const WorkExperience = () => {
               ))}
 
               <div className="group relative">
-                <div className="absolute left-0 top-0 bottom-0 w-px bg-gradient-to-b from-green-500 to-transparent opacity-50"></div>
-                <div className="absolute left-0 top-6 w-3 h-3 bg-green-500 rounded-full transform -translate-x-1/2 animate-pulse"></div>
+                <div className="absolute left-0 top-0 bottom-0 w-px bg-gradient-to-b from-blue-500 to-transparent opacity-50"></div>
+                <div className="absolute left-0 top-6 w-3 h-3 bg-blue-500 rounded-full transform -translate-x-1/2"></div>
 
-                <div className="ml-8 p-6 rounded-xl bg-gradient-to-br from-green-900/20 to-blue-900/20 backdrop-blur-lg border border-green-500/20 hover:border-green-400/40 transition-all duration-300">
-                  <h3 className="text-lg font-bold text-white mb-2">🌱 Currently Building</h3>
+                <div className="ml-8 p-6 rounded-xl bg-gradient-to-br from-blue-900/20 to-purple-900/20 backdrop-blur-lg border border-blue-500/20 hover:border-blue-400/40 transition-all duration-300">
+                  <h3 className="text-lg font-bold text-white mb-2">� Completed Journey</h3>
                   <p className="text-gray-300 text-sm mb-3">
-                    Actively developing innovative solutions at BGS while expanding expertise in modern web technologies
-                    and image processing.
+                    Successfully completed innovative solutions at BGS while expanding expertise in modern web
+                    technologies and image processing.
                   </p>
                   <div className="flex flex-wrap gap-2">
-                    <span className="px-2 py-1 bg-green-500/20 text-green-300 rounded text-xs">Active Development</span>
-                    <span className="px-2 py-1 bg-blue-500/20 text-blue-300 rounded text-xs">Learning & Growing</span>
+                    <span className="px-2 py-1 bg-blue-500/20 text-blue-300 rounded text-xs">Internship</span>
+                    <span className="px-2 py-1 bg-purple-500/20 text-purple-300 rounded text-xs">Growth Achieved</span>
                   </div>
                 </div>
               </div>

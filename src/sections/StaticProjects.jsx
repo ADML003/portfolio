@@ -1,34 +1,4 @@
 import { useState, useEffect } from 'react';
-import { Swiper, SwiperSlide } from 'swiper/react';
-import { Navigation, Pagination } from 'swiper/modules';
-import 'swiper/css';
-import 'swiper/css/navigation';
-import 'swiper/css/pagination';
-
-// Custom styles for mobile swiper pagination positioning
-const swiperStyles = `
-  .mobile-projects-swiper .swiper-pagination {
-    position: relative !important;
-    bottom: auto !important;
-    margin-top: 1rem !important;
-    padding-top: 0.5rem !important;
-  }
-  
-  .mobile-projects-swiper .swiper-pagination-bullet {
-    background: rgba(255, 255, 255, 0.4) !important;
-    opacity: 1 !important;
-    width: 8px !important;
-    height: 8px !important;
-    margin: 0 4px !important;
-    transition: all 0.3s ease !important;
-  }
-  
-  .mobile-projects-swiper .swiper-pagination-bullet-active {
-    background: linear-gradient(135deg, #3b82f6, #8b5cf6) !important;
-    box-shadow: 0 0 10px rgba(59, 130, 246, 0.5) !important;
-    transform: scale(1.2) !important;
-  }
-`;
 
 // Enhanced tech icon component with inline SVGs for better display
 const TechIcon = ({ tech, className = 'w-5 h-5' }) => {
@@ -108,35 +78,66 @@ const TechIcon = ({ tech, className = 'w-5 h-5' }) => {
   );
 };
 
-const Projects = () => {
-  const [currentProject, setCurrentProject] = useState(0);
-  const [isMobile, setIsMobile] = useState(false);
-
-  // Mobile detection
-  useEffect(() => {
-    const checkMobile = () => {
-      setIsMobile(window.innerWidth < 768);
-    };
-
-    checkMobile();
-    window.addEventListener('resize', checkMobile);
-
-    return () => window.removeEventListener('resize', checkMobile);
-  }, []);
-
-  // Inject custom styles for swiper pagination
-  useEffect(() => {
-    const styleId = 'mobile-swiper-styles';
-    if (!document.getElementById(styleId)) {
-      const style = document.createElement('style');
-      style.id = styleId;
-      style.textContent = swiperStyles;
-      document.head.appendChild(style);
-    }
-  }, []);
-
-  // Project data
+const StaticProjects = () => {
+  // Project data - your actual projects
   const projects = [
+    {
+      id: 1,
+      title: 'Pix Pro – AI-Powered Image Editing SaaS',
+      description:
+        'Pix Pro is a full-stack AI-powered image editing platform built to offer users advanced yet intuitive tools for enhancing and transforming images. The platform integrates state-of-the-art image manipulation powered by AI APIs, with a modern and responsive user interface featuring user authentication, seamless payments, and subscription handling.',
+      github: 'https://github.com/ADML003/pix_pro',
+      liveDemo: 'https://pix-pro-orpin.vercel.app',
+      gradient: 'from-amber-600/20 via-orange-600/20 to-red-600/20',
+      glowColor: 'shadow-orange-500/25',
+      techStack: [
+        { name: 'Next.js', icon: '/assets/nextjs.svg', color: '#000000' },
+        { name: 'React', icon: '/assets/react.svg', color: '#61DAFB' },
+        { name: 'TypeScript', icon: '/assets/typescript.png', color: '#3178C6' },
+        { name: 'Tailwind CSS', icon: '/assets/tailwindcss.png', color: '#06B6D4' },
+        { name: 'MongoDB', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original.svg', color: '#47A248' },
+        { name: 'Cloudinary', icon: 'https://res.cloudinary.com/cloudinary-marketing/image/upload/f_auto,q_auto/v1599088394/creative_source/Logo/cloudinary_logo_square.png', color: '#3448C5' },
+        { name: 'Clerk', icon: 'https://images.clerk.dev/static/logo-light-mode-400x400.png', color: '#6C47FF' },
+        { name: 'Stripe', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/stripe/stripe-original.svg', color: '#635BFF' },
+      ],
+    },
+    {
+      id: 2,
+      title: 'Travelisto – Full-Stack Travel Application',
+      description:
+        'Travelisto is a full-stack travel application that revolutionizes trip planning and travel experiences. The platform offers comprehensive tools for discovering destinations, planning itineraries, and managing travel bookings with an intuitive, modern interface powered by AI.',
+      github: 'https://github.com/ADML003/travelisto',
+      liveDemo: 'https://travelisto.vercel.app',
+      gradient: 'from-blue-600/20 via-cyan-600/20 to-teal-600/20',
+      glowColor: 'shadow-blue-500/25',
+      techStack: [
+        { name: 'React', icon: '/assets/react.svg', color: '#61DAFB' },
+        { name: 'Next.js', icon: '/assets/nextjs.svg', color: '#000000' },
+        { name: 'TypeScript', icon: '/assets/typescript.png', color: '#3178C6' },
+        { name: 'Tailwind CSS', icon: '/assets/tailwindcss.png', color: '#06B6D4' },
+        { name: 'Appwrite', icon: 'https://appwrite.io/images/favicon.png', color: '#FD366E' },
+        { name: 'Google Gemini API', icon: 'https://ai.google.dev/static/images/favicon.png', color: '#4285F4' },
+      ],
+    },
+    {
+      id: 3,
+      title: 'Analytics Dashboard – Digital Marketing Platform',
+      description:
+        'A modern, responsive analytics dashboard featuring real-time data visualization, campaign management, and interactive charts. Built for digital marketing agencies with comprehensive filtering, export capabilities, and beautiful UI components.',
+      github: 'https://github.com/ADML003/analytics_dashboard',
+      liveDemo: 'https://analytics-dashboard-psi-five.vercel.app/',
+      gradient: 'from-slate-600/20 via-gray-600/20 to-zinc-600/20',
+      glowColor: 'shadow-slate-500/25',
+      techStack: [
+        { name: 'Next.js', icon: '/assets/nextjs.svg', color: '#000000' },
+        { name: 'React', icon: '/assets/react.svg', color: '#61DAFB' },
+        { name: 'TypeScript', icon: '/assets/typescript.png', color: '#3178C6' },
+        { name: 'Tailwind CSS', icon: '/assets/tailwindcss.png', color: '#06B6D4' },
+        { name: 'Recharts', icon: '/assets/recharts.svg', color: '#8884d8' },
+        { name: 'shadcn/ui', icon: 'https://ui.shadcn.com/apple-touch-icon.png', color: '#000000' },
+      ],
+    },
+  ];
     {
       id: 1,
       title: 'Pix Pro – AI-Powered Image Editing SaaS',

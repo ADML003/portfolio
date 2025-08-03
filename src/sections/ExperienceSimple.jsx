@@ -4,8 +4,8 @@ const WorkExperienceSimple = () => {
       id: 1,
       company: 'BGS (Beas Green Solutions)',
       position: 'Web Development Intern',
-      period: 'Jun 2025 – Present',
-      type: 'Current Internship',
+      period: 'Jun 2025 – Jul 2025',
+      type: 'Internship',
     },
     {
       id: 2,
