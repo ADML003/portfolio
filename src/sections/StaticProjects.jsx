@@ -193,6 +193,24 @@ const Projects = () => {
         { name: 'Unsplash API', icon: 'https://unsplash.com/favicon-32x32.png', color: '#000000' },
       ],
     },
+    {
+      id: 3,
+      title: 'Analytics Dashboard – Digital Marketing Platform',
+      description:
+        'A modern, responsive analytics dashboard featuring real-time data visualization, campaign management, and interactive charts. Built for digital marketing agencies with comprehensive filtering, export capabilities, and beautiful UI components.',
+      github: 'https://github.com/ADML003/analytics_dashboard',
+      liveDemo: 'https://analytics-dashboard-psi-five.vercel.app/',
+      gradient: 'from-slate-600/20 via-gray-600/20 to-zinc-600/20',
+      glowColor: 'shadow-slate-500/25',
+      techStack: [
+        { name: 'Next.js', icon: '/assets/nextjs.svg', color: '#000000' },
+        { name: 'React', icon: '/assets/react.svg', color: '#61DAFB' },
+        { name: 'TypeScript', icon: '/assets/typescript.png', color: '#3178C6' },
+        { name: 'Tailwind CSS', icon: '/assets/tailwindcss.png', color: '#06B6D4' },
+        { name: 'Recharts', icon: '/assets/recharts.svg', color: '#8884d8' },
+        { name: 'shadcn/ui', icon: 'https://ui.shadcn.com/apple-touch-icon.png', color: '#000000' },
+      ],
+    },
   ];
 
   const currentProjectData = projects[currentProject];

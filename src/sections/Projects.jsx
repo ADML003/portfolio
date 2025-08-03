@@ -115,6 +115,61 @@ const Projects = () => {
         },
       ],
     },
+    {
+      id: 3,
+      title: '📊 Analytics Dashboard – Digital Marketing Platform',
+      description:
+        'A modern, responsive analytics dashboard featuring real-time data visualization, campaign management, and interactive charts. Built for digital marketing agencies with comprehensive filtering, export capabilities, and beautiful UI components powered by shadcn/ui.',
+      image: '/assets/project-logo6.png',
+      video: '/textures/project/project6.mp4',
+      github: 'https://github.com/ADML003/analytics_dashboard',
+      liveDemo: 'https://analytics-dashboard-psi-five.vercel.app/',
+      techStack: [
+        {
+          name: 'Next.js',
+          icon: '/assets/nextjs.svg',
+          color: '#000000',
+          homepage: 'https://nextjs.org/',
+        },
+        { name: 'React.js', icon: '/assets/react.svg', color: '#61DAFB', homepage: 'https://react.dev/' },
+        {
+          name: 'TypeScript',
+          icon: '/assets/typescript.png',
+          color: '#3178C6',
+          homepage: 'https://www.typescriptlang.org/',
+        },
+        {
+          name: 'Tailwind CSS',
+          icon: '/assets/tailwindcss.png',
+          color: '#06B6D4',
+          homepage: 'https://tailwindcss.com/',
+        },
+        {
+          name: 'Recharts',
+          icon: '/assets/recharts.svg',
+          color: '#8884d8',
+          homepage: 'https://recharts.org/',
+        },
+        {
+          name: 'shadcn/ui',
+          icon: 'https://ui.shadcn.com/apple-touch-icon.png',
+          color: '#000000',
+          homepage: 'https://ui.shadcn.com/',
+        },
+        {
+          name: 'Radix UI',
+          icon: 'https://avatars.githubusercontent.com/u/75042455?s=200&v=4',
+          color: '#161618',
+          homepage: 'https://www.radix-ui.com/',
+        },
+        {
+          name: 'Vercel',
+          icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vercel/vercel-original.svg',
+          color: '#000000',
+          homepage: 'https://vercel.com/',
+        },
+      ],
+    },
   ];
 
   // Auto-rotate projects every 8 seconds
