@@ -203,28 +203,27 @@ const Projects = () => {
           // Three Equal Cards Grid Layout
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {projects.map((project) => (
-              <div key={project.id} className="group relative bg-gradient-to-br from-gray-900/80 to-gray-800/80 backdrop-blur-xl rounded-3xl border border-white/20 hover:border-white/40 transition-all duration-700 hover:scale-105 overflow-hidden shadow-2xl hover:shadow-blue-500/20 hover:shadow-[0_0_20px_rgba(59,130,246,0.3)] h-[700px] flex flex-col">
-                {/* Glowing Border Effect */}
-                <div className="absolute inset-0 bg-gradient-to-r from-blue-500/20 via-purple-500/20 to-pink-500/20 opacity-0 group-hover:opacity-100 transition-opacity duration-700 rounded-3xl"></div>
+              <div key={project.id} className="group relative bg-gradient-to-br from-purple-900/30 via-blue-900/20 to-cyan-900/30 backdrop-blur-xl rounded-3xl border border-purple-500/30 transition-all duration-700 hover:scale-105 h-[700px] flex flex-col">
+
                 
                 {/* Project Header */}
-                <div className="relative h-52 bg-gradient-to-br from-blue-600/30 via-purple-600/30 to-pink-600/30 flex items-center justify-center overflow-hidden">
+                <div className="relative h-52 bg-gradient-to-br from-purple-600/30 via-blue-600/20 to-cyan-600/30 flex items-center justify-center overflow-hidden">
                   {/* Animated Background Pattern */}
                   <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(255,255,255,0.1),transparent_50%)] animate-pulse"></div>
                   {/* Floating Particles */}
                   <div className="absolute inset-0">
-                    <div className="absolute top-4 left-4 w-2 h-2 bg-blue-400 rounded-full animate-bounce" style={{animationDelay: '0s'}}></div>
-                    <div className="absolute top-8 right-6 w-1 h-1 bg-purple-400 rounded-full animate-bounce" style={{animationDelay: '0.5s'}}></div>
-                    <div className="absolute bottom-6 left-8 w-1.5 h-1.5 bg-pink-400 rounded-full animate-bounce" style={{animationDelay: '1s'}}></div>
-                    <div className="absolute bottom-4 right-4 w-1 h-1 bg-blue-300 rounded-full animate-bounce" style={{animationDelay: '1.5s'}}></div>
+                    <div className="absolute top-4 left-4 w-2 h-2 bg-purple-500/60 rounded-full animate-bounce" style={{animationDelay: '0s'}}></div>
+                    <div className="absolute top-8 right-6 w-1 h-1 bg-blue-500/60 rounded-full animate-bounce" style={{animationDelay: '0.5s'}}></div>
+                    <div className="absolute bottom-6 left-8 w-1.5 h-1.5 bg-cyan-500/60 rounded-full animate-bounce" style={{animationDelay: '1s'}}></div>
+                    <div className="absolute bottom-4 right-4 w-1 h-1 bg-purple-400/60 rounded-full animate-bounce" style={{animationDelay: '1.5s'}}></div>
                   </div>
                   
                   <div className="text-center relative z-10 px-4">
                     <div className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl mb-3 drop-shadow-2xl animate-pulse leading-none">{project.title.split(' ')[0]}</div>
-                    <div className="text-white/95 text-base sm:text-sm md:text-base lg:text-lg font-bold tracking-wider uppercase bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent leading-tight">
+                    <div className="text-white/95 text-base sm:text-sm md:text-base lg:text-lg font-bold tracking-wider uppercase bg-gradient-to-r from-purple-400 via-blue-400 to-cyan-400 bg-clip-text text-transparent leading-tight">
                       {project.title.split(' ').slice(1).join(' ')}
                     </div>
-                    <div className="mt-2 w-12 h-0.5 bg-gradient-to-r from-blue-400 to-purple-400 mx-auto rounded-full"></div>
+                    <div className="mt-2 w-12 h-0.5 bg-gradient-to-r from-purple-500 via-blue-500 to-cyan-500 mx-auto rounded-full"></div>
                   </div>
                 </div>
 
@@ -239,7 +238,7 @@ const Projects = () => {
                   <div className="mb-8">
                     <h4 className="text-base sm:text-lg font-bold text-white mb-4 flex items-center gap-2">
                       <span className="text-xl sm:text-2xl animate-spin" style={{animationDuration: '3s'}}>⚡</span>
-                      <span className="bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">Technologies</span>
+                      <span className="bg-gradient-to-r from-purple-400 to-blue-400 bg-clip-text text-transparent">Technologies</span>
                     </h4>
                     <div className="flex flex-wrap gap-3">
                       {project.techStack.slice(0, 4).map((tech) => (
@@ -295,7 +294,7 @@ const Projects = () => {
                       rel="noopener noreferrer"
                       className="flex-1 px-4 py-2.5 bg-gradient-to-r from-blue-600/80 to-purple-600/80 rounded-lg border border-blue-400/40 text-white hover:from-blue-500/80 hover:to-purple-500/80 transition-all duration-300 flex items-center justify-center gap-2 text-xs sm:text-sm font-medium shadow-md hover:shadow-lg hover:scale-105">
                       <span className="text-sm sm:text-base">🚀</span>
-                      Demo
+                      Live Demo
                     </a>
                   </div>
                 </div>
