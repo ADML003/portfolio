@@ -1,8 +1,4 @@
-import { useState, useEffect } from 'react';
-
 const Projects = () => {
-  const [currentProject, setCurrentProject] = useState(0);
-
   // Project data - your actual projects
   const projects = [
     {
@@ -172,17 +168,6 @@ const Projects = () => {
     },
   ];
 
-  // Auto-rotate projects every 8 seconds
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentProject((prev) => (prev + 1) % projects.length);
-    }, 8000);
-
-    return () => clearInterval(interval);
-  }, [projects.length]);
-
-  const project = projects[currentProject];
-
   return (
     <section className="c-space my-20" id="projects">
       <div className="w-full text-center mb-16">
@@ -193,98 +178,131 @@ const Projects = () => {
       </div>
 
       <div className="w-full">
-        {/* Project Container - 2 Columns on Desktop */}
-        <div className="w-full flex flex-col md:flex-row gap-8">
-          {/* Left: Overview, Tech Stack, Action Buttons */}
-          <div className="md:w-1/2 w-full flex flex-col justify-between">
-            <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-8">
-              <div>
-                <h3 className="text-2xl md:text-3xl font-bold text-white mb-2">{project.title}</h3>
-                <p className="text-gray-400 text-sm mb-4">
-                  Featured Project {currentProject + 1} of {projects.length}
-                </p>
-              </div>
-              {/* Action Buttons */}
-            </div>
-            <h4 className="text-xl font-semibold text-white mb-4 section-header-enhanced">📋 Project Overview</h4>
-            <p className="text-gray-300 text-lg leading-relaxed mb-6">{project.description}</p>
+        {projects.length === 0 ? (
+          // Empty state when no projects
+          <div className="text-center py-16">
             <div className="mb-8">
-              <h4 className="text-xl font-semibold text-white mb-4 section-header-enhanced">🛠️ Technologies Used</h4>
-              <div className="tech-stack-grid-enhanced mb-4">
-                {project.techStack.map((tech) => (
-                  <div key={tech.name} className="group relative tech-stack-item-enhanced">
+              <div className="w-24 h-24 mx-auto mb-6 rounded-full bg-gradient-to-br from-blue-500/20 to-purple-500/20 flex items-center justify-center">
+                <span className="text-4xl">💼</span>
+              </div>
+              <h3 className="text-2xl font-bold text-white mb-4">No Projects Available</h3>
+              <p className="text-gray-400 text-lg max-w-md mx-auto">
+                Projects will be displayed here once they are added to the portfolio.
+              </p>
+            </div>
+            <div className="flex gap-4 justify-center">
+              <button className="px-6 py-3 bg-blue-500/80 rounded-lg text-white hover:bg-blue-500 transition-all duration-300">
+                Add New Project
+              </button>
+              <button className="px-6 py-3 bg-white/10 rounded-lg text-white hover:bg-white/20 transition-all duration-300">
+                View GitHub
+              </button>
+            </div>
+          </div>
+        ) : (
+          // Three Equal Cards Grid Layout
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {projects.map((project) => (
+              <div key={project.id} className="group relative bg-gradient-to-br from-gray-900/80 to-gray-800/80 backdrop-blur-xl rounded-3xl border border-white/20 hover:border-white/40 transition-all duration-700 hover:scale-105 overflow-hidden shadow-2xl hover:shadow-blue-500/20 hover:shadow-[0_0_20px_rgba(59,130,246,0.3)] h-[700px] flex flex-col">
+                {/* Glowing Border Effect */}
+                <div className="absolute inset-0 bg-gradient-to-r from-blue-500/20 via-purple-500/20 to-pink-500/20 opacity-0 group-hover:opacity-100 transition-opacity duration-700 rounded-3xl"></div>
+                
+                {/* Project Header */}
+                <div className="relative h-52 bg-gradient-to-br from-blue-600/30 via-purple-600/30 to-pink-600/30 flex items-center justify-center overflow-hidden">
+                  {/* Animated Background Pattern */}
+                  <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(255,255,255,0.1),transparent_50%)] animate-pulse"></div>
+                  {/* Floating Particles */}
+                  <div className="absolute inset-0">
+                    <div className="absolute top-4 left-4 w-2 h-2 bg-blue-400 rounded-full animate-bounce" style={{animationDelay: '0s'}}></div>
+                    <div className="absolute top-8 right-6 w-1 h-1 bg-purple-400 rounded-full animate-bounce" style={{animationDelay: '0.5s'}}></div>
+                    <div className="absolute bottom-6 left-8 w-1.5 h-1.5 bg-pink-400 rounded-full animate-bounce" style={{animationDelay: '1s'}}></div>
+                    <div className="absolute bottom-4 right-4 w-1 h-1 bg-blue-300 rounded-full animate-bounce" style={{animationDelay: '1.5s'}}></div>
+                  </div>
+                  
+                  <div className="text-center relative z-10 px-4">
+                    <div className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl mb-3 drop-shadow-2xl animate-pulse leading-none">{project.title.split(' ')[0]}</div>
+                    <div className="text-white/95 text-base sm:text-sm md:text-base lg:text-lg font-bold tracking-wider uppercase bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent leading-tight">
+                      {project.title.split(' ').slice(1).join(' ')}
+                    </div>
+                    <div className="mt-2 w-12 h-0.5 bg-gradient-to-r from-blue-400 to-purple-400 mx-auto rounded-full"></div>
+                  </div>
+                </div>
+
+                {/* Project Content */}
+                <div className="p-8 flex flex-col flex-1 relative z-10">
+                  {/* Description */}
+                  <p className="text-gray-300 text-sm sm:text-base leading-relaxed mb-8 flex-grow line-clamp-4">
+                    {project.description}
+                  </p>
+
+                  {/* Tech Stack */}
+                  <div className="mb-8">
+                    <h4 className="text-base sm:text-lg font-bold text-white mb-4 flex items-center gap-2">
+                      <span className="text-xl sm:text-2xl animate-spin" style={{animationDuration: '3s'}}>⚡</span>
+                      <span className="bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">Technologies</span>
+                    </h4>
+                    <div className="flex flex-wrap gap-3">
+                      {project.techStack.slice(0, 4).map((tech) => (
+                        <div key={tech.name} className="group/tech relative">
+                          <a
+                            href={tech.homepage}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="flex items-center gap-2 px-4 py-2 rounded-xl border border-white/30 transition-all duration-300 group-hover/tech:scale-110 group-hover/tech:border-white/60 cursor-pointer text-decoration-none shadow-lg hover:shadow-xl"
+                            style={{
+                              backgroundColor: tech.color === '#000000' ? 'rgba(255, 255, 255, 0.15)' : `${tech.color}20`,
+                              textDecoration: 'none',
+                            }}>
+                            <img
+                              src={tech.icon}
+                              alt={tech.name}
+                              className="w-5 h-5 group-hover/tech:scale-125 transition-transform duration-300"
+                              onError={(e) => {
+                                e.target.style.display = 'none';
+                                e.target.nextSibling.style.display = 'flex';
+                              }}
+                            />
+                            <div
+                              className="w-5 h-5 rounded items-center justify-center text-white text-xs font-bold"
+                              style={{ backgroundColor: tech.color, display: 'none' }}>
+                              {tech.name.charAt(0)}
+                            </div>
+                            <span className="text-white text-xs sm:text-sm font-semibold">{tech.name}</span>
+                          </a>
+                        </div>
+                      ))}
+                      {project.techStack.length > 4 && (
+                        <div className="px-4 py-2 rounded-xl border border-white/30 bg-white/15 shadow-lg">
+                          <span className="text-white text-xs sm:text-sm font-semibold">+{project.techStack.length - 4} more</span>
+                        </div>
+                      )}
+                    </div>
+                  </div>
+
+                  {/* Action Buttons - Always at bottom */}
+                  <div className="flex gap-3 mt-6">
                     <a
-                      href={tech.homepage}
+                      href={project.github}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className={`flex items-center gap-3 px-4 py-3 rounded-xl border border-white/20 transition-all duration-300 group-hover:scale-105 group-hover:border-white/40 enhanced-tooltip cursor-pointer text-decoration-none ${
-                        tech.color === '#000000' ||
-                        tech.name === 'Next.js' ||
-                        tech.name === 'Express.js' ||
-                        tech.name === 'ShadCN UI' ||
-                        tech.name === 'Vercel'
-                          ? 'bg-white/10'
-                          : 'bg-black/20'
-                      }`}
-                      style={{
-                        backgroundColor: tech.color === '#000000' ? 'rgba(255, 255, 255, 0.1)' : `${tech.color}15`,
-                        textDecoration: 'none',
-                      }}
-                      data-tooltip={`Visit ${tech.name} website`}>
-                      <img
-                        src={tech.icon}
-                        alt={tech.name}
-                        className="w-8 h-8 group-hover:scale-110 transition-transform duration-300"
-                        onError={(e) => {
-                          e.target.style.display = 'none';
-                          e.target.nextSibling.style.display = 'flex';
-                        }}
-                      />
-                      <div
-                        className="w-8 h-8 rounded-lg items-center justify-center text-white font-bold"
-                        style={{ backgroundColor: tech.color, display: 'none' }}>
-                        {tech.name.charAt(0)}
-                      </div>
-                      <span className="text-white font-medium">{tech.name}</span>
+                      className="flex-1 px-4 py-2.5 bg-gradient-to-r from-gray-800/80 to-gray-700/80 rounded-lg text-white hover:from-gray-700/80 hover:to-gray-600/80 transition-all duration-300 flex items-center justify-center gap-2 text-xs sm:text-sm font-medium border border-white/20 hover:border-white/40 shadow-md hover:shadow-lg hover:scale-105">
+                      <img src="/assets/github.svg" alt="GitHub" className="w-4 h-4" />
+                      Code
+                    </a>
+                    <a
+                      href={project.liveDemo}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex-1 px-4 py-2.5 bg-gradient-to-r from-blue-600/80 to-purple-600/80 rounded-lg border border-blue-400/40 text-white hover:from-blue-500/80 hover:to-purple-500/80 transition-all duration-300 flex items-center justify-center gap-2 text-xs sm:text-sm font-medium shadow-md hover:shadow-lg hover:scale-105">
+                      <span className="text-sm sm:text-base">🚀</span>
+                      Demo
                     </a>
                   </div>
-                ))}
+                </div>
               </div>
-            </div>
+            ))}
           </div>
-
-          {/* Right: Project Preview */}
-          <div className="md:w-1/2 w-full flex flex-col items-center justify-center">
-            {/* Action Buttons at the top of preview */}
-            <div className="flex gap-4 mb-4 w-full justify-end">
-              <a
-                href={project.github}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="px-6 py-3 project-button-enhanced rounded-lg text-white hover:bg-white/20 transition-all duration-300 flex items-center gap-2">
-                <img src="/assets/github.svg" alt="GitHub" className="w-5 h-5" />
-                View Code
-              </a>
-              <a
-                href={project.liveDemo}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="px-6 py-3 bg-blue-500/80 project-button-enhanced rounded-lg border border-blue-400/30 text-white hover:bg-blue-500 transition-all duration-300 flex items-center gap-2">
-                <span>🚀</span>
-                Live Demo
-              </a>
-            </div>
-            <div className="relative overflow-hidden rounded-2xl preview-card-glow preview-card-enhanced bg-black-300 w-full">
-              <iframe
-                src={project.liveDemo}
-                className="w-full h-[400px] md:h-[600px] border-0"
-                title={`${project.title} Live Preview`}
-                loading="lazy"
-                sandbox="allow-scripts allow-same-origin allow-forms allow-popups"
-              />
-            </div>
-          </div>
-        </div>
+        )}
       </div>
     </section>
   );

@@ -2,7 +2,7 @@ import Navbar from './sections/Navbar.jsx';
 import Hero from './sections/Hero.jsx';
 import About from './sections/About.jsx';
 import TechSkills from './sections/TechSkills.jsx';
-import StaticProjectsGrid from './sections/StaticProjectsGrid.jsx';
+import Projects from './sections/Projects.jsx';
 import StaticExperience from './sections/StaticExperienceOriginal_NEW.jsx';
 import Contact from './sections/Contact.jsx';
 import Footer from './sections/Footer.jsx';
@@ -31,7 +31,7 @@ const App = () => {
       <Hero />
       <About />
       <TechSkills />
-      <StaticProjectsGrid />
+      <Projects />
       <StaticExperience />
       <Contact />
       <Footer />
