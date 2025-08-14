@@ -230,7 +230,7 @@ const Projects = () => {
                 {/* Project Content */}
                 <div className="p-8 flex flex-col flex-1 relative z-10">
                   {/* Description */}
-                  <p className="text-gray-300 text-sm sm:text-base leading-relaxed mb-8 flex-grow ">
+                  <p className="text-gray-300 text-sm sm:text-base leading-relaxed mb-8 flex-grow line-clamp-4">
                     {project.description}
                   </p>
 
@@ -241,7 +241,7 @@ const Projects = () => {
                       <span className="bg-gradient-to-r from-purple-400 to-blue-400 bg-clip-text text-transparent">Technologies</span>
                     </h4>
                     <div className="flex flex-wrap gap-3">
-                      {project.techStack.map((tech) => (
+                      {project.techStack.slice(0, 4).map((tech) => (
                         <div key={tech.name} className="group/tech relative">
                           <a
                             href={tech.homepage}
@@ -270,6 +270,9 @@ const Projects = () => {
                           </a>
                         </div>
                       ))}
+                      {project.techStack.length > 4 && (
+                        <div className="px-4 py-2 rounded-xl border border-white/30 bg-white/15 shadow-lg">
+                          <span className="text-white text-xs sm:text-sm font-semibold">+{project.techStack.length - 4} more</span>
                         </div>
                       )}
                     </div>
