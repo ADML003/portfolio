@@ -203,7 +203,7 @@ const Projects = () => {
           // Three Equal Cards Grid Layout
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {projects.map((project) => (
-              <div key={project.id} className="group relative bg-gradient-to-br from-purple-900/30 via-blue-900/20 to-cyan-900/30 backdrop-blur-xl rounded-3xl border border-purple-500/30 transition-all duration-700 hover:scale-105 h-[700px] flex flex-col">
+              <div key={project.id} className="group relative bg-gradient-to-br from-purple-900/30 via-blue-900/20 to-cyan-900/30 backdrop-blur-xl rounded-3xl border border-purple-500/30 transition-all duration-700 hover:scale-105 min-h-[600px] flex flex-col">
 
                 
                 {/* Project Header */}
@@ -230,7 +230,7 @@ const Projects = () => {
                 {/* Project Content */}
                 <div className="p-8 flex flex-col flex-1 relative z-10">
                   {/* Description */}
-                  <p className="text-gray-300 text-sm sm:text-base leading-relaxed mb-8 flex-grow line-clamp-4">
+                  <p className="text-gray-300 text-sm sm:text-base leading-relaxed mb-8 flex-grow line-clamp-none">
                     {project.description}
                   </p>
 
