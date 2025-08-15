@@ -203,23 +203,33 @@ const Projects = () => {
           // Three Equal Cards Grid Layout
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {projects.map((project) => (
-              <div key={project.id} className="group relative bg-gradient-to-br from-purple-900/30 via-blue-900/20 to-cyan-900/30 backdrop-blur-xl rounded-3xl border border-purple-500/30 transition-all duration-700 hover:scale-105 min-h-[600px] flex flex-col">
-
-                
+              <div
+                key={project.id}
+                className="group relative bg-gradient-to-br from-purple-900/30 via-blue-900/20 to-cyan-900/30 backdrop-blur-xl rounded-3xl border border-purple-500/30 transition-all duration-700 hover:scale-105 min-h-[600px] flex flex-col">
                 {/* Project Header */}
                 <div className="relative h-52 bg-gradient-to-br from-purple-600/30 via-blue-600/20 to-cyan-600/30 flex items-center justify-center overflow-hidden">
                   {/* Animated Background Pattern */}
                   <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(255,255,255,0.1),transparent_50%)] animate-pulse"></div>
                   {/* Floating Particles */}
                   <div className="absolute inset-0">
-                    <div className="absolute top-4 left-4 w-2 h-2 bg-purple-500/60 rounded-full animate-bounce" style={{animationDelay: '0s'}}></div>
-                    <div className="absolute top-8 right-6 w-1 h-1 bg-blue-500/60 rounded-full animate-bounce" style={{animationDelay: '0.5s'}}></div>
-                    <div className="absolute bottom-6 left-8 w-1.5 h-1.5 bg-cyan-500/60 rounded-full animate-bounce" style={{animationDelay: '1s'}}></div>
-                    <div className="absolute bottom-4 right-4 w-1 h-1 bg-purple-400/60 rounded-full animate-bounce" style={{animationDelay: '1.5s'}}></div>
+                    <div
+                      className="absolute top-4 left-4 w-2 h-2 bg-purple-500/60 rounded-full animate-bounce"
+                      style={{ animationDelay: '0s' }}></div>
+                    <div
+                      className="absolute top-8 right-6 w-1 h-1 bg-blue-500/60 rounded-full animate-bounce"
+                      style={{ animationDelay: '0.5s' }}></div>
+                    <div
+                      className="absolute bottom-6 left-8 w-1.5 h-1.5 bg-cyan-500/60 rounded-full animate-bounce"
+                      style={{ animationDelay: '1s' }}></div>
+                    <div
+                      className="absolute bottom-4 right-4 w-1 h-1 bg-purple-400/60 rounded-full animate-bounce"
+                      style={{ animationDelay: '1.5s' }}></div>
                   </div>
-                  
+
                   <div className="text-center relative z-10 px-4">
-                    <div className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl mb-3 drop-shadow-2xl animate-pulse leading-none">{project.title.split(' ')[0]}</div>
+                    <div className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl mb-3 drop-shadow-2xl animate-pulse leading-none">
+                      {project.title.split(' ')[0]}
+                    </div>
                     <div className="text-white/95 text-base sm:text-sm md:text-base lg:text-lg font-bold tracking-wider uppercase bg-gradient-to-r from-purple-400 via-blue-400 to-cyan-400 bg-clip-text text-transparent leading-tight">
                       {project.title.split(' ').slice(1).join(' ')}
                     </div>
@@ -237,8 +247,12 @@ const Projects = () => {
                   {/* Tech Stack */}
                   <div className="mb-8">
                     <h4 className="text-base sm:text-lg font-bold text-white mb-4 flex items-center gap-2">
-                      <span className="text-xl sm:text-2xl animate-spin" style={{animationDuration: '3s'}}>⚡</span>
-                      <span className="bg-gradient-to-r from-purple-400 to-blue-400 bg-clip-text text-transparent">Technologies</span>
+                      <span className="text-xl sm:text-2xl animate-spin" style={{ animationDuration: '3s' }}>
+                        ⚡
+                      </span>
+                      <span className="bg-gradient-to-r from-purple-400 to-blue-400 bg-clip-text text-transparent">
+                        Technologies
+                      </span>
                     </h4>
                     <div className="flex flex-wrap gap-3">
                       {project.techStack.slice(0, 4).map((tech) => (
@@ -249,7 +263,8 @@ const Projects = () => {
                             rel="noopener noreferrer"
                             className="flex items-center gap-2 px-4 py-2 rounded-xl border border-white/30 transition-all duration-300 group-hover/tech:scale-110 group-hover/tech:border-white/60 cursor-pointer text-decoration-none shadow-lg hover:shadow-xl"
                             style={{
-                              backgroundColor: tech.color === '#000000' ? 'rgba(255, 255, 255, 0.15)' : `${tech.color}20`,
+                              backgroundColor:
+                                tech.color === '#000000' ? 'rgba(255, 255, 255, 0.15)' : `${tech.color}20`,
                               textDecoration: 'none',
                             }}>
                             <img
@@ -272,7 +287,9 @@ const Projects = () => {
                       ))}
                       {project.techStack.length > 4 && (
                         <div className="px-4 py-2 rounded-xl border border-white/30 bg-white/15 shadow-lg">
-                          <span className="text-white text-xs sm:text-sm font-semibold">+{project.techStack.length - 4} more</span>
+                          <span className="text-white text-xs sm:text-sm font-semibold">
+                            +{project.techStack.length - 4} more
+                          </span>
                         </div>
                       )}
                     </div>
@@ -306,5 +323,6 @@ const Projects = () => {
     </section>
   );
 };
+//
 
 export default Projects;
