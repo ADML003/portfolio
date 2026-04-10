@@ -138,37 +138,6 @@ const About = () => {
                 pointAltitude={0.015}
                 pointColor="color"
                 pointRadius="size"
-                // HTML elements for clean blinking effect
-                htmlElementsData={[
-                  {
-                    lat: 28.6139,
-                    lng: 77.209,
-                    html: `
-                      <div style="position: relative; display: flex; align-items: center; justify-content: center;">
-                        <span style="
-                          position: absolute;
-                          display: inline-flex;
-                          height: 12px;
-                          width: 12px;
-                          border-radius: 50%;
-                          background-color: rgb(74 222 128);
-                          opacity: 0.75;
-                          animation: ping 1s cubic-bezier(0, 0, 0.2, 1) infinite;
-                        "></span>
-                        <span style="
-                          position: relative;
-                          display: inline-flex;
-                          height: 12px;
-                          width: 12px;
-                          border-radius: 50%;
-                          background-color: rgb(34 197 94);
-                          box-shadow: 0 0 8px rgb(34 197 94);
-                        "></span>
-                      </div>
-                    `,
-                    altitude: 0.02,
-                  },
-                ]}
                 // Labels for text
                 labelsData={[
                   {

@@ -121,7 +121,7 @@ const TechSkills = () => {
     // Cloud Services
     {
       name: 'Cloudinary',
-      logo: 'https://res.cloudinary.com/cloudinary-marketing/image/upload/f_auto,q_auto/v1599088394/creative_source/Logo/cloudinary_logo_square.png',
+      logo: 'https://cdn.simpleicons.org/cloudinary/3448C5',
       color: '#3448C5',
       category: '☁️ Cloud Services',
       homepage: 'https://cloudinary.com/',

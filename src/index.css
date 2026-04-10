@@ -36,7 +36,7 @@
 html {
   scroll-behavior: smooth;
   overflow-x: hidden;
-  height: 100%;
+  min-height: 100%;
   /* Enhanced scroll performance */
   scroll-padding-top: 0;
   -webkit-text-size-adjust: 100%;
@@ -46,22 +46,17 @@ html {
 body {
   background: radial-gradient(ellipse at center, #0a0a23 0%, #000000 70%, #000000 100%);
   font-family: 'General Sans', sans-serif;
+  color: #ffffff;
   overflow-x: hidden;
   position: relative;
-  height: 100%;
+  min-height: 100%;
   /* Ultra-smooth scrolling optimizations */
   background-attachment: fixed;
-  -webkit-backface-visibility: hidden;
-  backface-visibility: hidden;
-  -webkit-transform: translateZ(0);
-  transform: translateZ(0);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   /* Prevent scroll bounce on iOS */
   -webkit-overflow-scrolling: touch;
   overscroll-behavior: none;
-  /* GPU acceleration for smoother scrolling */
-  will-change: scroll-position;
 }
 
 /* Enhanced Smooth Scrolling */
@@ -74,32 +69,33 @@ body {
 /* Optimize all sections for smooth scrolling */
 section {
   will-change: auto;
-  transform: translateZ(0);
-  backface-visibility: hidden;
-  contain: layout style paint;
-  /* Prevent layout thrashing */
+  /* Keep sections in normal flow to avoid browser paint/compositing glitches */
   position: relative;
-  isolation: isolate;
 }
 
 /* Optimize cards and interactive elements */
 .group {
   will-change: auto;
-  transform: translateZ(0);
-  backface-visibility: hidden;
 }
 
 /* Optimize gradient backgrounds */
 [class*='bg-gradient'] {
   will-change: auto;
-  transform: translateZ(0);
 }
 
 /* Ultra-smooth scrolling for entire page */
 #root {
   overflow-x: hidden;
-  height: 100vh;
-  width: 100vw;
+  min-height: 100vh;
+  height: auto;
+  width: 100%;
+  position: relative;
+  z-index: 1;
+}
+
+main.smooth-scroll {
+  position: relative;
+  z-index: 2;
 }
 
 /* Cosmic Background */
@@ -1166,7 +1162,7 @@ body::after {
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none; /* Disable text selection */
-    touch-action: none; /* Disable touch interactions */
+    touch-action: pan-y; /* Keep vertical page scrolling on touch devices */
     -webkit-touch-callout: none; /* Disable iOS callout */
     -webkit-tap-highlight-color: transparent !important;
   }
@@ -1212,7 +1208,7 @@ body::after {
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
-    touch-action: none !important; /* Completely disable touch actions */
+    touch-action: pan-y !important; /* Allow vertical page scrolling */
     pointer-events: none; /* Disable all interactions on mobile */
   }
 
