@@ -31,9 +31,10 @@ const Hero = () => {
         <p className="hero_tag text-gray_gradient">Developer and Problem Solver</p>
       </div>
 
-      <div className="w-full h-full absolute inset-0 z-0">
+      <div className="w-full h-full absolute inset-0 z-0 pointer-events-none">
         <Canvas
           className="w-full h-full"
+          style={{ pointerEvents: 'none' }}
           dpr={[1, 2]} // Restored original DPR
           performance={{ min: 0.5 }} // Restored original performance threshold
           frameloop="demand" // Restored original frameloop
