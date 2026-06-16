@@ -3,54 +3,61 @@ import { motion } from 'framer-motion';
 import Globe from 'react-globe.gl';
 import { stagger, fadeUp, VIEWPORT, EASE_OUT_EXPO } from '../lib/animations.js';
 
-/* ── Auto-rotating globe with Gurugram marker ──────────────── */
+/* ── Auto-rotating globe — pointer events disabled ─────────── */
 const GlobeWidget = () => {
   const containerRef = useRef(null);
   const globeRef     = useRef(null);
-  const [size, setSize]   = useState(300);
+  const [size, setSize]   = useState(0);
   const [isDark, setIsDark] = useState(
     () => document.documentElement.getAttribute('data-theme') !== 'light'
   );
 
-  /* Watch theme changes */
   useEffect(() => {
-    const observer = new MutationObserver(() => {
+    const mo = new MutationObserver(() => {
       setIsDark(document.documentElement.getAttribute('data-theme') !== 'light');
     });
-    observer.observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
-    return () => observer.disconnect();
+    mo.observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
+    return () => mo.disconnect();
   }, []);
 
-  /* Responsive size */
   useEffect(() => {
     if (!containerRef.current) return;
-    const ro = new ResizeObserver(([entry]) => {
-      setSize(Math.floor(entry.contentRect.width));
-    });
+    const ro = new ResizeObserver(([e]) => setSize(Math.floor(e.contentRect.width)));
     ro.observe(containerRef.current);
     return () => ro.disconnect();
   }, []);
 
-  /* Auto-rotate: increment longitude every frame */
+  /* continuous auto-rotation */
   useEffect(() => {
-    let raf;
+    let id;
     let lng = 77.0;
     const tick = () => {
       if (globeRef.current) {
-        lng -= 0.18; // rotate left
+        lng -= 0.18;
         globeRef.current.pointOfView({ lat: 22, lng, altitude: 2.2 }, 0);
       }
-      raf = requestAnimationFrame(tick);
+      id = requestAnimationFrame(tick);
     };
-    raf = requestAnimationFrame(tick);
-    return () => cancelAnimationFrame(raf);
+    id = requestAnimationFrame(tick);
+    return () => cancelAnimationFrame(id);
   }, []);
 
-  /* Gurugram marker — green dot only, no label */
+  /* Gurugram marker — green dot only */
   const markers = [{ lat: 28.4595, lng: 77.0266 }];
 
   return (
-    <div ref={containerRef} style={{ width: '100%', aspectRatio: '1', overflow: 'hidden', borderRadius: '12px' }}>
+    /* pointer-events: none prevents scroll/drag interference */
+    <div
+      ref={containerRef}
+      style={{
+        width: '100%',
+        aspectRatio: '1',
+        overflow: 'hidden',
+        borderRadius: '12px',
+        pointerEvents: 'none',
+        userSelect: 'none',
+      }}
+    >
       {size > 0 && (
         <Globe
           ref={globeRef}
@@ -69,7 +76,7 @@ const GlobeWidget = () => {
           pointAltitude={0.05}
           pointColor={() => '#22c55e'}
           pointRadius={0.7}
-          pointsMerge={false}
+          enablePointerInteraction={false}
         />
       )}
     </div>
@@ -90,7 +97,6 @@ const About = () => (
       </motion.p>
 
       <div className="about-layout">
-        {/* Left — bio text */}
         <motion.div
           variants={stagger(0.1)}
           initial="hidden"
@@ -109,7 +115,6 @@ const About = () => (
           </motion.p>
         </motion.div>
 
-        {/* Right — globe */}
         <motion.div
           className="globe-wrapper"
           initial={{ opacity: 0, scale: 0.92, filter: 'blur(8px)' }}
