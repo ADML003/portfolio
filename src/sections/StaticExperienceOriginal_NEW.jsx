@@ -1,138 +1,161 @@
-import { useEffect, useRef, useState } from 'react';
+import { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { stagger, fadeUp, VIEWPORT, EASE_OUT_EXPO } from '../lib/animations.js';
 
 const experiences = [
   {
     id: 1,
     initial: 'B',
     color: '#3b82f6',
-    role: 'Web Development Intern',
-    company: 'BGS — Beas Green Solutions',
+    role: 'Founding Tech & Marketing Lead',
+    company: 'Beas Green Solutions',
     period: 'Jun 2025 – Jul 2025',
     intro:
-      'Built the company\'s entire digital presence from the ground up — a production manufacturing website paired with an AI-powered image editing tool integrated directly into their marketing pipeline.',
+      'Architected and deployed a full-stack digital platform for BGS, integrating Google Maps API for geolocation services and a dynamic product catalog that streamlined user navigation and product discovery.',
     achievements: [
-      'Designed and launched beasgreen.com — a full-featured web presence for a brick, furniture, and block manufacturing company, including product catalog, company profile, and an inquiry system.',
-      'Built Pix Pro, an AI-powered image transformation tool using Cloudinary AI that automated enhancement of product photos and marketing hoardings for the client.',
-      'Integrated Google Maps API for multi-branch location display and WhatsApp Business API for direct customer-to-sales communication, reducing inquiry response time.',
-      'Deployed both projects on Vercel with CI/CD pipelines, optimizing Core Web Vitals and achieving sub-2s load times.',
+      'Architected and deployed the full-stack digital platform for BGS — a production manufacturing company — integrating Google Maps API for geolocation services and a dynamic product catalog for bricks, furniture, and block products.',
+      'Developed and deployed PixPro, a proprietary AI image-processing tool using Cloudinary AI, enabling automated enhancement of product photos and marketing hoardings for the client\'s digital campaigns.',
+      'Established a unified communication pipeline via WhatsApp Business API to automate digital engagement, lead capture, and customer-to-sales routing.',
+      'Deployed both platforms on Vercel with CI/CD pipelines, achieving sub-2s load times and optimized Core Web Vitals across all pages.',
     ],
-    tags: ['Next.js', 'React', 'TypeScript', 'Cloudinary AI', 'Google Maps API', 'Vercel'],
+    tags: ['Next.js', 'React', 'TypeScript', 'Cloudinary AI', 'Google Maps API', 'WhatsApp Business API', 'Vercel'],
   },
   {
     id: 2,
     initial: 'A',
     color: '#8b5cf6',
-    role: 'Web Development Intern',
-    company: 'AWRA — DIGATO OPC LIMITED',
-    period: 'Jun 2024 – Aug 2024',
+    role: 'Web Developer',
+    company: 'AWARA – An Apparel Brand',
+    location: 'Gurugram, Haryana',
+    period: 'Sept 2024 – Present',
     intro:
-      'Led end-to-end development of the official e-commerce website for an apparel brand — from design and build to payment integration, SEO, and analytics setup.',
+      'Engineered and launched the official brand website, delivering a high-conversion UI/UX and mobile-first responsiveness from concept to deployment.',
     achievements: [
-      'Developed and deployed the AWRA brand website using WordPress with a custom theme and plugin architecture supporting the full apparel catalog and checkout flow.',
-      'Integrated Razorpay and Stripe payment gateways with secure PCI-compliant checkout flows, directly improving conversion rates for the client.',
-      'Implemented on-page SEO — structured data, meta optimization, XML sitemaps, and canonical tags — resulting in measurable improvements in organic search visibility.',
-      'Configured Google Analytics 4 and Search Console dashboards so the marketing team could track acquisition channels, user behavior, and campaign performance.',
+      'Engineered and launched the official AWARA brand website with a strong focus on high-conversion UI/UX and mobile-first responsiveness, handling all architecture from concept to deployment.',
+      'Led end-to-end website architecture and operational workflows including secure payment gateway integration, dynamic inventory synchronization, and responsive storefront customization.',
+      'Significantly improved checkout efficiency, product discoverability, and overall customer engagement through targeted UX decisions and performance optimization.',
+      'Managed order management systems and operational workflows, ensuring reliability and scalability of the e-commerce platform.',
     ],
-    tags: ['WordPress', 'PHP', 'Razorpay', 'Stripe', 'SEO', 'Google Analytics'],
+    tags: ['WordPress', 'PHP', 'Razorpay', 'Stripe', 'SEO', 'Google Analytics', 'WooCommerce'],
   },
 ];
 
-// Chevron icon
 const ChevronDown = () => (
-  <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
+  <svg width="11" height="11" viewBox="0 0 12 12" fill="none">
     <path d="M2 4L6 8L10 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
   </svg>
 );
 
 const StaticExperience = () => {
-  const sectionRef = useRef(null);
   const [expanded, setExpanded] = useState(null);
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.querySelectorAll('[data-reveal]').forEach((el, i) => {
-              setTimeout(() => el.classList.add('revealed'), i * 100);
-            });
-            observer.unobserve(entry.target);
-          }
-        });
-      },
-      { threshold: 0.08 }
-    );
-    if (sectionRef.current) observer.observe(sectionRef.current);
-    return () => observer.disconnect();
-  }, []);
-
   const toggle = (id) => setExpanded(expanded === id ? null : id);
 
   return (
-    <section id="work" className="section" ref={sectionRef}>
+    <section id="work" className="section">
       <div className="container">
-        <p className="section-label" data-reveal>
+        <motion.p
+          className="section-label"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={VIEWPORT}
+          transition={{ duration: 0.65, ease: EASE_OUT_EXPO }}
+        >
           <span>04</span> Experience
-        </p>
+        </motion.p>
 
-        <div className="experience-list">
-          {experiences.map((exp, i) => (
-            <div
+        <motion.div
+          className="experience-list"
+          variants={stagger(0.12)}
+          initial="hidden"
+          whileInView="visible"
+          viewport={VIEWPORT}
+        >
+          {experiences.map((exp) => (
+            <motion.div
               key={exp.id}
               className={`experience-item ${expanded === exp.id ? 'is-open' : ''}`}
-              data-reveal
-              data-reveal-delay={String(i + 1)}
+              variants={fadeUp}
               onClick={() => toggle(exp.id)}
               role="button"
               tabIndex={0}
               aria-expanded={expanded === exp.id}
               onKeyDown={(e) => e.key === 'Enter' && toggle(exp.id)}
             >
-              {/* Company initial badge */}
+              {/* Company badge */}
               <div
                 className="exp-logo"
-                style={{ borderColor: `${exp.color}30`, color: exp.color }}
+                style={{ borderColor: `${exp.color}28`, color: exp.color }}
               >
                 {exp.initial}
               </div>
 
               {/* Content */}
               <div className="exp-content">
-                {/* Row: role + date */}
                 <div className="exp-header">
                   <div>
                     <div className="exp-role">{exp.role}</div>
-                    <div className="exp-company">{exp.company}</div>
+                    <div className="exp-company">
+                      {exp.company}
+                      {exp.location && (
+                        <span style={{ marginLeft: '8px', opacity: 0.6 }}>· {exp.location}</span>
+                      )}
+                    </div>
                   </div>
                   <div className="exp-date">{exp.period}</div>
                 </div>
 
-                {/* One-line intro — always visible */}
                 <p className="exp-intro">{exp.intro}</p>
 
-                {/* Expand hint */}
                 <span className="exp-expand-hint">
                   {expanded === exp.id ? 'Show less' : 'Show details'}
-                  <ChevronDown />
+                  <motion.span
+                    animate={{ rotate: expanded === exp.id ? 180 : 0 }}
+                    transition={{ duration: 0.3, ease: EASE_OUT_EXPO }}
+                    style={{ display: 'inline-flex' }}
+                  >
+                    <ChevronDown />
+                  </motion.span>
                 </span>
 
-                {/* Expandable achievements */}
-                {expanded === exp.id && (
-                  <div className="exp-achievements">
-                    {exp.achievements.map((a, idx) => (
-                      <p key={idx} className="exp-achievement">{a}</p>
-                    ))}
-                    <div className="exp-tags">
-                      {exp.tags.map((tag) => (
-                        <span key={tag} className="exp-tag">{tag}</span>
+                {/* Expanding achievements */}
+                <AnimatePresence>
+                  {expanded === exp.id && (
+                    <motion.div
+                      className="exp-achievements"
+                      initial={{ height: 0, opacity: 0 }}
+                      animate={{ height: 'auto', opacity: 1 }}
+                      exit={{ height: 0, opacity: 0 }}
+                      transition={{ duration: 0.38, ease: EASE_OUT_EXPO }}
+                      style={{ overflow: 'hidden' }}
+                    >
+                      {exp.achievements.map((a, idx) => (
+                        <motion.p
+                          key={idx}
+                          className="exp-achievement"
+                          initial={{ opacity: 0, x: -8 }}
+                          animate={{ opacity: 1, x: 0 }}
+                          transition={{ delay: idx * 0.06 + 0.1, duration: 0.4, ease: EASE_OUT_EXPO }}
+                        >
+                          {a}
+                        </motion.p>
                       ))}
-                    </div>
-                  </div>
-                )}
+                      <motion.div
+                        className="exp-tags"
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        transition={{ delay: 0.35, duration: 0.4 }}
+                      >
+                        {exp.tags.map((tag) => (
+                          <span key={tag} className="exp-tag">{tag}</span>
+                        ))}
+                      </motion.div>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
               </div>
-            </div>
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
       </div>
     </section>
   );
