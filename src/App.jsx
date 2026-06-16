@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import Navbar from './sections/Navbar.jsx';
 import Hero from './sections/Hero.jsx';
 import About from './sections/About.jsx';
@@ -6,27 +7,30 @@ import Projects from './sections/Projects.jsx';
 import StaticExperience from './sections/StaticExperienceOriginal_NEW.jsx';
 import Contact from './sections/Contact.jsx';
 import Footer from './sections/Footer.jsx';
-import { useEffect } from 'react';
-import { initSmoothScroll } from './utils/smoothScroll.js';
-// import CosmicBackground from './components/CosmicBackground.jsx';
 
 const App = () => {
   useEffect(() => {
-    // Initialize ultra-smooth scrolling
-    const smoothScroll = initSmoothScroll();
+    // Global IntersectionObserver for scroll-reveal
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('revealed');
+          }
+        });
+      },
+      { threshold: 0.05, rootMargin: '0px 0px -40px 0px' }
+    );
 
-    return () => {
-      // Cleanup on unmount
-      if (smoothScroll?.destroy) {
-        smoothScroll.destroy();
-      }
-    };
+    // Observe all elements with data-reveal not inside section refs
+    // (Sections handle their own via local observers)
+    document.querySelectorAll('[data-reveal]').forEach((el) => observer.observe(el));
+
+    return () => observer.disconnect();
   }, []);
 
   return (
-    <main className="max-w-7xl mx-auto relative smooth-scroll">
-      {/* <CosmicBackground /> */}
-
+    <div style={{ minHeight: '100vh', backgroundColor: 'var(--bg)' }}>
       <Navbar />
       <Hero />
       <About />
@@ -35,7 +39,7 @@ const App = () => {
       <StaticExperience />
       <Contact />
       <Footer />
-    </main>
+    </div>
   );
 };
 
