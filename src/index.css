@@ -131,9 +131,12 @@ button { font-family: inherit; font-synthesis: none; }
 @media (min-width: 1024px) { .container { padding: 0 60px; } }
 
 .section {
-  padding: 100px 0;
+  padding: 64px 0;
   position: relative;
   z-index: 1;
+}
+@media (min-width: 768px) {
+  .section { padding: 100px 0; }
 }
 .section + .section {
   border-top: 1px solid var(--border);
@@ -149,13 +152,16 @@ button { font-family: inherit; font-synthesis: none; }
   display: flex;
   align-items: baseline;
   gap: 14px;
-  margin-bottom: 60px;
+  margin-bottom: 40px;
   font-family: 'Geist', sans-serif;
   font-size: clamp(36px, 6vw, 56px);
   font-weight: 700;
   color: var(--text-1);
   letter-spacing: -0.04em;
   line-height: 1;
+}
+@media (min-width: 768px) {
+  .section-label { margin-bottom: 60px; }
 }
 .section-label > span {
   font-family: 'Geist Mono', monospace;
@@ -278,12 +284,13 @@ button { font-family: inherit; font-synthesis: none; }
 
 /* ─── Hero ───────────────────────────────────────────────────── */
 .hero {
-  /* Mobile: tight top padding so everything fits above fold */
-  padding-top: 80px;
-  padding-bottom: 40px;
+  /* Mobile: natural flow, fill the viewport with content */
+  padding-top: 90px;
+  padding-bottom: 48px;
   min-height: 100svh;
   display: flex;
-  align-items: center;
+  flex-direction: column;
+  justify-content: center;
 }
 @media (min-width: 768px) {
   .hero {
@@ -658,8 +665,8 @@ button { font-family: inherit; font-synthesis: none; }
   display: flex; flex-direction: column;
   background: var(--surface);
   border: 1px solid var(--border);
-  border-radius: var(--r-lg);
-  padding: 24px;
+  border-radius: var(--r-xl);
+  padding: 0;
   transition:
     border-color var(--t-base) ease,
     transform    var(--t-slow) var(--ease-expo),
@@ -675,26 +682,67 @@ button { font-family: inherit; font-synthesis: none; }
   background: linear-gradient(90deg, transparent 0%, var(--border-hover) 40%, var(--border-hover) 60%, transparent 100%);
   opacity: 0;
   transition: opacity var(--t-slow) ease;
+  z-index: 2;
 }
 .project-card:hover {
   border-color: var(--border-2);
-  transform: translateY(-4px);
-  box-shadow: 0 16px 48px rgba(0,0,0,0.35), 0 4px 12px rgba(0,0,0,0.2);
+  transform: translateY(-6px);
+  box-shadow: 0 20px 60px rgba(0,0,0,0.4), 0 6px 16px rgba(0,0,0,0.25);
 }
 [data-theme='light'] .project-card:hover {
-  box-shadow: 0 12px 36px rgba(0,0,0,0.08);
+  box-shadow: 0 16px 48px rgba(0,0,0,0.1), 0 4px 12px rgba(0,0,0,0.06);
 }
 .project-card:hover::after { opacity: 1; }
 
+/* ── Project Preview Thumbnail ── */
+.project-preview {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  border-bottom: 1px solid var(--border);
+  flex-shrink: 0;
+}
+.project-preview img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top center;
+  transition: transform 0.6s var(--ease-expo), filter 0.6s var(--ease-expo);
+  will-change: transform;
+}
+.project-card:hover .project-preview img {
+  transform: scale(1.05);
+}
+/* Gradient overlay — fades preview into card content */
+.project-preview-overlay {
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 60%;
+  background: linear-gradient(to top, var(--surface) 0%, transparent 100%);
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Card content area (below preview) */
+.project-card-header,
+.project-card > .project-desc,
+.project-card > .project-tags {
+  padding-left: 24px;
+  padding-right: 24px;
+}
+
 .project-card-header {
   display: flex; align-items: flex-start;
-  justify-content: space-between; gap: 12px; margin-bottom: 14px;
+  justify-content: space-between; gap: 12px;
+  padding-top: 20px;
+  margin-bottom: 12px;
 }
 .project-title-group { flex: 1; min-width: 0; }
 .project-title {
   font-family: 'Geist', sans-serif;
-  font-size: 15px; font-weight: 600; color: var(--text-1);
-  margin-bottom: 2px; letter-spacing: -0.02em;
+  font-size: 17px; font-weight: 600; color: var(--text-1);
+  margin-bottom: 3px; letter-spacing: -0.02em;
 }
 .project-type {
   font-family: 'Geist Mono', monospace;
@@ -713,11 +761,25 @@ button { font-family: inherit; font-synthesis: none; }
   color: var(--text-1); border-color: var(--border-hover);
   background: var(--surface-2); transform: translateY(-1px);
 }
+.project-link-live {
+  color: var(--green);
+  border-color: var(--green-border);
+  background: var(--green-bg);
+}
+.project-link-live:hover {
+  color: var(--green);
+  border-color: var(--green);
+  background: var(--green-bg);
+}
 .project-desc {
   font-size: 13.5px; color: var(--text-2);
   line-height: 1.7; margin-bottom: 16px; flex: 1;
 }
-.project-tags { display: flex; flex-wrap: wrap; gap: 5px; margin-top: auto; }
+.project-tags {
+  display: flex; flex-wrap: wrap; gap: 5px;
+  margin-top: auto;
+  padding-bottom: 24px;
+}
 .project-tag {
   font-family: 'Geist Mono', monospace;
   font-size: 10.5px; color: var(--text-3);

@@ -3,7 +3,9 @@ import { motion } from 'framer-motion';
 import Globe from 'react-globe.gl';
 import { stagger, fadeUp, VIEWPORT, EASE_OUT_EXPO } from '../lib/animations.js';
 
-/* ── Auto-rotating globe — pointer events disabled ─────────── */
+/* ── Globe with spin-to-stop animation ─────────────────────── */
+const GURUGRAM = { lat: 28.4595, lng: 77.0266 };
+
 const GlobeWidget = () => {
   const containerRef = useRef(null);
   const globeRef     = useRef(null);
@@ -11,6 +13,11 @@ const GlobeWidget = () => {
   const [isDark, setIsDark] = useState(
     () => document.documentElement.getAttribute('data-theme') !== 'light'
   );
+
+  // Animation state refs
+  const hasPlayed   = useRef(false);
+  const isAnimating = useRef(false);
+  const animFrameId = useRef(null);
 
   useEffect(() => {
     const mo = new MutationObserver(() => {
@@ -27,26 +34,86 @@ const GlobeWidget = () => {
     return () => ro.disconnect();
   }, []);
 
-  /* continuous auto-rotation */
+  /* Set initial position far from Gurugram so the spin has distance to cover */
   useEffect(() => {
-    let id;
-    let lng = 77.0;
-    const tick = () => {
-      if (globeRef.current) {
-        lng -= 0.18;
-        globeRef.current.pointOfView({ lat: 22, lng, altitude: 2.2 }, 0);
-      }
-      id = requestAnimationFrame(tick);
-    };
-    id = requestAnimationFrame(tick);
-    return () => cancelAnimationFrame(id);
+    if (globeRef.current) {
+      globeRef.current.pointOfView({ lat: 22, lng: GURUGRAM.lng + 720, altitude: 2.2 }, 0);
+    }
+  }, [size]);
+
+  /* Spin-to-stop animation triggered by IntersectionObserver */
+  useEffect(() => {
+    if (!containerRef.current) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting && !hasPlayed.current && globeRef.current) {
+          hasPlayed.current = true;
+          startSpinAnimation();
+        }
+      },
+      { threshold: 0.3 }
+    );
+
+    observer.observe(containerRef.current);
+    return () => observer.disconnect();
   }, []);
 
-  /* Gurugram marker — green dot only */
-  const markers = [{ lat: 28.4595, lng: 77.0266 }];
+  const startSpinAnimation = () => {
+    if (isAnimating.current) return;
+    isAnimating.current = true;
+
+    const DURATION = 3500;    // ms — total animation time
+    const START_SPEED = 12.0; // degrees per frame at the start
+    const startTime = performance.now();
+
+    // Start from a position far away from target
+    let currentLng = GURUGRAM.lng + 1080; // 3 full rotations worth
+    let currentLat = 10; // Start slightly off latitude too
+    const targetLat = GURUGRAM.lat;
+    const targetLng = GURUGRAM.lng;
+
+    const tick = (now) => {
+      const elapsed = now - startTime;
+      const progress = Math.min(elapsed / DURATION, 1);
+
+      // Exponential ease-out: fast start, smooth slowdown
+      // Using a cubic ease-out with extra power for dramatic deceleration
+      const eased = 1 - Math.pow(1 - progress, 4);
+
+      // Interpolate from start position to target
+      const lng = currentLng + (targetLng - currentLng) * eased;
+      const lat = currentLat + (targetLat - currentLat) * eased;
+
+      if (globeRef.current) {
+        globeRef.current.pointOfView({ lat, lng, altitude: 2.2 }, 0);
+      }
+
+      if (progress < 1) {
+        animFrameId.current = requestAnimationFrame(tick);
+      } else {
+        // Snap to exact target
+        if (globeRef.current) {
+          globeRef.current.pointOfView({ lat: targetLat, lng: targetLng, altitude: 2.2 }, 0);
+        }
+        isAnimating.current = false;
+      }
+    };
+
+    animFrameId.current = requestAnimationFrame(tick);
+  };
+
+  // Cleanup
+  useEffect(() => {
+    return () => {
+      if (animFrameId.current) cancelAnimationFrame(animFrameId.current);
+    };
+  }, []);
+
+  /* Gurugram marker — green dot */
+  const markers = [{ lat: GURUGRAM.lat, lng: GURUGRAM.lng }];
 
   return (
-    /* pointer-events: none prevents scroll/drag interference */
     <div
       ref={containerRef}
       style={{

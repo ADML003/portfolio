@@ -26,10 +26,11 @@ const experiences = [
     period: 'Sept 2024 – Present',
     bullets: [
       'Engineered and launched the official brand e-commerce website end-to-end — from architecture and storefront design to payment gateway integration and inventory synchronization.',
+      'Led the complete migration of the e-commerce platform from WordPress/WooCommerce to Shopify, improving site performance, scalability, and operational efficiency.',
       'Improved checkout efficiency and product discoverability through targeted UX decisions, performance optimization, and responsive mobile-first design.',
       'Managed order management systems and operational workflows, ensuring platform reliability and scalability.',
     ],
-    tags: ['WordPress', 'WooCommerce', 'Razorpay', 'Stripe', 'SEO', 'Google Analytics'],
+    tags: ['WordPress', 'WooCommerce', 'Shopify', 'Razorpay', 'Stripe', 'SEO', 'Google Analytics'],
   },
 ];
 

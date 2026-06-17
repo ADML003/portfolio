@@ -2,19 +2,19 @@ import { motion } from 'framer-motion';
 import { stagger, fadeUp, VIEWPORT, EASE_OUT_EXPO } from '../lib/animations.js';
 
 /*
-  5-project Bento layout (on ≥768px):
+  5-project Bento layout (on ≥960px):
   ┌─────────────────────┬──────────────┐
   │  GenFit  (col 2/3)  │ NEXUS (1/3)  │
-  ├──────────┬──────────┴──────────────┤
-  │  Pix Pro │      Travelisto         │
-  ├──────────┴──────────┬──────────────┤
-  │    Analytics (2/3)  │ placeholder  │  ← Analytics spans 2
-  └─────────────────────┴──────────────┘
+  ├─────────────────────┼──────────────┤
+  │  Pix Pro (col 2/3)  │ Analytics    │
+  ├─────────────────────┴──────────────┤
+  │        AWARA (full width)          │
+  └────────────────────────────────────┘
 
-  Actually: 3-column grid, spanning:
+  3-column grid:
   Row 1: GenFit col-span-2 | NEXUS col-span-1
-  Row 2: Pix Pro col-span-1 | Travelisto col-span-2
-  Row 3: Analytics col-span-3 (full width)
+  Row 2: Pix Pro col-span-2 | Analytics col-span-1
+  Row 3: Awara col-span-3 (full width)
 */
 
 const projects = [
@@ -27,6 +27,7 @@ const projects = [
       'AI-powered fitness platform delivering personalized workout and diet plans using user goals, BMI, medical history, and dietary constraints. Includes computer-vision posture detection and food image calorie estimation.',
     github: 'https://github.com/ADML003',
     live: 'https://genfitai.vercel.app/',
+    preview: '/assets/previews/genfit.png',
     tags: ['React 18', 'Node.js', 'Express.js', 'MongoDB', 'TensorFlow.js', 'Gemini API', 'Socket.io', 'Redux Toolkit', 'JWT', 'OAuth 2.0'],
   },
   {
@@ -38,40 +39,44 @@ const projects = [
       'Intelligent conversational AI platform with 80+ tool integrations including Google Workspace and Slack. Multi-model LLM architecture with DeepSeek V3, automatic failover, and Dynamic Tool Discovery.',
     github: 'https://github.com/ADML003',
     live: null,
+    preview: '/assets/previews/nexus.png',
     tags: ['Next.js 14', 'TypeScript', 'FastAPI', 'Python', 'LangChain', 'DeepSeek V3', 'Gemini', 'Portia.AI'],
   },
   {
     id: 3,
     title: 'Pix Pro',
     type: 'AI SaaS · Full-Stack',
-    span: 'col-span-1',
+    span: 'col-span-2',
     description:
       'Full-stack AI image editing platform with user authentication, subscription handling, and seamless payments. Restore, recolor, and generatively fill images using Cloudinary AI.',
     github: 'https://github.com/ADML003/pix_pro',
     live: 'https://pix-pro-orpin.vercel.app',
+    preview: '/assets/previews/pixpro.png',
     tags: ['Next.js', 'TypeScript', 'MongoDB', 'Cloudinary AI', 'Clerk', 'Stripe'],
   },
   {
     id: 4,
-    title: 'Travelisto',
-    type: 'Web App · Full-Stack',
-    span: 'col-span-2',
-    description:
-      'Smart travel planning app powered by AI recommendations. Features destination discovery, itinerary management, and booking integration — built for speed and usability.',
-    github: 'https://github.com/ADML003/Travelisto',
-    live: 'https://travelisto.vercel.app',
-    tags: ['React.js', 'Next.js', 'TypeScript', 'Appwrite', 'Tailwind CSS'],
-  },
-  {
-    id: 5,
     title: 'Analytics Dashboard',
     type: 'Dashboard · Full-Stack',
-    span: 'col-span-3',
+    span: 'col-span-1',
     description:
       'Real-time analytics dashboard for digital marketing agencies. Includes interactive charts, campaign management, CSV/PDF export, advanced filtering, and full dark mode support.',
     github: 'https://github.com/ADML003/analytics_dashboard',
     live: 'https://analytics-dashboard-psi-five.vercel.app/',
+    preview: '/assets/previews/analytics.png',
     tags: ['Next.js 15', 'React 19', 'TypeScript', 'shadcn/ui', 'Recharts'],
+  },
+  {
+    id: 5,
+    title: 'AWARA',
+    type: 'E-Commerce · Shopify',
+    span: 'col-span-3',
+    description:
+      'Engineered and launched the official e-commerce storefront for AWARA — a premium apparel brand. Built the platform end-to-end from architecture and storefront design to payment gateway integration, inventory synchronization, and order management. Led the complete migration from WordPress/WooCommerce to Shopify, improving performance, scalability, and checkout efficiency with a mobile-first, conversion-optimized design.',
+    github: null,
+    live: 'https://awara.in',
+    preview: '/assets/previews/awara.png',
+    tags: ['Shopify', 'WordPress', 'WooCommerce', 'Razorpay', 'Stripe', 'SEO', 'Google Analytics', 'Liquid'],
   },
 ];
 
@@ -111,9 +116,21 @@ const Projects = () => (
             key={project.id}
             className={`project-card bento-${project.span.replace('col-span-', 'span')}`}
             variants={fadeUp}
-            whileHover={{ y: -4 }}
+            whileHover={{ y: -6 }}
             transition={{ type: 'spring', stiffness: 280, damping: 32 }}
           >
+            {/* Preview Thumbnail */}
+            {project.preview && (
+              <div className="project-preview">
+                <img
+                  src={project.preview}
+                  alt={`${project.title} preview`}
+                  loading="lazy"
+                />
+                <div className="project-preview-overlay" />
+              </div>
+            )}
+
             {/* Header */}
             <div className="project-card-header">
               <div className="project-title-group">
@@ -122,20 +139,22 @@ const Projects = () => (
               </div>
 
               <div className="project-links">
-                <motion.a
-                  href={project.github}
-                  target="_blank" rel="noopener noreferrer"
-                  className="project-link"
-                  whileHover={{ y: -2 }} whileTap={{ y: 0 }}
-                  transition={{ type: 'spring', stiffness: 400, damping: 25 }}
-                >
-                  <GitHubIcon /> Code
-                </motion.a>
+                {project.github && (
+                  <motion.a
+                    href={project.github}
+                    target="_blank" rel="noopener noreferrer"
+                    className="project-link"
+                    whileHover={{ y: -2 }} whileTap={{ y: 0 }}
+                    transition={{ type: 'spring', stiffness: 400, damping: 25 }}
+                  >
+                    <GitHubIcon /> Code
+                  </motion.a>
+                )}
                 {project.live && (
                   <motion.a
                     href={project.live}
                     target="_blank" rel="noopener noreferrer"
-                    className="project-link"
+                    className="project-link project-link-live"
                     whileHover={{ y: -2 }} whileTap={{ y: 0 }}
                     transition={{ type: 'spring', stiffness: 400, damping: 25 }}
                   >
