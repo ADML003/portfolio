@@ -1,6 +1,7 @@
 /* ─── Mobile Dock — iPhone-style liquid glass ───────────── */
 
 /* Only visible on mobile */
+/* Only visible on mobile */
 .dock-outer {
   display: none;
   position: fixed;
@@ -12,6 +13,7 @@
   justify-content: center;
   /* Safe area for iPhone home bar */
   padding-bottom: env(safe-area-inset-bottom, 0px);
+  touch-action: none; /* prevent scroll/gesture conflicts on dock container */
 }
 @media (max-width: 639px) {
   .dock-outer { display: flex; }
@@ -25,35 +27,36 @@
   gap: 6px;
   padding: 7px 10px;
   border-radius: 28px;
+  touch-action: none; /* prevent scroll/gesture conflicts on panel */
 
   /* Liquid glass layers */
-  background: rgba(255, 255, 255, 0.08);
-  backdrop-filter: blur(40px) saturate(2.2) brightness(1.1);
-  -webkit-backdrop-filter: blur(40px) saturate(2.2) brightness(1.1);
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.09) 0%, rgba(255, 255, 255, 0.03) 100%);
+  backdrop-filter: blur(48px) saturate(2.3) brightness(1.08);
+  -webkit-backdrop-filter: blur(48px) saturate(2.3) brightness(1.08);
 
   /* Frosted border — inner highlight + outer subtle edge */
-  border: 1px solid rgba(255, 255, 255, 0.18);
+  border: 1.2px solid rgba(255, 255, 255, 0.15);
   box-shadow:
     /* Outer ambient shadow */
-    0 12px 40px rgba(0, 0, 0, 0.38),
-    0  4px 14px rgba(0, 0, 0, 0.22),
+    0 16px 48px rgba(0, 0, 0, 0.45),
+    0  6px 20px rgba(0, 0, 0, 0.28),
     /* Inner top-edge specular highlight */
-    inset 0 1px 0 rgba(255, 255, 255, 0.22),
+    inset 0 1.5px 0 rgba(255, 255, 255, 0.25),
     /* Inner bottom-edge dark */
-    inset 0 -1px 0 rgba(0, 0, 0, 0.12);
+    inset 0 -1.5px 0 rgba(0, 0, 0, 0.15);
 }
 
 /* Light mode: brighter glass */
 [data-theme='light'] .dock-panel {
-  background: rgba(255, 255, 255, 0.52);
-  backdrop-filter: blur(40px) saturate(2.4) brightness(1.05);
-  -webkit-backdrop-filter: blur(40px) saturate(2.4) brightness(1.05);
-  border: 1px solid rgba(255, 255, 255, 0.75);
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.58) 0%, rgba(255, 255, 255, 0.38) 100%);
+  backdrop-filter: blur(48px) saturate(2.4) brightness(1.04);
+  -webkit-backdrop-filter: blur(48px) saturate(2.4) brightness(1.04);
+  border: 1.2px solid rgba(255, 255, 255, 0.82);
   box-shadow:
-    0 12px 40px rgba(0, 0, 0, 0.14),
-    0  4px 14px rgba(0, 0, 0, 0.08),
-    inset 0 1px 0 rgba(255, 255, 255, 0.90),
-    inset 0 -1px 0 rgba(0, 0, 0, 0.04);
+    0 16px 48px rgba(0, 0, 0, 0.12),
+    0  6px 20px rgba(0, 0, 0, 0.06),
+    inset 0 1.5px 0 rgba(255, 255, 255, 0.95),
+    inset 0 -1.5px 0 rgba(0, 0, 0, 0.05);
 }
 
 /* Individual item */
@@ -68,31 +71,31 @@
   flex-shrink: 0;
 
   /* Frosted item bg — slightly brighter than panel */
-  background: rgba(255, 255, 255, 0.10);
-  border: 1px solid rgba(255, 255, 255, 0.16);
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.12);
   transition: background 0.18s ease, border-color 0.18s ease, box-shadow 0.18s ease;
   -webkit-tap-highlight-color: transparent;
 }
 .dock-item:hover,
 .dock-item:focus-visible {
-  background: rgba(255, 255, 255, 0.18);
-  border-color: rgba(255, 255, 255, 0.30);
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.18);
+  background: rgba(255, 255, 255, 0.14);
+  border-color: rgba(255, 255, 255, 0.25);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.22);
 }
 .dock-item:active {
-  background: rgba(255, 255, 255, 0.25);
+  background: rgba(255, 255, 255, 0.22);
   transform: scale(0.94);
 }
 
 [data-theme='light'] .dock-item {
-  background: rgba(255, 255, 255, 0.55);
-  border: 1px solid rgba(255, 255, 255, 0.80);
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
+  background: rgba(255, 255, 255, 0.45);
+  border: 1px solid rgba(255, 255, 255, 0.70);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
 }
 [data-theme='light'] .dock-item:hover {
-  background: rgba(255, 255, 255, 0.80);
+  background: rgba(255, 255, 255, 0.75);
   border-color: rgba(255, 255, 255, 0.95);
-  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.10);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
 }
 
 /* Icon */

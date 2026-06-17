@@ -24,6 +24,7 @@ function DockItem({
 }) {
   const ref = useRef(null);
   const isHovered = useMotionValue(0);
+  const [hoveredByEvent, setHoveredByEvent] = useState(false);
 
   const mouseDistance = useTransform(mouseX, val => {
     const rect = ref.current?.getBoundingClientRect() ?? { x: 0, width: baseItemSize };
@@ -37,6 +38,24 @@ function DockItem({
   );
   const size = useSpring(targetSize, spring);
 
+  const distanceVal = useTransform(mouseDistance, val => Math.abs(val));
+
+  useEffect(() => {
+    const updateHoverState = () => {
+      const isProximity = mouseX.get() !== Infinity && distanceVal.get() < baseItemSize * 0.8;
+      isHovered.set((hoveredByEvent || isProximity) ? 1 : 0);
+    };
+
+    const unsubDistance = distanceVal.on('change', updateHoverState);
+    const unsubMouseX = mouseX.on('change', updateHoverState);
+    updateHoverState();
+
+    return () => {
+      unsubDistance();
+      unsubMouseX();
+    };
+  }, [distanceVal, mouseX, baseItemSize, isHovered, hoveredByEvent]);
+
   const handleKeyDown = e => {
     if (e.key === 'Enter' || e.key === ' ') {
       e.preventDefault();
@@ -48,10 +67,10 @@ function DockItem({
     <motion.div
       ref={ref}
       style={{ width: size, height: size }}
-      onHoverStart={() => isHovered.set(1)}
-      onHoverEnd={() => isHovered.set(0)}
-      onFocus={() => isHovered.set(1)}
-      onBlur={() => isHovered.set(0)}
+      onHoverStart={() => setHoveredByEvent(true)}
+      onHoverEnd={() => setHoveredByEvent(false)}
+      onFocus={() => setHoveredByEvent(true)}
+      onBlur={() => setHoveredByEvent(false)}
       onClick={onClick}
       className={`dock-item ${className}`}
       tabIndex={0}
@@ -108,12 +127,48 @@ export default function Dock({
   baseItemSize = 42,
 }) {
   const mouseX = useMotionValue(Infinity);
+  const [active, setActive] = useState(false);
+
+  useEffect(() => {
+    if (!active) return;
+
+    const handlePointerMove = (e) => {
+      mouseX.set(e.clientX);
+    };
+
+    const handlePointerUp = () => {
+      setActive(false);
+      mouseX.set(Infinity);
+    };
+
+    window.addEventListener('pointermove', handlePointerMove);
+    window.addEventListener('pointerup', handlePointerUp);
+    window.addEventListener('pointercancel', handlePointerUp);
+
+    return () => {
+      window.removeEventListener('pointermove', handlePointerMove);
+      window.removeEventListener('pointerup', handlePointerUp);
+      window.removeEventListener('pointercancel', handlePointerUp);
+    };
+  }, [active, mouseX]);
 
   return (
     <div className="dock-outer" aria-label="Navigation dock">
       <motion.div
-        onMouseMove={({ pageX }) => mouseX.set(pageX)}
-        onMouseLeave={() => mouseX.set(Infinity)}
+        onPointerDown={(e) => {
+          setActive(true);
+          mouseX.set(e.clientX);
+        }}
+        onPointerMove={(e) => {
+          if (e.pointerType === 'mouse') {
+            mouseX.set(e.clientX);
+          }
+        }}
+        onPointerLeave={(e) => {
+          if (e.pointerType === 'mouse') {
+            mouseX.set(Infinity);
+          }
+        }}
         className={`dock-panel ${className}`}
         style={{ height: panelHeight }}
         role="toolbar"

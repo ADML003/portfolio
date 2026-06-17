@@ -78,7 +78,7 @@ const Navbar = () => {
     {
       icon: <FaLinkedinIn size={ICON_SIZE} />,
       label: 'LinkedIn',
-      onClick: () => window.open('https://www.linkedin.com/in/adityamalhotra003/', '_blank', 'noopener,noreferrer'),
+      onClick: () => window.open('https://www.linkedin.com/in/aditya-malhotra-50884b26a/', '_blank', 'noopener,noreferrer'),
     },
     {
       icon: <FaGithub size={ICON_SIZE} />,

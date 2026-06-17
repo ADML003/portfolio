@@ -21,7 +21,7 @@ const Footer = () => {
           <div className="footer-links">
             {[
               { label: 'GitHub',      href: 'https://github.com/ADML003',                              external: true },
-              { label: 'LinkedIn',    href: 'https://www.linkedin.com/in/aditya-malhotra-am003/',      external: true },
+              { label: 'LinkedIn',    href: 'https://www.linkedin.com/in/aditya-malhotra-50884b26a/',      external: true },
               { label: 'X / Twitter', href: 'https://x.com/adml003',                                   external: true },
               { label: 'Email',       href: 'mailto:reach.adml@gmail.com',                             external: false },
             ].map((link) => (
