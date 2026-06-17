@@ -748,6 +748,7 @@ button { font-family: inherit; font-synthesis: none; }
   font-family: 'Geist Mono', monospace;
   font-size: 10px; color: var(--text-3);
   text-transform: uppercase; letter-spacing: 0.08em;
+  white-space: nowrap;
 }
 .project-links { display: flex; align-items: center; gap: 6px; flex-shrink: 0; }
 .project-link {
@@ -786,9 +787,17 @@ button { font-family: inherit; font-synthesis: none; }
   background: var(--bg); border: 1px solid var(--border);
   border-radius: 4px; padding: 2px 8px;
 }
+.projects-disclaimer {
+  margin-top: 20px;
+  font-family: 'Geist Mono', monospace;
+  font-size: 10px;
+  color: var(--text-4);
+  letter-spacing: 0.03em;
+  font-style: italic;
+}
 .projects-github-link {
   display: inline-flex; align-items: center; gap: 7px;
-  margin-top: 28px; font-size: 13px; color: var(--text-3);
+  margin-top: 12px; font-size: 13px; color: var(--text-3);
   font-family: 'Geist Mono', monospace; letter-spacing: 0.02em;
   transition: color var(--t-base) ease, gap var(--t-base) ease;
 }

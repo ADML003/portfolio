@@ -21,7 +21,7 @@ const projects = [
   {
     id: 1,
     title: 'GenFit',
-    type: 'AI Platform · Full-Stack',
+    type: 'AI Fitness · Full-Stack',
     span: 'col-span-2',
     description:
       'AI-powered fitness platform delivering personalized workout and diet plans using user goals, BMI, medical history, and dietary constraints. Includes computer-vision posture detection and food image calorie estimation.',
@@ -33,7 +33,7 @@ const projects = [
   {
     id: 2,
     title: 'NEXUS AI Agent',
-    type: 'Agentic AI · Full-Stack',
+    type: 'AI Agent · G Suite',
     span: 'col-span-1',
     description:
       'Intelligent conversational AI platform with 80+ tool integrations including Google Workspace and Slack. Multi-model LLM architecture with DeepSeek V3, automatic failover, and Dynamic Tool Discovery.',
@@ -57,7 +57,7 @@ const projects = [
   {
     id: 4,
     title: 'Analytics Dashboard',
-    type: 'Dashboard · Full-Stack',
+    type: 'Frontend · MERN Stack',
     span: 'col-span-1',
     description:
       'Real-time analytics dashboard for digital marketing agencies. Includes interactive charts, campaign management, CSV/PDF export, advanced filtering, and full dark mode support.',
@@ -174,6 +174,16 @@ const Projects = () => (
           </motion.div>
         ))}
       </motion.div>
+
+      <motion.p
+        className="projects-disclaimer"
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        viewport={VIEWPORT}
+        transition={{ delay: 0.2, duration: 0.5 }}
+      >
+        * Previews are for visual reference only — live sites may vary.
+      </motion.p>
 
       <motion.a
         href="https://github.com/ADML003"
