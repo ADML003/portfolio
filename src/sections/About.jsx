@@ -10,8 +10,9 @@ const GlobeWidget = () => {
   const containerRef = useRef(null);
   const globeRef     = useRef(null);
   const [size, setSize]   = useState(0);
+  // Read from localStorage (same source Navbar uses) — DOM attr may not be set yet at mount
   const [isDark, setIsDark] = useState(
-    () => document.documentElement.getAttribute('data-theme') !== 'light'
+    () => (typeof window !== 'undefined' ? localStorage.getItem('theme') : null) !== 'light'
   );
 
   // Animation state refs

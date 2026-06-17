@@ -93,7 +93,10 @@
 
 /* ─── Reset ─────────────────────────────────────────────────── */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-html { scroll-behavior: smooth; }
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 70px;
+}
 body {
   font-family: 'Geist', system-ui, -apple-system, sans-serif;
   background: var(--bg);
@@ -107,6 +110,20 @@ body {
   overflow-x: hidden;
   transition: background 350ms ease, color 350ms ease;
 }
+
+/* ─── Noise grain overlay ────────────────────────────────────── */
+.noise-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  user-select: none;
+  opacity: 0.032;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: 180px 180px;
+}
+[data-theme='light'] .noise-overlay { opacity: 0.018; }
+
 h1,h2,h3,h4,h5,h6 {
   color: var(--text-1);
   font-family: 'Geist', sans-serif;
@@ -138,9 +155,7 @@ button { font-family: inherit; font-synthesis: none; }
 @media (min-width: 768px) {
   .section { padding: 100px 0; }
 }
-.section + .section {
-  border-top: 1px solid var(--border);
-}
+/* Section top border handled by ::before in animation layer */
 
 /* ─── Section Labels — Editorial scale ──────────────────────── */
 /*
@@ -242,55 +257,28 @@ button { font-family: inherit; font-synthesis: none; }
 }
 .theme-toggle:hover { color: var(--text-1); background: var(--surface); border-color: var(--border-2); }
 
-.navbar-mobile-btn {
-  display: none;
-  background: none; border: none;
-  cursor: pointer; padding: 4px;
-  color: var(--text-2);
-  transition: color var(--t-fast) ease;
-}
-.navbar-mobile-btn:hover { color: var(--text-1); }
-
-.mobile-menu {
-  display: none;
-  background: var(--bg);
-  border-top: 1px solid var(--border);
-  padding: 12px var(--gutter) 20px;
-}
-.mobile-menu.open { display: block; }
-.mobile-menu ul { list-style: none; display: flex; flex-direction: column; }
-.mobile-menu a {
-  display: block; padding: 12px 0;
-  font-size: 16px; color: var(--text-2);
-  border-bottom: 1px solid var(--border);
-  transition: color var(--t-fast) ease, transform var(--t-base) var(--ease-expo);
-}
-.mobile-menu a:hover { color: var(--text-1); transform: translateX(4px); }
-.mobile-menu li:last-child a { border-bottom: none; }
-.mobile-menu-theme {
-  display: flex; align-items: center; gap: 10px;
-  padding: 12px 0; width: 100%;
-  background: none; border: none; border-bottom: 1px solid var(--border);
-  cursor: pointer; color: var(--text-2);
-  font-family: 'Geist', sans-serif; font-size: 16px;
-  transition: color var(--t-fast) ease, transform var(--t-base) var(--ease-expo);
-}
-.mobile-menu-theme:hover { color: var(--text-1); transform: translateX(4px); }
-
+/* Dock handles mobile nav — hide full nav links on mobile */
 @media (max-width: 639px) {
   .navbar-links { display: none; }
-  .navbar-mobile-btn { display: flex; }
+  /* theme-toggle stays visible top-right on mobile */
 }
+
 
 /* ─── Hero ───────────────────────────────────────────────────── */
 .hero {
-  /* Mobile: natural flow, fill the viewport with content */
-  padding-top: 90px;
-  padding-bottom: 48px;
-  min-height: 100svh;
+  padding-top: 80px;
+  /* Mobile: push content toward vertical center-bottom so About is always below the fold */
+  padding-bottom: 112px;
+  min-height: 105svh;
   display: flex;
   flex-direction: column;
   justify-content: center;
+}
+@media (min-width: 640px) {
+  .hero {
+    padding-bottom: 48px;
+    min-height: 100svh;
+  }
 }
 @media (min-width: 768px) {
   .hero {
@@ -336,14 +324,14 @@ button { font-family: inherit; font-synthesis: none; }
 
 .hero-avatar-ring-sm {
   position: relative;
-  width: 72px;
-  height: 72px;
+  width: 88px;
+  height: 88px;
 }
 .hero-avatar-ring-sm .hero-avatar-img {
-  width: 72px; height: 72px;
+  width: 88px; height: 88px;
 }
 .hero-avatar-ring-sm .hero-avatar-halo {
-  inset: -4px;
+  inset: -5px;
 }
 
 /* Desktop avatar column — hidden on mobile */
@@ -383,13 +371,25 @@ button { font-family: inherit; font-synthesis: none; }
   background: conic-gradient(
     from 0deg,
     transparent 0%,
-    rgba(62,207,142,0.25) 20%,
-    rgba(99,102,241,0.3)  45%,
-    rgba(59,130,246,0.25) 65%,
+    rgba(62,207,142,0.22) 20%,
+    rgba(99,102,241,0.26) 45%,
+    rgba(59,130,246,0.22) 65%,
     transparent 80%
   );
   animation: haloSpin 8s linear infinite;
   z-index: 0;
+}
+/* Lighter, more subtle in light mode */
+[data-theme='light'] .hero-avatar-halo {
+  background: conic-gradient(
+    from 0deg,
+    transparent 0%,
+    rgba(62,207,142,0.18) 20%,
+    rgba(99,102,241,0.20) 45%,
+    rgba(59,130,246,0.18) 65%,
+    transparent 80%
+  );
+  opacity: 0.7;
 }
 @keyframes haloSpin {
   from { transform: rotate(0deg); }
@@ -499,7 +499,10 @@ button { font-family: inherit; font-synthesis: none; }
   border-color: var(--border-hover);
   background: var(--surface-2);
   transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(0,0,0,0.25);
+  box-shadow: 0 6px 20px rgba(0,0,0,0.18);
+}
+[data-theme='light'] .btn:hover {
+  box-shadow: 0 4px 14px rgba(0,0,0,0.08);
 }
 .btn:active { transform: translateY(0); }
 
@@ -574,16 +577,121 @@ button { font-family: inherit; font-synthesis: none; }
   width: 100%; text-align: center;
 }
 
-/* ─── Skills — text only, no logos ──────────────────────────── */
-.skills-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
-  gap: 8px;
-}
-@media (min-width: 640px) {
-  .skills-grid { grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); gap: 10px; }
+/* ─── Skills — responsive marquee ────────────────────────── */
+
+/* Marquee wrapper — always full bleed, no container */
+.skills-marquee {
+  margin-top: 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }
 
+/* Desktop: 2-row layout — hidden on mobile */
+.skills-marquee--desktop {
+  display: none;
+}
+
+/* Mobile: 3-row layout — shown by default */
+.skills-marquee--mobile {
+  display: flex;
+}
+
+@media (min-width: 640px) {
+  /* Switch to desktop 2-row layout at sm+ */
+  .skills-marquee--desktop { display: flex; }
+  .skills-marquee--mobile  { display: none; }
+  .skills-marquee { gap: 12px; margin-top: 36px; }
+}
+
+.skills-marquee-row {
+  overflow: hidden;
+  padding: 4px 0;
+}
+
+/* ── Skill pill ──────────────────────────────────────────── */
+.skill-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 7px 13px;
+  margin: 0 5px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  text-decoration: none;
+  white-space: nowrap;
+  cursor: pointer;
+  transition:
+    border-color 0.22s ease,
+    background   0.22s ease,
+    box-shadow   0.3s  ease,
+    transform    0.22s ease;
+  will-change: transform;
+}
+
+@media (min-width: 640px) {
+  .skill-pill {
+    gap: 10px;
+    padding: 10px 18px;
+    margin: 0 7px;
+  }
+}
+
+.skill-pill:hover {
+  border-color: color-mix(in srgb, var(--pill-color) 40%, transparent);
+  background: color-mix(in srgb, var(--pill-color) 7%, var(--surface));
+  box-shadow:
+    0 0 0 1px color-mix(in srgb, var(--pill-color) 15%, transparent),
+    0 2px 12px color-mix(in srgb, var(--pill-color) 14%, transparent);
+  transform: translateY(-2px);
+}
+[data-theme='light'] .skill-pill:hover {
+  /* Use the light-appropriate color for border/bg tint */
+  border-color: color-mix(in srgb, var(--pill-color-light, var(--pill-color)) 35%, transparent);
+  background: color-mix(in srgb, var(--pill-color-light, var(--pill-color)) 7%, var(--surface));
+  box-shadow:
+    0 0 0 1px color-mix(in srgb, var(--pill-color-light, var(--pill-color)) 18%, transparent),
+    0 2px 10px color-mix(in srgb, var(--pill-color-light, var(--pill-color)) 8%, transparent);
+}
+
+/* Icon */
+.skill-pill-icon {
+  display: inline-flex;
+  align-items: center;
+  font-size: 15px;
+  color: var(--pill-color);
+  flex-shrink: 0;
+  transition: transform 0.22s ease, color 0.22s ease;
+}
+/* In light mode use the dedicated light colour — prevents white icons disappearing */
+[data-theme='light'] .skill-pill-icon {
+  color: var(--pill-color-light, var(--pill-color));
+}
+@media (min-width: 640px) {
+  .skill-pill-icon { font-size: 20px; }
+}
+.skill-pill:hover .skill-pill-icon {
+  transform: scale(1.15);
+}
+
+/* Label */
+.skill-pill-label {
+  font-family: 'Geist', sans-serif;
+  font-size: 11.5px;
+  font-weight: 500;
+  color: var(--text-2);
+  letter-spacing: -0.01em;
+  transition: color 0.22s ease;
+}
+@media (min-width: 640px) {
+  .skill-pill-label { font-size: 13.5px; }
+}
+.skill-pill:hover .skill-pill-label {
+  color: var(--text-1);
+}
+
+/* Legacy skill-card (kept for any remaining refs) */
 .skill-card {
   position: relative;
   overflow: hidden;
@@ -599,36 +707,6 @@ button { font-family: inherit; font-synthesis: none; }
     transform     var(--t-slow) var(--ease-expo),
     box-shadow    var(--t-slow) var(--ease-expo);
 }
-
-/* Subtle sheen sweep on hover */
-.skill-card::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(130deg,
-    rgba(255,255,255,0.04) 0%,
-    rgba(255,255,255,0.01) 50%,
-    transparent 100%);
-  opacity: 0;
-  transition: opacity var(--t-base) ease;
-}
-[data-theme='light'] .skill-card::before {
-  background: linear-gradient(130deg,
-    rgba(0,0,0,0.03) 0%,
-    rgba(0,0,0,0.01) 50%,
-    transparent 100%);
-}
-.skill-card:hover {
-  border-color: var(--border-hover);
-  background: var(--surface-2);
-  transform: translateY(-4px);
-  box-shadow: 0 10px 30px rgba(0,0,0,0.3), 0 2px 8px rgba(0,0,0,0.2);
-}
-[data-theme='light'] .skill-card:hover {
-  box-shadow: 0 8px 24px rgba(0,0,0,0.08);
-}
-.skill-card:hover::before { opacity: 1; }
-
 .skill-name {
   font-family: 'Geist Mono', monospace;
   font-size: 11.5px;
@@ -636,9 +714,7 @@ button { font-family: inherit; font-synthesis: none; }
   color: var(--text-2);
   text-align: center;
   line-height: 1.4;
-  transition: color var(--t-base) ease;
 }
-.skill-card:hover .skill-name { color: var(--text-1); }
 
 /* ─── Projects — Bento Grid ───────────────────────────────── */
 .bento-grid {
@@ -718,10 +794,25 @@ button { font-family: inherit; font-synthesis: none; }
 .project-preview-overlay {
   position: absolute;
   bottom: 0; left: 0; right: 0;
-  height: 60%;
-  background: linear-gradient(to top, var(--surface) 0%, transparent 100%);
+  height: 50%;
+  background: linear-gradient(
+    to top,
+    var(--surface)      0%,
+    var(--surface)      8%,
+    rgba(0, 0, 0, 0)   100%
+  );
   pointer-events: none;
   z-index: 1;
+}
+/* Light mode: shorter, gentler fade — matches the card's #eeeeee surface exactly */
+[data-theme='light'] .project-preview-overlay {
+  height: 38%;
+  background: linear-gradient(
+    to top,
+    rgb(238, 238, 238)       0%,
+    rgba(238, 238, 238, 0.7) 35%,
+    rgba(238, 238, 238, 0)   100%
+  );
 }
 
 /* Card content area (below preview) */
@@ -942,11 +1033,13 @@ button { font-family: inherit; font-synthesis: none; }
 .form-input:focus, .form-textarea:focus {
   border-color: var(--border-hover);
   background: var(--surface-2);
-  box-shadow: 0 0 0 3px rgba(255,255,255,0.03);
+  box-shadow: 0 0 0 3px rgba(255,255,255,0.04);
 }
 [data-theme='light'] .form-input:focus,
 [data-theme='light'] .form-textarea:focus {
-  box-shadow: 0 0 0 3px rgba(0,0,0,0.04);
+  border-color: #a0a0a0;
+  box-shadow: 0 0 0 3px rgba(0,0,0,0.06);
+  background: #fff;
 }
 .form-textarea { min-height: 130px; }
 .form-submit {
@@ -1036,3 +1129,193 @@ button { font-family: inherit; font-synthesis: none; }
 /* ─── Selection ──────────────────────────────────────────────── */
 ::selection { background: rgba(235,235,235,0.12); color: var(--text-1); }
 [data-theme='light'] ::selection { background: rgba(0,0,0,0.08); }
+
+/* ════════════════════════════════════════════════════════════════
+   PREMIUM ANIMATION LAYER
+   ─ Section glow borders on scroll
+   ─ Magnetic card tilts
+   ─ Experience left accent bar
+   ─ Skill card shimmer sweep
+   ─ Page entrance fade
+═══════════════════════════════════════════════════════════════ */
+
+/* ─── Page entrance ────────────────────────────────────────── */
+@keyframes pageFadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+#root {
+  animation: pageFadeIn 0.6s ease forwards;
+}
+
+/* ─── Section divider glow lines ───────────────────────────── */
+.section + .section::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 15%; right: 15%;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    var(--border-2) 30%,
+    var(--border-2) 70%,
+    transparent 100%
+  );
+  pointer-events: none;
+  opacity: 0.6;
+}
+
+/* ─── Section label expand on scroll-in ────────────────────── */
+/* NOTE: section-label is already animated by framer-motion fadeUp.
+   We just ensure it's always visible (no opacity:0 traps). */
+
+/* ─── Skill card shimmer sweep ─────────────────────────────── */
+@keyframes shimmerSweep {
+  0%   { transform: translateX(-100%) skewX(-15deg); }
+  100% { transform: translateX(250%)  skewX(-15deg); }
+}
+.skill-card::after {
+  content: '';
+  position: absolute;
+  top: 0; left: 0;
+  width: 50%; height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255,255,255,0.055) 50%,
+    transparent 100%
+  );
+  transform: translateX(-100%) skewX(-15deg);
+  pointer-events: none;
+}
+.skill-card:hover::after {
+  animation: shimmerSweep 0.55s var(--ease-expo) forwards;
+}
+[data-theme='light'] .skill-card::after {
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(0,0,0,0.04) 50%,
+    transparent 100%
+  );
+}
+
+/* ─── Experience item — left accent bar ────────────────────── */
+.experience-item::before {
+  content: '';
+  position: absolute;
+  left: -1px; top: 28px; bottom: 28px;
+  width: 2px;
+  background: linear-gradient(
+    to bottom,
+    transparent 0%,
+    var(--green) 40%,
+    var(--green) 60%,
+    transparent 100%
+  );
+  opacity: 0;
+  border-radius: 2px;
+  transition: opacity 0.4s ease, transform 0.4s var(--ease-expo);
+  transform: scaleY(0.4);
+  pointer-events: none;
+}
+.experience-item:hover::before {
+  opacity: 0.65;
+  transform: scaleY(1);
+}
+
+/* ─── Button shimmer on hover ──────────────────────────────── */
+.btn {
+  position: relative;
+  overflow: hidden;
+}
+.btn::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    105deg,
+    transparent 35%,
+    rgba(255,255,255,0.07) 50%,
+    transparent 65%
+  );
+  transform: translateX(-100%);
+  transition: transform 0.45s var(--ease-expo);
+  pointer-events: none;
+}
+.btn:hover::before { transform: translateX(100%); }
+[data-theme='light'] .btn::before {
+  background: linear-gradient(
+    105deg,
+    transparent 35%,
+    rgba(0,0,0,0.04) 50%,
+    transparent 65%
+  );
+}
+
+/* ─── Hero name glow on hover ──────────────────────────────── */
+.hero-name {
+  transition: text-shadow 0.5s ease;
+}
+.hero-name:hover {
+  text-shadow:
+    0 0 60px rgba(62,207,142,0.18),
+    0 0 120px rgba(62,207,142,0.09);
+}
+
+/* ─── Smooth focus ring ─────────────────────────────────────── */
+:focus-visible {
+  outline: 2px solid var(--green);
+  outline-offset: 3px;
+  border-radius: var(--r-sm);
+}
+
+/* ─── About globe wrapper — glow pulse ─────────────────────── */
+@keyframes globePulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(62,207,142,0); }
+  50%       { box-shadow: 0 0 40px 6px rgba(62,207,142,0.08); }
+}
+.globe-wrapper {
+  animation: globePulse 4s ease-in-out infinite;
+}
+
+/* ─── Project card — radial top glow on hover ──────────────── */
+.project-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: radial-gradient(
+    ellipse 80% 45% at 50% 0%,
+    rgba(62,207,142,0) 0%,
+    transparent 70%
+  );
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0;
+  transition: opacity 0.45s ease;
+}
+.project-card:hover::before {
+  background: radial-gradient(
+    ellipse 80% 45% at 50% 0%,
+    rgba(62,207,142,0.10) 0%,
+    transparent 70%
+  );
+  opacity: 1;
+}
+[data-theme='light'] .project-card:hover::before {
+  background: radial-gradient(
+    ellipse 80% 45% at 50% 0%,
+    rgba(99,102,241,0.07) 0%,
+    transparent 70%
+  );
+}
+
+/* ─── Page entrance ────────────────────────────────────────── */
+@keyframes pageFadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+#root {
+  animation: pageFadeIn 0.5s ease both;
+}

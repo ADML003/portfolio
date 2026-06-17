@@ -72,7 +72,7 @@ const projects = [
     type: 'E-Commerce · Shopify',
     span: 'col-span-3',
     description:
-      'Engineered and launched the official e-commerce storefront for AWARA — a premium apparel brand. Built the platform end-to-end from architecture and storefront design to payment gateway integration, inventory synchronization, and order management. Led the complete migration from WordPress/WooCommerce to Shopify, improving performance, scalability, and checkout efficiency with a mobile-first, conversion-optimized design.',
+      'End-to-end e-commerce storefront for a premium apparel brand — full Shopify build with Razorpay/Stripe payments, inventory sync, and a mobile-first, conversion-optimised design.',
     github: null,
     live: 'https://awara.in',
     preview: '/assets/previews/awara.png',

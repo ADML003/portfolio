@@ -7,6 +7,7 @@ import Projects from './sections/Projects.jsx';
 import StaticExperience from './sections/StaticExperienceOriginal_NEW.jsx';
 import Contact from './sections/Contact.jsx';
 import Footer from './sections/Footer.jsx';
+import GridBackground from './components/GridBackground.jsx';
 
 const App = () => {
   useEffect(() => {
@@ -30,7 +31,14 @@ const App = () => {
   }, []);
 
   return (
-    <div style={{ minHeight: '100vh', backgroundColor: 'var(--bg)' }}>
+    <div style={{ minHeight: '100vh', backgroundColor: 'var(--bg)', position: 'relative' }}>
+      {/* ── Fixed canvas grid + particle layer ── */}
+      <GridBackground />
+
+      {/* ── Noise grain overlay ── */}
+      <div className="noise-overlay" aria-hidden="true" />
+
+      {/* ── Content ── */}
       <Navbar />
       <Hero />
       <About />
@@ -44,3 +52,4 @@ const App = () => {
 };
 
 export default App;
+
