@@ -10,9 +10,9 @@ const experiences = [
     company: 'Beas Green Solutions',
     period: 'Jun 2025 – Jul 2025',
     bullets: [
-      'Architected and shipped the full-stack company platform integrating Google Maps API for geolocation, a dynamic product catalog, and WhatsApp Business API for automated lead capture and customer routing.',
-      'Built PixPro — a proprietary AI image-processing tool using Cloudinary AI — to automate enhancement of product photos and marketing creatives for digital campaigns.',
-      'Deployed both platforms on Vercel with CI/CD pipelines, achieving sub-2s load times and optimized Core Web Vitals.',
+      'Architected and shipped a full-stack platform with Next.js & TypeScript, integrating Google Maps API for geolocation, a dynamic product catalog, and WhatsApp Business API for automated lead capture.',
+      'Built PixPro — an AI image-processing pipeline using Cloudinary AI — to automate product photo enhancement and marketing creative generation at scale.',
+      'Deployed both platforms on Vercel with CI/CD pipelines; achieved sub-2s LCP and passing Core Web Vitals across all routes.',
     ],
     tags: ['Next.js', 'TypeScript', 'Cloudinary AI', 'Google Maps API', 'WhatsApp Business API', 'Vercel'],
   },
@@ -25,14 +25,14 @@ const experiences = [
     location: 'Gurugram, Haryana',
     period: 'Sept 2024 – Present',
     bullets: [
-      'Engineered and launched the official brand e-commerce website end-to-end — from architecture and storefront design to payment gateway integration and inventory synchronization.',
-      'Led the complete migration of the e-commerce platform from WordPress/WooCommerce to Shopify, improving site performance, scalability, and operational efficiency.',
-      'Improved checkout efficiency and product discoverability through targeted UX decisions, performance optimization, and responsive mobile-first design.',
-      'Managed order management systems and operational workflows, ensuring platform reliability and scalability.',
+      'Migrated the full storefront from WordPress/WooCommerce to Shopify — custom Liquid theme, metafield schema, and headless product sync — cutting page load by ~40%.',
+      'Integrated Razorpay & Stripe payment gateways with webhook-driven order management, inventory sync, and automated fulfilment workflows.',
+      'Implemented technical SEO (structured data, canonical tags, sitemap), Google Analytics 4, and conversion-rate optimisations that improved organic discoverability and checkout completion.',
     ],
-    tags: ['WordPress', 'WooCommerce', 'Shopify', 'Razorpay', 'Stripe', 'SEO', 'Google Analytics'],
+    tags: ['WordPress', 'WooCommerce', 'Shopify', 'Liquid', 'Razorpay', 'Stripe', 'SEO', 'Google Analytics 4'],
   },
 ];
+
 
 const StaticExperience = () => (
   <section id="work" className="section">
